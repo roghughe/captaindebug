@@ -17,6 +17,8 @@ import dependency_injection_with_annotations.loaders.FileSystemClassLoader;
 import dependency_injection_with_annotations.loaders.JarLoader;
 
 /**
+ * This is a very limited factory class that performs dependency injection using
+ * annotations.
  * 
  * @author Roger
  * 
