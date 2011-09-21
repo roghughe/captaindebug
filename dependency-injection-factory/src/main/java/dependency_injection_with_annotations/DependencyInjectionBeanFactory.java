@@ -30,16 +30,14 @@ public class DependencyInjectionBeanFactory implements MyBeanFactory {
 	/**
 	 * Default Ctor - start looking in the root location
 	 */
-	public DependencyInjectionBeanFactory() throws IOException,
-			ClassNotFoundException, InstantiationException,
+	public DependencyInjectionBeanFactory() throws IOException, ClassNotFoundException, InstantiationException,
 			IllegalAccessException {
 
 		this("");
 	}
 
-	public DependencyInjectionBeanFactory(String packageName)
-			throws IOException, ClassNotFoundException, InstantiationException,
-			IllegalAccessException {
+	public DependencyInjectionBeanFactory(String packageName) throws IOException, ClassNotFoundException,
+			InstantiationException, IllegalAccessException {
 		this.packageName = packageName;
 		injectionGraph = loadAll();
 	}
@@ -49,8 +47,7 @@ public class DependencyInjectionBeanFactory implements MyBeanFactory {
 	 * returning them in a map where the key is either an id value or a class
 	 * name
 	 */
-	private Map<Class<?>, Object> loadAll() throws IOException,
-			ClassNotFoundException, InstantiationException,
+	private Map<Class<?>, Object> loadAll() throws IOException, ClassNotFoundException, InstantiationException,
 			IllegalAccessException {
 
 		List<File> directories = getDirectories();
@@ -64,8 +61,7 @@ public class DependencyInjectionBeanFactory implements MyBeanFactory {
 		return loader.getFileList();
 	}
 
-	private List<Class<?>> loadClasses(List<File> directories)
-			throws ClassNotFoundException, IOException {
+	private List<Class<?>> loadClasses(List<File> directories) throws ClassNotFoundException, IOException {
 
 		List<Class<?>> classes = new ArrayList<Class<?>>();
 
@@ -84,29 +80,25 @@ public class DependencyInjectionBeanFactory implements MyBeanFactory {
 		return directory.getParent().endsWith(".jar");
 	}
 
-	private List<Class<?>> loadFromJarFile(File directory)
-			throws ClassNotFoundException, IOException {
+	private List<Class<?>> loadFromJarFile(File directory) throws ClassNotFoundException, IOException {
 
 		return JarLoader.getInstance(directory, packageName).getClasses();
 	}
 
-	private List<Class<?>> loadFromFileSystem(File directory)
-			throws ClassNotFoundException, IOException {
+	private List<Class<?>> loadFromFileSystem(File directory) throws ClassNotFoundException, IOException {
 
-		return FileSystemClassLoader.getInstance(directory, packageName)
-				.getClasses();
+		return FileSystemClassLoader.getInstance(directory, packageName).getClasses();
 	}
 
-	private Map<Class<?>, Object> glueClassesTogether(List<Class<?>> classes)
-			throws InstantiationException, IllegalAccessException {
+	private Map<Class<?>, Object> glueClassesTogether(List<Class<?>> classes) throws InstantiationException,
+			IllegalAccessException {
 
 		Map<Class<?>, Object> components = getComponents(classes);
 		glueComponents(components);
 		return components;
 	}
 
-	private Map<Class<?>, Object> getComponents(List<Class<?>> classes)
-			throws InstantiationException, IllegalAccessException {
+	private Map<Class<?>, Object> getComponents(List<Class<?>> classes) throws InstantiationException, IllegalAccessException {
 
 		Map<Class<?>, Object> result = new HashMap<Class<?>, Object>();
 
@@ -122,8 +114,7 @@ public class DependencyInjectionBeanFactory implements MyBeanFactory {
 		return result;
 	}
 
-	private void glueComponents(Map<Class<?>, Object> components)
-			throws IllegalArgumentException, IllegalAccessException {
+	private void glueComponents(Map<Class<?>, Object> components) throws IllegalArgumentException, IllegalAccessException {
 
 		Set<Class<?>> keys = components.keySet();
 		for (Class<?> key : keys) {
@@ -131,8 +122,8 @@ public class DependencyInjectionBeanFactory implements MyBeanFactory {
 		}
 	}
 
-	private void injectFields(Class<?> clazz, Map<Class<?>, Object> components)
-			throws IllegalArgumentException, IllegalAccessException {
+	private void injectFields(Class<?> clazz, Map<Class<?>, Object> components) throws IllegalArgumentException,
+			IllegalAccessException {
 
 		AnnotationChecker checker = new AnnotationChecker(clazz);
 		Object target = components.get(clazz);
@@ -143,8 +134,7 @@ public class DependencyInjectionBeanFactory implements MyBeanFactory {
 		}
 	}
 
-	private void injectInToField(Object target, Field field,
-			Map<Class<?>, Object> components) throws IllegalArgumentException,
+	private void injectInToField(Object target, Field field, Map<Class<?>, Object> components) throws IllegalArgumentException,
 			IllegalAccessException {
 
 		field.setAccessible(true); // If a field is private, then gain access to
@@ -153,8 +143,7 @@ public class DependencyInjectionBeanFactory implements MyBeanFactory {
 		field.set(target, injectedClass);
 	}
 
-	private Object getObjectToInject(Map<Class<?>, Object> components,
-			Field field) {
+	private Object getObjectToInject(Map<Class<?>, Object> components, Field field) {
 		Class<?> classField = field.getType();
 		return components.get(classField);
 	}
