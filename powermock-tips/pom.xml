@@ -6,7 +6,7 @@
 	<artifactId>powermock-tips</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>Powermock Sample Code</name>
+	<name>Powermock Sample Code </name>
 	<properties>
 		<powermock.version>1.4.10</powermock.version>
 	</properties>
