@@ -12,7 +12,7 @@
 	</properties>
 	<dependencies>
 			<!-- Using slf4j as an alternative to commons logging
-			     This is the main interface -->
+			     This is the main interface  -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
