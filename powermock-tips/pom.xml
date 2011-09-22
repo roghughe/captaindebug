@@ -9,6 +9,7 @@
 	<name>Powermock Sample Code </name>
 	<properties>
 		<powermock.version>1.4.10</powermock.version>
+        <slf4jVersion>1.6.1</slf4jVersion>
 	</properties>
 	<dependencies>
 	   <dependency>
@@ -27,7 +28,30 @@
 			<groupId>org.easymock</groupId>
 			<artifactId>easymock</artifactId>
 			<version>3.0</version>
-		</dependency>	   
+		    <scope>test</scope>
+		</dependency>	
+		
+		<!-- Using slf4j as an alternative to commons logging
+		     This is the main interface  -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4jVersion}</version>
+			<scope>test</scope>
+		</dependency>
+		<!--Binding for log4j version 1.2.x You also need to place log4j.jar on your class path. -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4jVersion}</version>
+			<scope>test</scope>
+		</dependency>	
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>		   
 	</dependencies>     
 	<build>
 		<plugins>
