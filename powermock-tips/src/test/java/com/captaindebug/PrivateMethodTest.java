@@ -12,30 +12,27 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(AnyOldClass.class)
+@PrepareForTest(GameStatistics.class)
 public class PrivateMethodTest {
 
 	@Test
 	public final void testMockPrivateMethod() throws Exception {
 
-		final String methodToTest = "someComplexMethod";
-		final String url = "www.captaindebug.com";
-		final String description = "Captain Debug's Blog";
-		final String expected = "<a href=\"" + url + "\">" + description
-				+ "</a>";
+		final String methodToTest = "crunchNumbers";
+		final String expected = "100%";
 
-		// create a partial mock that can test one method. The last arg is a
-		// var-arg and you can test many methods in one go
-		AnyOldClass instance = createPartialMock(AnyOldClass.class,
-				methodToTest);
+		// create a partial mock that can mock out one method */
+		GameStatistics instance = createPartialMock(GameStatistics.class, methodToTest);
 
-		expectPrivate(instance, methodToTest, url, description).andReturn(
-				expected);
+		expectPrivate(instance, methodToTest).andReturn(true);
 
 		replay(instance);
-		String result = instance.someComplexMethod();
+		final long startTime = System.currentTimeMillis();
+		String result = instance.calculateStats();
+		final long duration = System.currentTimeMillis() - startTime;
 		verify(instance);
-		assertEquals(expected, result);
-	}
 
+		assertEquals(expected, result);
+		System.out.println("Time to run test: " + duration + "mS");
+	}
 }
