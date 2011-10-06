@@ -14,7 +14,8 @@ import java.util.regex.Pattern;
  */
 public class AnyOldClass {
 
-	private static Pattern pattern = Pattern.compile("^([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,6}$");
+	private final Pattern pattern = Pattern
+			.compile("^([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,6}$");
 
 	public String someMethod() {
 		return "someMethod";
@@ -31,7 +32,8 @@ public class AnyOldClass {
 	}
 
 	/**
-	 * A private method that's used internally, but is complex enough to require testing in its own right
+	 * A private method that's used internally, but is complex enough to require
+	 * testing in its own right
 	 */
 	private String createAnchorTag(String url, String description) {
 
