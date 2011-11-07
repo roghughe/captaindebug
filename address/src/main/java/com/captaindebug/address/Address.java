@@ -7,29 +7,37 @@
 package com.captaindebug.address;
 
 /**
- * This is a Value Object class that represents a row in our table
- * example_address.
+ * This is a Value Object class that represents a row in our table example_address.
  * 
  * @author Roger
  */
 public class Address {
 
-	private String street;
+	private final int id;
 
-	private String town;
+	private final String street;
 
-	private String country;
+	private final String town;
 
-	private String postCode;
+	private final String country;
+
+	private final String postCode;
+
+	public Address(int id, String street, String town, String postCode, String country) {
+		this.id = id;
+		this.street = street;
+		this.town = town;
+		this.postCode = postCode;
+		this.country = country;
+	}
+
+	public int getId() {
+		return id;
+	}
 
 	public String getStreet() {
 
 		return street;
-	}
-
-	public void setStreet(String street) {
-
-		this.street = street;
 	}
 
 	public String getTown() {
@@ -37,29 +45,13 @@ public class Address {
 		return town;
 	}
 
-	public void setTown(String town) {
-
-		this.town = town;
-	}
-
 	public String getCountry() {
 
 		return country;
-	}
-
-	public void setCountry(String country) {
-
-		this.country = country;
 	}
 
 	public String getPostCode() {
 
 		return postCode;
 	}
-
-	public void setPostCode(String post_code) {
-
-		this.postCode = post_code;
-	}
-
 }
