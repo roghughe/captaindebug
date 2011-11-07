@@ -13,12 +13,10 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.object.MappingSqlQuery;
-import org.springframework.stereotype.Component;
 
 /**
  * Simple JDBC Data Access object that gets hold of an address object, given an id
  */
-@Component
 public class JdbcAddress extends JdbcDaoSupport implements AddressDao {
 
 	/**

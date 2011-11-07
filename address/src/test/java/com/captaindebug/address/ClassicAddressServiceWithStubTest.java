@@ -12,7 +12,7 @@ import org.junit.Test;
  * @author Roger
  * 
  */
-public class ClassicAddressServiceTest {
+public class ClassicAddressServiceWithStubTest {
 
 	private AddressService instance;
 
