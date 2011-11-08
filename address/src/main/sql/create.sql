@@ -1,3 +1,5 @@
+drop table addresses;
+
 create table addresses (
 	id integer unique,
 	street varchar(50),
