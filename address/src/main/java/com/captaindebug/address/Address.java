@@ -7,11 +7,14 @@
 package com.captaindebug.address;
 
 /**
- * This is a Value Object class that represents a row in our table example_address.
+ * This is a Value Object class that represents a row in our table
+ * example_address.
  * 
  * @author Roger
  */
 public class Address {
+
+	public static final Address INVALID_ADDRESS = new Address(-1, "Invalid Address", "", "", "");
 
 	private final int id;
 

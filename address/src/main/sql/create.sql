@@ -8,7 +8,8 @@ create table addresses (
 	country varchar(15)
 );
 
-insert into addresses (10000,'15 Cred Street','Anytown','DD3 TT5', 'England');
+insert into addresses (id,street,town,post_code,country)
+  values(10000,'15 Cred Street','Anytown','DD3 TT5', 'England');
 
 select * from addresses;
 

@@ -23,7 +23,8 @@ public class AddressController {
 	 * Grab hold of an address and push it into the model for display.
 	 * 
 	 * @param id
-	 *            The id of the address object as a request param in the form id=<num>
+	 *            The id of the address object as a request param in the form
+	 *            id=<num>
 	 * 
 	 */
 	@RequestMapping(value = "/findaddress", method = RequestMethod.GET)
@@ -32,7 +33,7 @@ public class AddressController {
 		logger.info("Processing an address page request for address with id: " + id);
 
 		Address address = addressService.findAddress(id);
-		model.addAttribute(address);
+		model.addAttribute("address", address);
 
 		return "address-display";
 	}

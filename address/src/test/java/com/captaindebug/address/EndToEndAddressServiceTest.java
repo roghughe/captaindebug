@@ -3,11 +3,13 @@
  */
 package com.captaindebug.address;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.ui.Model;
 import org.springframework.validation.support.BindingAwareModelMap;
 import org.unitils.UnitilsJUnit4TestClassRunner;
+import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.spring.annotation.SpringApplicationContext;
 import org.unitils.spring.annotation.SpringBeanByType;
 
@@ -25,16 +27,39 @@ public class EndToEndAddressServiceTest {
 	private AddressController instance;
 
 	/**
-	 * Test method for {@link com.captaindebug.address.AddressService#findAddress(int)}.
+	 * Test method for
+	 * {@link com.captaindebug.address.AddressService#findAddress(int)}.
 	 */
 	@Test
+	public void testFindAddressWithNoAddress() {
+
+		final int id = 10;
+		BindingAwareModelMap model = new BindingAwareModelMap();
+
+		String result = instance.findAddress(id, model);
+		assertEquals("address-display", result);
+
+		Address resultAddress = (Address) model.get("address");
+		assertEquals(Address.INVALID_ADDRESS, resultAddress);
+	}
+
+	/**
+	 * Test method for
+	 * {@link com.captaindebug.address.AddressService#findAddress(int)}.
+	 */
+	@Test
+	@DataSet("FindAddress.xml")
 	public void testFindAddress() {
 
 		final int id = 10;
 		Address expectedAddress = new Address(1, "15 My Street", "My Town", "POSTCODE", "My Country");
 
-		Model model = new BindingAwareModelMap();
+		BindingAwareModelMap model = new BindingAwareModelMap();
 
-		instance.findAddress(id, model);
+		String result = instance.findAddress(id, model);
+		assertEquals("address-display", result);
+
+		Address resultAddress = (Address) model.get("address");
+		assertEquals(Address.INVALID_ADDRESS, resultAddress);
 	}
 }

@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * Small service class that handles getting an address from a DAO and then pretends to apply a business rule
+ * Small service class that handles getting an address from a DAO and then
+ * pretends to apply a business rule
  * 
  * @author Roger
  * 
@@ -32,21 +33,31 @@ public class AddressService {
 		logger.info("In Address Service with id: " + id);
 		Address address = addressDao.findAddress(id);
 
-		businessMethod(address);
+		address = businessMethod(address);
 
 		logger.info("Leaving Address Service with id: " + id);
 		return address;
 	}
 
-	private void businessMethod(Address address) {
+	private Address businessMethod(Address address) {
 
 		logger.info("in business method");
+
+		if (isNull(address)) {
+			address = Address.INVALID_ADDRESS;
+		}
+
 		// Do some jiggery-pokery here....
+
+		return address;
+	}
+
+	private boolean isNull(Object obj) {
+		return obj == null;
 	}
 
 	@Autowired
 	void setAddressDao(AddressDao addressDao) {
 		this.addressDao = addressDao;
 	}
-
 }

@@ -8,20 +8,24 @@ package com.captaindebug.address;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
+import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.object.MappingSqlQuery;
 
 /**
- * Simple JDBC Data Access object that gets hold of an address object, given an id
+ * Simple JDBC Data Access object that gets hold of an address object, given an
+ * id
  */
 public class JdbcAddress extends JdbcDaoSupport implements AddressDao {
 
 	/**
-	 * This is an instance of the query object that'll sort out the results of the SQL and produce whatever values
-	 * objects are required
+	 * This is an instance of the query object that'll sort out the results of
+	 * the SQL and produce whatever values objects are required
 	 */
 	private MyQueryClass query;
 
@@ -35,11 +39,13 @@ public class JdbcAddress extends JdbcDaoSupport implements AddressDao {
 
 		public MyQueryClass(DataSource dataSource, String sql) {
 			super(dataSource, sql);
+			this.declareParameter(new SqlParameter(Types.INTEGER));
 		}
 
 		/**
-		 * This the implementation of the MappingSqlQuery abstract method. This method creates and returns a instance of
-		 * our value object associated with the table / select statement.
+		 * This the implementation of the MappingSqlQuery abstract method. This
+		 * method creates and returns a instance of our value object associated
+		 * with the table / select statement.
 		 * 
 		 * @param rs
 		 *            This is the current ResultSet
@@ -57,8 +63,9 @@ public class JdbcAddress extends JdbcDaoSupport implements AddressDao {
 	}
 
 	/**
-	 * Override the JdbcDaoSupport method of this name, calling the super class so that things get set-up correctly and
-	 * then create the inner query class.
+	 * Override the JdbcDaoSupport method of this name, calling the super class
+	 * so that things get set-up correctly and then create the inner query
+	 * class.
 	 */
 	@Override
 	protected void initDao() throws Exception {
@@ -69,8 +76,11 @@ public class JdbcAddress extends JdbcDaoSupport implements AddressDao {
 	/**
 	 * Return an address object based upon it's id
 	 */
+	@Override
 	public Address findAddress(int id) {
-		return query.findObject(id);
+		List<Address> result = query.execute(new Object[] { new Integer(id) });
+
+		return result.get(0);
 	}
 
 }

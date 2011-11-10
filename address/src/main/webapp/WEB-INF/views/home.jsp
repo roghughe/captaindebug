@@ -5,10 +5,8 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+<h1>Simple Address App</h1>
+<br />
+<a href="find?id=101">Select Address with ID 9</a>
 </body>
 </html>
