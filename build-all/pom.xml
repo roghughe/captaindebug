@@ -10,5 +10,6 @@
 	<modules>
 		<module>../dependency-injection-factory</module>
 		<module>../powermock-tips</module>
+		<module>../address</module>
 	</modules>
 </project>
