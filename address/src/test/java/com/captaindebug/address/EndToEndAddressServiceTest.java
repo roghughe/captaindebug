@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.validation.support.BindingAwareModelMap;
 import org.unitils.UnitilsJUnit4TestClassRunner;
+import org.unitils.database.annotations.Transactional;
+import org.unitils.database.util.TransactionMode;
 import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.spring.annotation.SpringApplicationContext;
 import org.unitils.spring.annotation.SpringBeanByType;
@@ -21,6 +23,7 @@ import org.unitils.spring.annotation.SpringBeanByType;
  */
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 @SpringApplicationContext("servlet-context.xml")
+@Transactional(TransactionMode.DISABLED)
 public class EndToEndAddressServiceTest {
 
 	@SpringBeanByType
@@ -51,8 +54,9 @@ public class EndToEndAddressServiceTest {
 	@DataSet("FindAddress.xml")
 	public void testFindAddress() {
 
-		final int id = 10;
-		Address expectedAddress = new Address(1, "15 My Street", "My Town", "POSTCODE", "My Country");
+		final int id = 1;
+		Address expected = new Address(id, "15 My Street", "My Town",
+				"POSTCODE", "My Country");
 
 		BindingAwareModelMap model = new BindingAwareModelMap();
 
@@ -60,6 +64,10 @@ public class EndToEndAddressServiceTest {
 		assertEquals("address-display", result);
 
 		Address resultAddress = (Address) model.get("address");
-		assertEquals(Address.INVALID_ADDRESS, resultAddress);
+		assertEquals(expected.getId(), resultAddress.getId());
+		assertEquals(expected.getStreet(), resultAddress.getStreet());
+		assertEquals(expected.getTown(), resultAddress.getTown());
+		assertEquals(expected.getPostCode(), resultAddress.getPostCode());
+		assertEquals(expected.getCountry(), resultAddress.getCountry());
 	}
 }

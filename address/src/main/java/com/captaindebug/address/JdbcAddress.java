@@ -9,7 +9,6 @@ package com.captaindebug.address;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -57,7 +56,8 @@ public class JdbcAddress extends JdbcDaoSupport implements AddressDao {
 		@Override
 		protected Address mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-			return new Address(rs.getInt("pkseq"), rs.getString("street"), rs.getString("town"), rs.getString("post_code"),
+			return new Address(rs.getInt("id"), rs.getString("street"),
+					rs.getString("town"), rs.getString("post_code"),
 					rs.getString("country"));
 		}
 	}
@@ -78,9 +78,7 @@ public class JdbcAddress extends JdbcDaoSupport implements AddressDao {
 	 */
 	@Override
 	public Address findAddress(int id) {
-		List<Address> result = query.execute(new Object[] { new Integer(id) });
-
-		return result.get(0);
+		return query.findObject(id);
 	}
 
 }

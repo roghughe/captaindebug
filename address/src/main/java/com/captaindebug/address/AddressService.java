@@ -18,7 +18,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class AddressService {
 
-	private static final Logger logger = LoggerFactory.getLogger(AddressService.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(AddressService.class);
 
 	private AddressDao addressDao;
 
@@ -43,6 +44,7 @@ public class AddressService {
 
 		logger.info("in business method");
 
+		// Apply the Special Case Pattern (See MartinFowler.com)
 		if (isNull(address)) {
 			address = Address.INVALID_ADDRESS;
 		}
