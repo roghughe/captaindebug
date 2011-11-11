@@ -7,6 +7,6 @@
 <body>
 <h1>Simple Address App</h1>
 <br />
-<a href="find?id=101">Select Address with ID 9</a>
+<a href="find?id=9">Select Address with ID 9</a>
 </body>
 </html>

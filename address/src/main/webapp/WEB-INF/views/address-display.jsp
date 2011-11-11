@@ -6,13 +6,12 @@
 </head>
 <body>
 <h1>Simple Address App</h1>
-<br />
 <h2>These are the Results of your Search</h2>
 <p>
 Address id: <c:out value="${address.id}" /><br>
 Street: <c:out value="${address.street}" /><br>
 Town: <c:out value="${address.town}" /><br>
-Post Code: <c:out value="${address.post_code}" /><br>
+Post Code: <c:out value="${address.postCode}" /><br>
 Country: <c:out value="${address.country}" /><br>
 </p>
 <br>

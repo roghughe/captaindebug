@@ -27,7 +27,7 @@ public class AddressController {
 	 *            id=<num>
 	 * 
 	 */
-	@RequestMapping(value = "/findaddress", method = RequestMethod.GET)
+	@RequestMapping(value = "/find", method = RequestMethod.GET)
 	public String findAddress(@RequestParam("id") int id, Model model) {
 
 		logger.info("Processing an address page request for address with id: " + id);
