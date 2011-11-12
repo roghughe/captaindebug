@@ -15,6 +15,6 @@ Post Code: <c:out value="${address.postCode}" /><br>
 Country: <c:out value="${address.country}" /><br>
 </p>
 <br>
-<a href="find?id=101">Search Again with Address with ID 9</a>
+<a href="find?id=9">Search Again with Address with ID 9</a>
 </body>
 </html>
