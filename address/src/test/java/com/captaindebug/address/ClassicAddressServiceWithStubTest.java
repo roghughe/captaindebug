@@ -16,8 +16,6 @@ public class ClassicAddressServiceWithStubTest {
 
 	private AddressService instance;
 
-	private Address expectedAddress = new Address(1, "15 My Street", "My Town", "POSTCODE", "My Country");
-
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -25,14 +23,18 @@ public class ClassicAddressServiceWithStubTest {
 	public void setUp() throws Exception {
 
 		instance = new AddressService();
-		instance.setAddressDao(new StubAddressDao(expectedAddress));
 	}
 
 	/**
-	 * Test method for {@link com.captaindebug.address.AddressService#findAddress(int)}.
+	 * Test method for
+	 * {@link com.captaindebug.address.AddressService#findAddress(int)}.
 	 */
 	@Test
 	public void testFindAddressWithStub() {
+
+		Address expectedAddress = new Address(1, "15 My Street", "My Town",
+				"POSTCODE", "My Country");
+		instance.setAddressDao(new StubAddressDao(expectedAddress));
 
 		Address result = instance.findAddress(1);
 
