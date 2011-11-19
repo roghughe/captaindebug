@@ -32,23 +32,30 @@ public class MockingAddressServiceTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-
+		/* Create the object to test */
+		/* Inject the mock dependency */
 		instance = new AddressService();
 		instance.setAddressDao(mockDao);
 	}
 
 	/**
-	 * Test method for {@link com.captaindebug.address.AddressService#findAddress(int)}.
+	 * Test method for
+	 * {@link com.captaindebug.address.AddressService#findAddress(int)}.
 	 */
 	@Test
 	public void testFindAddress() {
 
-		final int id = 10;
-		Address expectedAddress = new Address(1, "15 My Street", "My Town", "POSTCODE", "My Country");
+		/* Setup the test data - stuff that's specific to this test */
+		final int id = 1;
+		Address expectedAddress = new Address(id, "15 My Street", "My Town", "POSTCODE", "My Country");
+		/* Set the expectations */
 		expect(mockDao.findAddress(id)).andReturn(expectedAddress);
-
 		replay();
+
+		/* Run the test */
 		instance.findAddress(id);
+
+		/* Verify that the mock's expectations were met */
 		verify();
 	}
 }
