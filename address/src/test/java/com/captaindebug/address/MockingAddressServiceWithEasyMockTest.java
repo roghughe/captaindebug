@@ -14,16 +14,20 @@ import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.easymock.annotation.Mock;
 
 /**
- * Simple Demo of a Mock test for the Address Service
+ * Simple Demo of a Mock test for the Address Service that uses EasyMock
  * 
  * @author Roger
  * 
  */
 @RunWith(UnitilsJUnit4TestClassRunner.class)
-public class MockingAddressServiceTest {
+public class MockingAddressServiceWithEasyMockTest {
 
+	/** The object to test */
 	private AddressService instance;
 
+	/**
+	 * EasyMock creates the mock object
+	 */
 	@Mock
 	private AddressDao mockDao;
 
@@ -33,9 +37,7 @@ public class MockingAddressServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		/* Create the object to test */
-		/* Inject the mock dependency */
 		instance = new AddressService();
-		instance.setAddressDao(mockDao);
 	}
 
 	/**
@@ -43,8 +45,10 @@ public class MockingAddressServiceTest {
 	 * {@link com.captaindebug.address.AddressService#findAddress(int)}.
 	 */
 	@Test
-	public void testFindAddress() {
+	public void testFindAddressWithEasyMock() {
 
+		/* Inject the mock dependency */
+		instance.setAddressDao(mockDao);
 		/* Setup the test data - stuff that's specific to this test */
 		final int id = 1;
 		Address expectedAddress = new Address(id, "15 My Street", "My Town", "POSTCODE", "My Country");
