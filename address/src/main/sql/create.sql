@@ -23,3 +23,16 @@ create table properties (
 	propval varchar(255) not null,
 	locale varchar(8) 
 );
+
+insert into properties (id,propkey,propval,locale) values(1,'key1','val1','');
+insert into properties (id,propkey,propval,locale) values(2,'key2','val2','fr_FR');
+insert into properties (id,propkey,propval,locale) values(3,'key3','val3','en_US');
+insert into properties (id,propkey,propval,locale) values(4,'key4','val4','en_GB');
+insert into properties (id,propkey,propval,locale) values(5,'key5','val5','');
+insert into properties (id,propkey,propval,locale) values(6,'key6','val6','en_GB');
+insert into properties (id,propkey,propval,locale) values(7,'key7','val7','');
+insert into properties (id,propkey,propval,locale) values(8,'key8','val8','en_GB');
+insert into properties (id,propkey,propval,locale) values(9,'key9','val9','');
+insert into properties (id,propkey,propval,locale) values(10,'key10','val10','');
+insert into properties (id,propkey,propval,locale) values(11,'key11','val11','en_US');
+insert into properties (id,propkey,propval,locale) values(12,'key12','val12','fr_FR');

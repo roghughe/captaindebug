@@ -3,20 +3,26 @@
  */
 package com.captaindebug.siteproperties;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
 
 /**
  * Class written to be as big as mess as possible, doing lots of things and
  * breaking the Single Responsibility Principal
  */
-public class SitePropertiesManager {
+public class SitePropertiesManager implements Serializable {
 
-	private static final String sql = "select * from site properties";
-
-	private final String serialfileName = "";
+	private static final String GLOBAL_LOCALE = "gbl";
+	private static final String sql = "select * from properties";
 
 	private String url;
 
@@ -24,14 +30,16 @@ public class SitePropertiesManager {
 
 	private String password;
 
-	private PreparedStatement ps;
+	private transient PreparedStatement ps;
 	private static long MILLIS_IN_HOUR = 1000 * 60 * 60;
 
 	private long lastUpdateTime;
 
-	private SitePropertiesManager INSTANCE;
+	private static transient SitePropertiesManager INSTANCE;
 
-	public SitePropertiesManager getInstance() {
+	HashMap<String, HashMap<String, String>> theBigMap = new HashMap<String, HashMap<String, String>>();
+
+	public static SitePropertiesManager getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new SitePropertiesManager();
 		}
@@ -59,40 +67,106 @@ public class SitePropertiesManager {
 		return password;
 	}
 
+	public long getLastUpdateTime() {
+		return lastUpdateTime;
+	}
+
+	public void setLastUpdateTime(long lastUpdateTime) {
+		this.lastUpdateTime = lastUpdateTime;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public void init() throws Exception {
+	public void init() {
 
-		Class.forName("com.mysql.jdbc.Driver");
-		Connection con = DriverManager.getConnection(url, username, password);
+		long lastSaveTime = 0L;
+		try {
+			FileInputStream aFIS = new FileInputStream("/Users/Roger/my-site-props.ser");
+			ObjectInputStream aOIS = new ObjectInputStream(aFIS);
 
-		ps = con.prepareStatement(sql);
+			Object o = aOIS.readObject();
+			SitePropertiesManager tmp = (SitePropertiesManager) o;
+			lastSaveTime = tmp.getLastUpdateTime();
+			System.out.println("last save time was: " + lastSaveTime);
 
-		ResultSet rs = ps.executeQuery();
-
-		while (rs.next()) {
-			String propertyKey = rs.getString("propkey");
-			String propertyValue = rs.getString("propval");
-			String locale = rs.getString("locale");
-
+			aFIS.close();
+		} catch (IOException ioe) {
+			System.out.println(ioe.getMessage());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-		ps.close();
 
-		// serialize the results
+		if (lastSaveTime < System.currentTimeMillis() - MILLIS_IN_HOUR) {
+
+			try {
+
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection con = DriverManager.getConnection(url, username, password);
+
+				ps = con.prepareStatement(sql);
+
+				ResultSet rs = ps.executeQuery();
+
+				while (rs.next()) {
+					String propertyKey = rs.getString("propkey");
+					String propertyValue = rs.getString("propval");
+					String locale = rs.getString("locale");
+
+					HashMap<String, String> localeMap = null;
+					if (!theBigMap.containsKey(propertyKey)) {
+
+						localeMap = new HashMap<String, String>();
+						theBigMap.put(propertyKey, localeMap);
+					} else {
+
+						localeMap = theBigMap.get(locale);
+					}
+
+					if ("".equals(locale)) {
+						locale = GLOBAL_LOCALE;
+					}
+					localeMap.put(locale, propertyValue);
+
+					System.out.println("The results are: " + theBigMap);
+				}
+				ps.close();
+
+				lastUpdateTime = System.currentTimeMillis();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				// whoops do nothing about the error.
+			}
+			// serialize the results
+
+			try {
+				FileOutputStream aFOS = new FileOutputStream("/Users/Roger/my-site-props.ser");
+				ObjectOutputStream aOOS = new ObjectOutputStream(aFOS);
+
+				aOOS.writeObject(this);
+				aOOS.flush();
+				aFOS.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 	}
 
-	public void rebuild() throws Exception {
+	/*
+	 * Use this to test the class
+	 */
+	public static void main(String[] args) {
 
-		long currentTime = System.currentTimeMillis();
-		if (currentTime > (lastUpdateTime + MILLIS_IN_HOUR)) {
-			lastUpdateTime = currentTime;
+		SitePropertiesManager test = SitePropertiesManager.getInstance();
 
-			// cut n paste init code
-		}
+		test.setPassword("experience");
+		test.setUsername("root");
+		test.setUrl("jdbc:mysql://localhost/junit");
 
+		test.init();
 	}
 
 }
