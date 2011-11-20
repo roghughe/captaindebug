@@ -17,3 +17,9 @@ insert into addresses (id,street,town,post_code,country)
   
 select * from addresses;
 
+create table properties (
+	id integer primary key,
+	propkey varchar(32) not null,
+	propval varchar(255) not null,
+	locale varchar(8) 
+);
