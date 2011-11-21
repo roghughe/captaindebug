@@ -13,13 +13,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Class written to be as big as mess as possible, doing lots of things and
  * breaking the Single Responsibility Principal
  */
-public class SitePropertiesManager implements Serializable {
+public class SitePropertiesManager implements Serializable, PropertiesManager {
 
 	private static final String GLOBAL_LOCALE = "gbl";
 	private static final String sql = "select * from properties";
@@ -155,6 +157,86 @@ public class SitePropertiesManager implements Serializable {
 
 	}
 
+	/**
+	 * @see com.captaindebug.siteproperties.PropertiesManager#findProperty(java.lang.String)
+	 */
+	@Override
+	public String findProperty(String propertyName) {
+
+		HashMap<String, String> localeMap = theBigMap.get(propertyName);
+		String retVal = localeMap.get(GLOBAL_LOCALE);
+		if (retVal == null) {
+			retVal = localeMap.get("en_GB");
+		}
+		return retVal;
+	}
+
+	/**
+	 * @see com.captaindebug.siteproperties.PropertiesManager#findProperty(java.lang.String,
+	 *      java.lang.String)
+	 */
+	@Override
+	public String findProperty(String propertyName, String locale) {
+		HashMap<String, String> localeMap = theBigMap.get(propertyName);
+		String retVal = localeMap.get(locale);
+		return retVal;
+
+	}
+
+	/**
+	 * @see com.captaindebug.siteproperties.PropertiesManager#findListProperty(java.lang.String)
+	 */
+	@Override
+	public List<String> findListProperty(String propertyName) {
+		HashMap<String, String> localeMap = theBigMap.get(propertyName);
+		String retVal = localeMap.get(GLOBAL_LOCALE);
+		if (retVal == null) {
+			retVal = localeMap.get("en_GB");
+		}
+
+		String[] split = retVal.split(",");
+		return Arrays.asList(split);
+	}
+
+	/**
+	 * @see com.captaindebug.siteproperties.PropertiesManager#findListProperty(java.lang.String,
+	 *      java.lang.String)
+	 */
+	@Override
+	public List<String> findListProperty(String propertyName, String locale) {
+		HashMap<String, String> localeMap = theBigMap.get(propertyName);
+		String retVal = localeMap.get(locale);
+		String[] split = retVal.split(",");
+		return Arrays.asList(split);
+
+	}
+
+	/**
+	 * @see com.captaindebug.siteproperties.PropertiesManager#findIntProperty(java.lang.String)
+	 */
+	@Override
+	public int findIntProperty(String propertyName) {
+
+		HashMap<String, String> localeMap = theBigMap.get(propertyName);
+		String retVal = localeMap.get(GLOBAL_LOCALE);
+		if (retVal == null) {
+			retVal = localeMap.get("en_GB");
+		}
+		return new Integer(retVal).intValue();
+	}
+
+	/**
+	 * @see com.captaindebug.siteproperties.PropertiesManager#findIntProperty(java.lang.String,
+	 *      java.lang.String)
+	 */
+	@Override
+	public int findIntProperty(String propertyName, String locale) {
+
+		HashMap<String, String> localeMap = theBigMap.get(propertyName);
+		String retVal = localeMap.get(locale);
+		return new Integer(retVal).intValue();
+	}
+
 	/*
 	 * Use this to test the class
 	 */
@@ -167,6 +249,8 @@ public class SitePropertiesManager implements Serializable {
 		test.setUrl("jdbc:mysql://localhost/junit");
 
 		test.init();
-	}
 
+		String property1 = test.findProperty("key5");
+		System.out.println("Test is: " + property1);
+	}
 }
