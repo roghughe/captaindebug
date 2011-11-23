@@ -6,7 +6,7 @@ package com.captaindebug.address;
  * @author RogerHughes
  * 
  */
-interface AddressDao {
+public interface AddressDao {
 
 	public Address findAddress(int id);
 

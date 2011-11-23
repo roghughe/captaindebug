@@ -16,6 +16,8 @@ public class Address {
 
 	public static final Address INVALID_ADDRESS = new Address(-1, "Invalid Address", "", "", "");
 
+	public static final Address CLASSIFIED_ADDRESS = new Address(-1, "Classified Address", "", "", "");
+
 	private final int id;
 
 	private final String street;
