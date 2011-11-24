@@ -37,12 +37,22 @@ public class AddressService {
 	public Address findAddress(int id) {
 
 		logger.info("In Address Service with id: " + id);
-		Address address = addressDao.findAddress(id);
 
-		address = businessMethod(address);
+		Address address = Address.INVALID_ADDRESS;
+
+		if (isAddressServiceEnabled()) {
+			address = addressDao.findAddress(id);
+			address = businessMethod(address);
+		}
 
 		logger.info("Leaving Address Service with id: " + id);
 		return address;
+	}
+
+	private boolean isAddressServiceEnabled() {
+
+		// // TODO
+		return false;
 	}
 
 	private Address businessMethod(Address address) {

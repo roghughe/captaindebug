@@ -19,14 +19,20 @@ public class AddressServiceUnitTest {
 	@Before
 	public void setUp() {
 		instance = new AddressService();
+
 		stubProperties = new StubPropertiesManager();
 		instance.setPropertiesManager(stubProperties);
-
-		instance.setAddressDao(addressDao);
 	}
 
 	@Test
-	public void testAddressSiteProperties() {
+	public void testAddressSiteProperties_AddressServiceDisabled() {
+
+		/* Set up the AddressDAO Stubb for this test */
+		Address address = new Address(1, "15 My Street", "My Town", "POSTCODE", "My Country");
+		addressDao = new StubAddressDao(address);
+		instance.setAddressDao(addressDao);
+
+		stubProperties.setProperty("address.enabled", "false");
 
 		Address expected = Address.INVALID_ADDRESS;
 		Address result = instance.findAddress(1);

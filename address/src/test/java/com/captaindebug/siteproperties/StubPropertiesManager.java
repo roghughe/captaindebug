@@ -3,9 +3,13 @@
  */
 package com.captaindebug.siteproperties;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
+ * An example of a stub based upon an interface.
+ * 
  * @author Roger
  * 
  *         Created 10:18:06 PM Nov 23, 2011
@@ -13,9 +17,15 @@ import java.util.List;
  */
 public class StubPropertiesManager implements PropertiesManager {
 
+	private final Map<String, String> propMap = new HashMap<String, String>();
+
+	public void setProperty(String key, String value) {
+		propMap.put(key, value);
+	}
+
 	@Override
 	public String findProperty(String propertyName) {
-		throw new UnsupportedOperationException();
+		return propMap.get(propertyName);
 	}
 
 	@Override

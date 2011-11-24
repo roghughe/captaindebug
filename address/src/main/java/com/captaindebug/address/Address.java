@@ -16,11 +16,7 @@ import com.captaindebug.whytotest.AddressFormatException;
  */
 public class Address {
 
-	public static final Address INVALID_ADDRESS = new Address(-1,
-			"Invalid Address", "", "", "");
-
-	public static final Address CLASSIFIED_ADDRESS = new Address(-1,
-			"Classified Address", "", "", "");
+	public static final Address INVALID_ADDRESS = new Address(-1, "Invalid Address", "", "", "");
 
 	private final int id;
 
@@ -32,8 +28,7 @@ public class Address {
 
 	private final String postCode;
 
-	public Address(int id, String street, String town, String postCode,
-			String country) {
+	public Address(int id, String street, String town, String postCode, String country) {
 		this.id = id;
 		this.street = street;
 		this.town = town;
@@ -76,8 +71,7 @@ public class Address {
 
 	private void checkAddress() throws AddressFormatException {
 
-		if (isNull(street) || isNull(town) || isNull(country)
-				|| isNull(postCode)) {
+		if (isNull(street) || isNull(town) || isNull(country) || isNull(postCode)) {
 			throw new AddressFormatException("Unable to format address");
 		}
 
@@ -88,8 +82,7 @@ public class Address {
 	}
 
 	private String formatAsString() {
-		return "Address is... Street: " + street + "  Town: " + town
-				+ " PostCode: " + postCode + " Country: " + country;
+		return "Address is... Street: " + street + "  Town: " + town + " PostCode: " + postCode + " Country: " + country;
 	}
 
 }

@@ -27,12 +27,6 @@ public class AddressService {
 
 	private AddressDao addressDao;
 
-	/**
-	 * Given an id, retrieve an address. Apply phony business rules.
-	 * 
-	 * @param id
-	 *            The id of the address object.
-	 */
 	public String findAddressText(int id) {
 
 		logger.info("In Address Service with id: " + id);

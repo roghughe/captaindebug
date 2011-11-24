@@ -17,6 +17,8 @@ import com.captaindebug.address.Address;
 import com.captaindebug.address.AddressDao;
 
 /**
+ * These three tests took approx 15 mins
+ * 
  * @author Roger
  * 
  */
@@ -43,10 +45,12 @@ public class WhyToTestAddressServiceTest {
 
 	/**
 	 * This test passes with the bug in the code
+	 * 
+	 * Scenario: The Address object is found in the database and can return a
+	 * formatted address
 	 */
 	@Test
-	public void testFindAddressText_Address_Found()
-			throws AddressFormatException {
+	public void testFindAddressText_Address_Found() throws AddressFormatException {
 
 		final int id = 1;
 		expect(mockDao.findAddress(id)).andReturn(mockAddress);
@@ -58,11 +62,12 @@ public class WhyToTestAddressServiceTest {
 	}
 
 	/**
-	 * This test passes with the bug in the code
+	 * This test fails with the bug in the code
+	 * 
+	 * Scenario: The Address Object is not found and the method returns null
 	 */
 	@Test
-	public void testFindAddressText_Address_Not_Found()
-			throws AddressFormatException {
+	public void testFindAddressText_Address_Not_Found() throws AddressFormatException {
 
 		final int id = 1;
 		expect(mockDao.findAddress(id)).andReturn(null);
@@ -72,4 +77,21 @@ public class WhyToTestAddressServiceTest {
 		verify();
 	}
 
+	/**
+	 * This test passes with the bug in the code
+	 * 
+	 * Scenario: The Address Object is found but the data is incomplete and so a
+	 * null is returned.
+	 */
+	@Test
+	public void testFindAddressText_Address_Found_But_Cant_Format() throws AddressFormatException {
+
+		final int id = 1;
+		expect(mockDao.findAddress(id)).andReturn(mockAddress);
+		expect(mockAddress.format()).andThrow(new AddressFormatException());
+
+		replay();
+		instance.findAddressText(id);
+		verify();
+	}
 }
