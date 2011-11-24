@@ -8,6 +8,7 @@ import static org.unitils.easymock.EasyMockUnitils.replay;
 import static org.unitils.easymock.EasyMockUnitils.verify;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.unitils.UnitilsJUnit4TestClassRunner;
@@ -66,7 +67,7 @@ public class WhyToTestAddressServiceTest {
 	 * 
 	 * Scenario: The Address Object is not found and the method returns null
 	 */
-	@Test
+	@Ignore
 	public void testFindAddressText_Address_Not_Found() throws AddressFormatException {
 
 		final int id = 1;

@@ -51,8 +51,8 @@ public class AddressService {
 
 	private boolean isAddressServiceEnabled() {
 
-		// // TODO
-		return false;
+		SitePropertiesManager propManager = SitePropertiesManager.getInstance();
+		return new Boolean(propManager.findProperty("address.enabled"));
 	}
 
 	private Address businessMethod(Address address) {
