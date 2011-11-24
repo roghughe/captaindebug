@@ -6,6 +6,8 @@
 
 package com.captaindebug.address;
 
+import com.captaindebug.whytotest.AddressFormatException;
+
 /**
  * This is a Value Object class that represents a row in our table
  * example_address.
@@ -14,9 +16,11 @@ package com.captaindebug.address;
  */
 public class Address {
 
-	public static final Address INVALID_ADDRESS = new Address(-1, "Invalid Address", "", "", "");
+	public static final Address INVALID_ADDRESS = new Address(-1,
+			"Invalid Address", "", "", "");
 
-	public static final Address CLASSIFIED_ADDRESS = new Address(-1, "Classified Address", "", "", "");
+	public static final Address CLASSIFIED_ADDRESS = new Address(-1,
+			"Classified Address", "", "", "");
 
 	private final int id;
 
@@ -28,7 +32,8 @@ public class Address {
 
 	private final String postCode;
 
-	public Address(int id, String street, String town, String postCode, String country) {
+	public Address(int id, String street, String town, String postCode,
+			String country) {
 		this.id = id;
 		this.street = street;
 		this.town = town;
@@ -59,4 +64,32 @@ public class Address {
 
 		return postCode;
 	}
+
+	/**
+	 * Part of the 'whytotest' example. A rather contrived address formatter
+	 */
+	public String format() throws AddressFormatException {
+
+		checkAddress();
+		return formatAsString();
+	}
+
+	private void checkAddress() throws AddressFormatException {
+
+		if (isNull(street) || isNull(town) || isNull(country)
+				|| isNull(postCode)) {
+			throw new AddressFormatException("Unable to format address");
+		}
+
+	}
+
+	private boolean isNull(Object obj) {
+		return obj == null;
+	}
+
+	private String formatAsString() {
+		return "Address is... Street: " + street + "  Town: " + town
+				+ " PostCode: " + postCode + " Country: " + country;
+	}
+
 }

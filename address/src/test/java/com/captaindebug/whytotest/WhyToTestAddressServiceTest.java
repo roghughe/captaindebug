@@ -1,0 +1,75 @@
+/**
+ * Copyright 2011 Marin Solutions
+ */
+package com.captaindebug.whytotest;
+
+import static org.easymock.EasyMock.expect;
+import static org.unitils.easymock.EasyMockUnitils.replay;
+import static org.unitils.easymock.EasyMockUnitils.verify;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.unitils.UnitilsJUnit4TestClassRunner;
+import org.unitils.easymock.annotation.Mock;
+
+import com.captaindebug.address.Address;
+import com.captaindebug.address.AddressDao;
+
+/**
+ * @author Roger
+ * 
+ */
+@RunWith(UnitilsJUnit4TestClassRunner.class)
+public class WhyToTestAddressServiceTest {
+
+	private AddressService instance;
+
+	@Mock
+	private AddressDao mockDao;
+
+	@Mock
+	private Address mockAddress;
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+
+		instance = new AddressService();
+		instance.setAddressDao(mockDao);
+	}
+
+	/**
+	 * This test passes with the bug in the code
+	 */
+	@Test
+	public void testFindAddressText_Address_Found()
+			throws AddressFormatException {
+
+		final int id = 1;
+		expect(mockDao.findAddress(id)).andReturn(mockAddress);
+		expect(mockAddress.format()).andReturn("This is an address");
+
+		replay();
+		instance.findAddressText(id);
+		verify();
+	}
+
+	/**
+	 * This test passes with the bug in the code
+	 */
+	@Test
+	public void testFindAddressText_Address_Not_Found()
+			throws AddressFormatException {
+
+		final int id = 1;
+		expect(mockDao.findAddress(id)).andReturn(null);
+
+		replay();
+		instance.findAddressText(id);
+		verify();
+	}
+
+}
