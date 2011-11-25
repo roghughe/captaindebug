@@ -22,7 +22,8 @@ import com.captaindebug.address.AddressDao;
 @Component
 public class AddressService {
 
-	private static final Logger logger = LoggerFactory.getLogger(AddressService.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(AddressService.class);
 
 	private AddressDao addressDao;
 
@@ -51,7 +52,6 @@ public class AddressService {
 
 	private boolean isAddressServiceEnabled() {
 
-		SitePropertiesManager propManager = SitePropertiesManager.getInstance();
 		return new Boolean(propManager.findProperty("address.enabled"));
 	}
 
@@ -80,6 +80,7 @@ public class AddressService {
 	}
 
 	@Autowired
+	@Qualifier("propman")
 	void setPropertiesManager(PropertiesManager propManager) {
 		this.propManager = propManager;
 	}

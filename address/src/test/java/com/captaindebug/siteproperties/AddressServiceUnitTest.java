@@ -36,7 +36,8 @@ public class AddressServiceUnitTest {
 	public void testAddressSiteProperties_AddressServiceDisabled() {
 
 		/* Set up the AddressDAO Stubb for this test */
-		Address address = new Address(1, "15 My Street", "My Town", "POSTCODE", "My Country");
+		Address address = new Address(1, "15 My Street", "My Town", "POSTCODE",
+				"My Country");
 		addressDao = new StubAddressDao(address);
 		instance.setAddressDao(addressDao);
 
@@ -52,7 +53,8 @@ public class AddressServiceUnitTest {
 	public void testAddressSiteProperties_AddressServiceEnabled() {
 
 		/* Set up the AddressDAO Stubb for this test */
-		Address address = new Address(1, "15 My Street", "My Town", "POSTCODE", "My Country");
+		Address address = new Address(1, "15 My Street", "My Town", "POSTCODE",
+				"My Country");
 		addressDao = new StubAddressDao(address);
 		instance.setAddressDao(addressDao);
 
@@ -62,5 +64,4 @@ public class AddressServiceUnitTest {
 
 		assertEquals(address, result);
 	}
-
 }
