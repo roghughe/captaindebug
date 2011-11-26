@@ -9,24 +9,24 @@ import com.captaindebug.address.Address;
 import com.captaindebug.address.StubAddressDao;
 
 /**
- * Stub based test for AddressService
+ * Stub based test for LegacyAddressService
  * 
  * @author Roger
  * 
  *         Created 9:13:49 PM Nov 24, 2011
  * 
  */
-public class AddressServiceUnitTest {
+public class LegacyAddressServiceUnitTest {
 
 	private StubAddressDao addressDao;
 
 	private StubPropertiesManager stubProperties;
 
-	private AddressService instance;
+	private LegacyAddressService instance;
 
 	@Before
 	public void setUp() {
-		instance = new AddressService();
+		instance = new LegacyAddressService();
 
 		stubProperties = new StubPropertiesManager();
 		instance.setPropertiesManager(stubProperties);

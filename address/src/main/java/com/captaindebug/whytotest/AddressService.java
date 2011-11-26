@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
 import com.captaindebug.address.Address;
 import com.captaindebug.address.AddressDao;
@@ -19,11 +18,9 @@ import com.captaindebug.address.AddressDao;
  * @author Roger
  * 
  */
-@Component
 public class AddressService {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(AddressService.class);
+	private static final Logger logger = LoggerFactory.getLogger(AddressService.class);
 
 	private AddressDao addressDao;
 
@@ -34,7 +31,8 @@ public class AddressService {
 
 		String formattedAddress = null;
 
-		if (address != null);
+		if (address != null)
+			;
 		try {
 			formattedAddress = address.format();
 		} catch (AddressFormatException e) {

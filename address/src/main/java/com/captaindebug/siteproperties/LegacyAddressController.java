@@ -15,11 +15,11 @@ import com.captaindebug.address.Address;
  * Handles requests for the display address page
  */
 @Controller
-public class AddressController {
+public class LegacyAddressController {
 
-	private static final Logger logger = LoggerFactory.getLogger(AddressController.class);
+	private static final Logger logger = LoggerFactory.getLogger(LegacyAddressController.class);
 
-	private AddressService addressService;
+	private LegacyAddressService addressService;
 
 	/**
 	 * Grab hold of an address and push it into the model for display.
@@ -41,7 +41,7 @@ public class AddressController {
 	}
 
 	@Autowired
-	void setAddressService(AddressService addressService) {
+	void setAddressService(LegacyAddressService addressService) {
 		this.addressService = addressService;
 	}
 }

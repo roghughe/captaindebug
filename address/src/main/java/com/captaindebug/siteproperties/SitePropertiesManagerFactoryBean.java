@@ -4,16 +4,21 @@
 package com.captaindebug.siteproperties;
 
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.stereotype.Component;
 
 /**
  * This is our Factory Object - creates a instance of SiteProperties that can be
  * picked up by Spring.
  */
-public class SitePropertiesManagerFactoryBean implements
-		FactoryBean<SitePropertiesManager> {
+@Component
+public class SitePropertiesManagerFactoryBean implements FactoryBean<SitePropertiesManager> {
 
-	private static SitePropertiesManager propsManager = SitePropertiesManager
-			.getInstance();
+	private static SitePropertiesManager propsManager;
+
+	public SitePropertiesManagerFactoryBean() {
+		propsManager = SitePropertiesManager.getInstance();
+		propsManager.init();
+	}
 
 	@Override
 	public SitePropertiesManager getObject() throws Exception {

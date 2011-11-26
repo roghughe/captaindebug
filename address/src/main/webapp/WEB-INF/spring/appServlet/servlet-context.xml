@@ -26,7 +26,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-	<context:component-scan base-package="com.captaindebug.address" />
+	<context:component-scan base-package="com.captaindebug" />
 
 	<beans:bean id="addressDao" class="com.captaindebug.address.JdbcAddress">
 		<beans:property name="dataSource" ref="dataSource" />
