@@ -20,10 +20,9 @@ import com.captaindebug.address.AddressDao;
  * 
  */
 @Component
-public class AddressService {
+public class LegacyAddressService {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(AddressService.class);
+	private static final Logger logger = LoggerFactory.getLogger(LegacyAddressService.class);
 
 	private AddressDao addressDao;
 
