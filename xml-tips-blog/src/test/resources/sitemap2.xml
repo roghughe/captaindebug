@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sm:urlset xmlns:sm="http://www.sitemaps.org/schemas/sitemap/0.9"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+   <sm:url>
+      <sm:loc>http://www.example.com/</sm:loc>
+      <sm:lastmod>2005-01-01</sm:lastmod>
+      <sm:changefreq>monthly</sm:changefreq>
+      <sm:priority>0.8</sm:priority>
+   </sm:url>
+   <sm:url>
+      <sm:loc>http://www.example.com/page1/</sm:loc>
+      <sm:lastmod>2006-01-02</sm:lastmod>
+      <sm:changefreq>weekly</sm:changefreq>
+      <sm:priority>0.8</sm:priority>
+   </sm:url>
+</sm:urlset> 
