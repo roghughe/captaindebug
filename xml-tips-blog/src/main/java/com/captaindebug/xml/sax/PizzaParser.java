@@ -82,7 +82,9 @@ public class PizzaParser {
 		public void startElement(String uri, String localName, String qName, Attributes attributes) {
 
 			capture = true;
-			if ("pizza".equals(qName)) {
+			if ("pizzas".equals(qName)) {
+				capture = false;
+			} else if ("pizza".equals(qName)) {
 				pizzaInfo = new String[3];
 				capture = false;
 			} else if ("name".equals(qName)) {

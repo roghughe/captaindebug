@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pizzas>
+	<pizza>
+		<name>Capricciosa</name>
+		<base>thin</base>
+		<quantity>2</quantity>
+	</pizza>
+	<pizza>
+		<name>Margherita</name>
+		<base>thin</base>
+		<quantity>1</quantity>
+	</pizza>
+</pizzas>

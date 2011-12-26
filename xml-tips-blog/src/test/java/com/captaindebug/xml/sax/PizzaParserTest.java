@@ -22,6 +22,21 @@ public class PizzaParserTest {
 	private static final String ORDER_XML_2 = //
 	"<?xml version=\"1.0\" encoding=\"UTF-8\"?><pizza><name>Capricciosa</name><base>thin</base><quantity>2</quantity></pizza>";
 
+	private static final String ORDER_XML_3 = //
+	"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + //
+			"<pizzas>\n" + //
+			"    <pizza>\n" + //
+			"        <name>Capricciosa</name>\n" + //
+			"        <base>thin</base>\n" + //
+			"        <quantity>2</quantity>\n" + //
+			"    </pizza>\n" + //
+			"    <pizza>\n" + //
+			"        <name>Margherita</name>\n" + //
+			"        <base>thin</base>\n" + //
+			"        <quantity>1</quantity>\n" + //
+			"    </pizza>\n" + //
+			"</pizzas>";
+
 	private PizzaParser instance;
 
 	@Before
@@ -55,4 +70,19 @@ public class PizzaParserTest {
 		assertEquals("2", result.getQuantity());
 	}
 
+	@Test
+	public void readOrderForMultiplePizza() {
+
+		List<PizzaOrder> results = instance.order(ORDER_XML_3);
+
+		PizzaOrder result = results.get(0);
+		assertEquals("Capricciosa", result.getPizzaName());
+		assertEquals("thin", result.getBase());
+		assertEquals("2", result.getQuantity());
+
+		result = results.get(1);
+		assertEquals("Margherita", result.getPizzaName());
+		assertEquals("thin", result.getBase());
+		assertEquals("1", result.getQuantity());
+	}
 }
