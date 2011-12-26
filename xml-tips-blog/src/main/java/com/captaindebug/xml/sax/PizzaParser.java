@@ -10,12 +10,12 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-public class CoffeeParser {
+public class PizzaParser {
 
-	public List<CoffeeBean> order(String xml) {
+	public List<PizzaOrder> order(String xml) {
 
 		// create a new Content Handler for this xml String
-		CoffeeContentHandler handler = new CoffeeContentHandler();
+		PizzaContentHandler handler = new PizzaContentHandler();
 
 		// do the parsing
 		try {
@@ -29,51 +29,51 @@ public class CoffeeParser {
 			// Do the actual work
 			parser.parse(source);
 
-			return handler.getCoffeeBeans();
+			return handler.getPizzaOrder();
 		} catch (Exception ex) {
 			throw new RuntimeException("Exception parsing xml message. Message: " + ex.getMessage(), ex);
 		}
 	}
 
-	static class CoffeeBean {
+	static class PizzaOrder {
 
-		private final String brand;
-		private final String type;
-		private final String sugars;
+		private final String pizzaName;
+		private final String base;
+		private final String quantity;
 
-		CoffeeBean(String brand, String type, String sugars) {
-			this.brand = brand;
-			this.type = type;
-			this.sugars = sugars;
+		PizzaOrder(String pizzaName, String base, String quantity) {
+			this.pizzaName = pizzaName;
+			this.base = base;
+			this.quantity = quantity;
 		}
 
-		public String getBrand() {
-			return brand;
+		public String getPizzaName() {
+			return pizzaName;
 		}
 
-		public String getType() {
-			return type;
+		public String getBase() {
+			return base;
 		}
 
-		public String getSugars() {
-			return sugars;
+		public String getQuantity() {
+			return quantity;
 		}
 	}
 
 	/**
 	 */
-	class CoffeeContentHandler extends DefaultHandler {
+	class PizzaContentHandler extends DefaultHandler {
 
-		private String[] coffeeInfo;
+		private String[] pizzaInfo;
 		private int index;
-		private List<CoffeeBean> outList;
+		private List<PizzaOrder> outList;
 		private boolean capture;
 
 		/**
 		 */
 		@Override
 		public void startDocument() {
-			outList = new ArrayList<CoffeeBean>();
+			outList = new ArrayList<PizzaOrder>();
 		}
 
 		/**
@@ -82,14 +82,14 @@ public class CoffeeParser {
 		public void startElement(String uri, String localName, String qName, Attributes attributes) {
 
 			capture = true;
-			if ("coffee".equals(qName)) {
-				coffeeInfo = new String[3];
+			if ("pizza".equals(qName)) {
+				pizzaInfo = new String[3];
 				capture = false;
-			} else if ("brand".equals(qName)) {
+			} else if ("name".equals(qName)) {
 				index = 0;
-			} else if ("type".equals(qName)) {
+			} else if ("base".equals(qName)) {
 				index = 1;
-			} else if ("sugars".equals(qName)) {
+			} else if ("quantity".equals(qName)) {
 				index = 2;
 			}
 		}
@@ -99,8 +99,8 @@ public class CoffeeParser {
 		@Override
 		public void endElement(String uri, String localName, String qName) {
 
-			if ("coffee".equals(qName)) {
-				outList.add(new CoffeeBean(coffeeInfo[0], coffeeInfo[1], coffeeInfo[2]));
+			if ("pizza".equals(qName)) {
+				outList.add(new PizzaOrder(pizzaInfo[0], pizzaInfo[1], pizzaInfo[2]));
 			}
 		}
 
@@ -108,12 +108,12 @@ public class CoffeeParser {
 		public void characters(char[] ch, int start, int length) {
 
 			if (capture) {
-				coffeeInfo[index] = new String(ch, start, length);
+				pizzaInfo[index] = new String(ch, start, length);
 				capture = false;
 			}
 		}
 
-		List<CoffeeBean> getCoffeeBeans() {
+		List<PizzaOrder> getPizzaOrder() {
 			return outList;
 		}
 	}
