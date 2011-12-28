@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by Roger Hughes (Marin Solutions Ltd) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cust="http://customer.dets" targetNamespace="http://customer.dets" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Customer" type="cust:CustomerType">
+		<xs:annotation>
+			<xs:documentation>Generic Customer Definition</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="CustomerType">
+		<xs:sequence>
+			<xs:element name="name" type="cust:NameType"/>
+			<xs:element name="phone" type="cust:PhoneNumberType"/>
+			<xs:element name="address" type="cust:AddressType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NameType">
+		<xs:sequence>
+			<xs:element name="firstName" type="cust:FirstNameType"/>
+			<xs:element name="lastName" type="cust:LastNameType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="FirstNameType">
+		<xs:annotation>
+			<xs:documentation>The Customer's first name</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="16"/>
+			<xs:pattern value=".{1,16}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LastNameType">
+		<xs:annotation>
+			<xs:documentation>The Customer's surname</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token">
+			<xs:pattern value=".{1,48}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AddressType">
+		<xs:sequence>
+			<xs:element name="houseNumber" type="cust:HouseNumberType"/>
+			<xs:element name="street" type="cust:AddressLineType"/>
+			<xs:element name="town" type="cust:AddressLineType" minOccurs="0"/>
+			<xs:element name="area" type="cust:AddressLineType" minOccurs="0"/>
+			<xs:element name="postCode" type="cust:PostCodeType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="HouseNumberType">
+		<xs:annotation>
+			<xs:documentation>The house number</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger"/>
+	</xs:simpleType>
+	<xs:simpleType name="AddressLineType">
+		<xs:annotation>
+			<xs:documentation>A line of an address</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token">
+			<xs:pattern value=".{1,100}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PhoneNumberType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="18"/>
+			<xs:pattern value=".{1,18}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PostCodeType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

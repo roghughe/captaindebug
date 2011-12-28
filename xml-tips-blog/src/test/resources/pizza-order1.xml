@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ppp:PizzaOrder xsi:schemaLocation="http://www.petesperfectpizza.com pizza-order.xsd" xmlns:cust="http://customer.dets" xmlns:ppp="http://www.petesperfectpizza.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ppp:orderID>123w3454r5</ppp:orderID>
+	<ppp:date>2001-12-12</ppp:date>
+	<ppp:time>18:02:00</ppp:time>
+	<ppp:Customer>
+		<cust:name>
+			<cust:firstName>John</cust:firstName>
+			<cust:lastName>Miggins</cust:lastName>
+		</cust:name>
+		<cust:phone>555-65678</cust:phone>
+		<cust:address>
+			<cust:houseNumber>15</cust:houseNumber>
+			<cust:street>Credability Street</cust:street>
+			<cust:town>Any Town</cust:town>
+			<cust:area>Any Where</cust:area>
+			<cust:postCode>AW12 3WS</cust:postCode>
+		</cust:address>
+	</ppp:Customer>
+	<ppp:pizzas>
+		<ppp:pizza>
+			<ppp:name>Capricciosa</ppp:name>
+			<ppp:base>thick</ppp:base>
+			<ppp:quantity>1</ppp:quantity>
+		</ppp:pizza>
+		<ppp:pizza>
+			<ppp:name>Prosciutto e Funghi</ppp:name>
+			<ppp:base>thin</ppp:base>
+			<ppp:quantity>2</ppp:quantity>
+		</ppp:pizza>
+		<ppp:pizza>
+			<ppp:name>Marinara</ppp:name>
+			<ppp:base>thick</ppp:base>
+			<ppp:quantity>1</ppp:quantity>
+		</ppp:pizza>
+	</ppp:pizzas>
+</ppp:PizzaOrder>
