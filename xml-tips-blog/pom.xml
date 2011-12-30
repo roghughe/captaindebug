@@ -42,6 +42,11 @@
 			    <artifactId>xml-tips-xmlbeans</artifactId>
 			    <version>1.0-SNAPSHOT</version>
 			</dependency>
+			<dependency>
+			    <groupId>com.captaindebug</groupId>
+			    <artifactId>xml-tips-jaxb</artifactId>
+			    <version>1.0-SNAPSHOT</version>
+			</dependency>
 	 </dependencies>          
 	<build>
 		<plugins>

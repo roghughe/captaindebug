@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by Roger Hughes (Marin Solutions Ltd) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ppp="http://www.petesperfectpizza.com" xmlns:cust="http://customer.dets" targetNamespace="http://www.petesperfectpizza.com" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.00">
+	<!-- Import the Namespaces required -->
+	<xs:import namespace="http://customer.dets" schemaLocation="customer.xsd"/>
+	<!-- The Root Node -->
+	<xs:element name="PizzaOrder">
+		<xs:annotation>
+			<xs:documentation>A wrapper around the customer and the pizza order</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="orderID" type="ppp:CorrelationIdentifierType"/>
+				<xs:element name="date" type="ppp:DateType"/>
+				<xs:element name="time" type="ppp:TimeType"/>
+				<xs:element name="Customer" type="cust:CustomerType"/>
+				<xs:element ref="ppp:pizzas"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- The Pizza Order-->
+	<xs:element name="pizzas">
+		<xs:annotation>
+			<xs:documentation>This is a list of pizzas ordered by the customer</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="pizza" type="ppp:PizzaType"  minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="PizzaType">
+		<xs:sequence>
+			<xs:element name="name" type="ppp:PizzaNameType">
+				<xs:annotation>
+					<xs:documentation>The type of pizza on the menu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="base" type="ppp:BaseType">
+				<xs:annotation>
+					<xs:documentation>type of base</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="quantity" type="ppp:QuantityType">
+				<xs:annotation>
+					<xs:documentation>quantity of pizzas</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="PizzaNameType">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="Margherita">
+				<xs:annotation>
+					<xs:documentation>Plain and Simple</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Marinara">
+				<xs:annotation>
+					<xs:documentation>Garlic Pizza...</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Prosciutto e Funghi">
+				<xs:annotation>
+					<xs:documentation>Ham and Musheroom</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Capricciosa">
+				<xs:annotation>
+					<xs:documentation>with an egg</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BaseType">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="thin">
+				<xs:annotation>
+					<xs:documentation>thin base traditional</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="thick">
+				<xs:annotation>
+					<xs:documentation>Thick base</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QuantityType">
+		<xs:restriction base="xs:nonNegativeInteger"/>
+	</xs:simpleType>
+	<xs:simpleType name="CorrelationIdentifierType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="44"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DateType">
+		<xs:annotation>
+			<xs:documentation>The date is in the Common Era (minus sign in years is not permitted)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date">
+			<xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TimeType">
+		<xs:annotation>
+			<xs:documentation>The time zone although not included UTC is implied</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:time">
+			<xs:pattern value="\d{2}:\d{2}:\d{2}(\.\d+)?"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
