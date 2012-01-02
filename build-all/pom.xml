@@ -11,5 +11,8 @@
 		<module>../dependency-injection-factory</module>
 		<module>../powermock-tips</module>
 		<module>../address</module>
+		<module>../xml-tips-xmlbeans</module>
+		<module>../xml-tips-jaxb</module>
+		<module>../xml-tips-blog</module>
 	</modules>
 </project>
