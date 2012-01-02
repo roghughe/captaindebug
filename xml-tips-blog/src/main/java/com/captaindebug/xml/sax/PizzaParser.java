@@ -1,6 +1,6 @@
 package com.captaindebug.xml.sax;
 
-import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +12,8 @@ import org.xml.sax.helpers.XMLReaderFactory;
 
 public class PizzaParser {
 
-	public List<PizzaOrder> order(String xml) {
+	public List<PizzaOrder> order(InputStream xml) {
 
-		// create a new Content Handler for this xml String
 		PizzaContentHandler handler = new PizzaContentHandler();
 
 		// do the parsing
@@ -24,8 +23,8 @@ public class PizzaParser {
 			XMLReader parser = XMLReaderFactory.createXMLReader();
 			parser.setContentHandler(handler);
 
-			// create an input source from the xml string
-			InputSource source = new InputSource(new ByteArrayInputStream(xml.getBytes()));
+			// create an input source from the XML input stream
+			InputSource source = new InputSource(xml);
 			// Do the actual work
 			parser.parse(source);
 
@@ -61,6 +60,7 @@ public class PizzaParser {
 	}
 
 	/**
+	 * Use this class the handle the SAX events
 	 */
 	class PizzaContentHandler extends DefaultHandler {
 
@@ -70,6 +70,7 @@ public class PizzaParser {
 		private boolean capture;
 
 		/**
+		 * Set things up at the start of the document.
 		 */
 		@Override
 		public void startDocument() {
@@ -77,6 +78,7 @@ public class PizzaParser {
 		}
 
 		/**
+		 * Handle the startElement event
 		 */
 		@Override
 		public void startElement(String uri, String localName, String qName, Attributes attributes) {
@@ -97,6 +99,7 @@ public class PizzaParser {
 		}
 
 		/**
+		 * Handle the endElement event
 		 */
 		@Override
 		public void endElement(String uri, String localName, String qName) {
@@ -106,6 +109,9 @@ public class PizzaParser {
 			}
 		}
 
+		/**
+		 * Grab hold of incoming character data
+		 */
 		@Override
 		public void characters(char[] ch, int start, int length) {
 

@@ -2,6 +2,7 @@ package com.captaindebug.xml.sax;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 import org.junit.Before;
@@ -12,9 +13,9 @@ import com.captaindebug.xml.sax.PizzaParser.PizzaOrder;
 public class PizzaParserTest {
 
 	private static final String ORDER_XML = //
-	"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + // 39
+	"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + //
 			"<pizza>\n" + // 8
-			"    <name>Capricciosa</name>\n" + // 10 then to </
+			"    <name>Capricciosa</name>\n" + //
 			"    <base>thin</base>\n" + //
 			"    <quantity>2</quantity>\n" + //
 			"</pizza>\n";
@@ -47,7 +48,7 @@ public class PizzaParserTest {
 	@Test
 	public void readOrderFromXML() {
 
-		List<PizzaOrder> results = instance.order(ORDER_XML);
+		List<PizzaOrder> results = instance.order(new ByteArrayInputStream(ORDER_XML.getBytes()));
 
 		assertEquals(1, results.size());
 
@@ -60,7 +61,7 @@ public class PizzaParserTest {
 	@Test
 	public void readOrderFromModifiedXML() {
 
-		List<PizzaOrder> results = instance.order(ORDER_XML_2);
+		List<PizzaOrder> results = instance.order(new ByteArrayInputStream(ORDER_XML_2.getBytes()));
 
 		assertEquals(1, results.size());
 
@@ -73,7 +74,7 @@ public class PizzaParserTest {
 	@Test
 	public void readOrderForMultiplePizza() {
 
-		List<PizzaOrder> results = instance.order(ORDER_XML_3);
+		List<PizzaOrder> results = instance.order(new ByteArrayInputStream(ORDER_XML_3.getBytes()));
 
 		PizzaOrder result = results.get(0);
 		assertEquals("Capricciosa", result.getPizzaName());

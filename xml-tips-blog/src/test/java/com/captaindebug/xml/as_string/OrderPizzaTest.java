@@ -6,6 +6,7 @@ package com.captaindebug.xml.as_string;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -15,9 +16,9 @@ import org.junit.Test;
 public class OrderPizzaTest {
 
 	private static final String ORDER_XML = //
-	"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + // 39
+	"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + //
 			"<pizza>\n" + // 8
-			"    <name>Capricciosa</name>\n" + // 10 then to </
+			"    <name>Capricciosa</name>\n" + //
 			"    <base>thin</base>\n" + //
 			"    <quantity>2</quantity>\n" + //
 			"</pizza>\n";
@@ -62,7 +63,10 @@ public class OrderPizzaTest {
 		assertEquals("2", instance.getQuantity());
 	}
 
-	@Test
+	/**
+	 * This will, and is supposed to fail
+	 */
+	@Ignore
 	public void readOrderFromModifiedXML() {
 
 		instance.order(ORDER_XML_2);
@@ -72,7 +76,10 @@ public class OrderPizzaTest {
 		assertEquals("2", instance.getQuantity());
 	}
 
-	@Test
+	/**
+	 * This will, and is supposed to fail
+	 */
+	@Ignore
 	public void readOrderForMultiplePizza() {
 
 		instance.order(ORDER_XML_3);
