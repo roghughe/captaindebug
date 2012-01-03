@@ -27,7 +27,7 @@
 				</executions>
 				<inherited>true</inherited>
 				<configuration>
-					<schemaDirectory>src/main/xsd</schemaDirectory>
+					<schemaDirectory>src/main/resources</schemaDirectory>
 				</configuration>
 			</plugin>
 			<plugin>
