@@ -17,6 +17,9 @@ public class SitePropertiesManagerFactoryBean implements FactoryBean<SitePropert
 
 	public SitePropertiesManagerFactoryBean() {
 		propsManager = SitePropertiesManager.getInstance();
+		propsManager.setUrl("jdbc:mysql://localhost/junit");
+		propsManager.setUsername("root");
+		propsManager.setPassword("experience");
 		propsManager.init();
 	}
 
