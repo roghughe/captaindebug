@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	Some Exceptional Code  
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+<p>  <a href="ioexception">IOException</a>  </p>
 </body>
 </html>
