@@ -20,6 +20,9 @@ import com.captaindebug.exceptions.dao.UserDao;
 
 /**
  * Handles requests for the application home page.
+ * http://static.springsource.org
+ * /spring/docs/3.0.x/spring-framework-reference/html
+ * /mvc.html#mvc-exceptionhandlers
  */
 @Controller
 public class ExceptionsDemoController {
@@ -30,9 +33,7 @@ public class ExceptionsDemoController {
 	private UserDao userDao;
 
 	/**
-	 * Simply selects the home view to render by returning its name.
-	 * 
-	 * @throws IOException
+	 * Whoops, throw an IOException
 	 */
 	@RequestMapping(value = "/ioexception", method = RequestMethod.GET)
 	public String throwIoException(Locale locale, Model model) throws IOException {
@@ -49,8 +50,7 @@ public class ExceptionsDemoController {
 	}
 
 	/**
-	 * http://static.springsource.org/spring/docs/3.0.x/spring-framework-
-	 * reference/html/mvc.html#mvc-exceptionhandlers
+	 * Catch IOException and redirect to a 'personal' page
 	 */
 	@ExceptionHandler(IOException.class)
 	public ModelAndView handleIOException(IOException ex, HttpServletResponse response) {
@@ -59,6 +59,9 @@ public class ExceptionsDemoController {
 		return errorModelAndView(ex);
 	}
 
+	/**
+	 * Get the users details for the 'personal' page
+	 */
 	private ModelAndView errorModelAndView(Exception ex) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("error");
@@ -94,10 +97,6 @@ public class ExceptionsDemoController {
 		return "home";
 	}
 
-	/**
-	 * http://static.springsource.org/spring/docs/3.0.x/spring-framework-
-	 * reference/html/mvc.html#mvc-exceptionhandlers
-	 */
 	@ExceptionHandler({ NullPointerException.class, NoSuchRequestHandlingMethodException.class })
 	public ModelAndView handleExceptionArray(Exception ex, HttpServletResponse response) {
 
