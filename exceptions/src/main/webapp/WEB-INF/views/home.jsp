@@ -11,5 +11,6 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 <p>  <a href="ioexception">IOException</a>  </p>
+<p>  <a href="my404">404 Not found</a>  </p>
 </body>
 </html>

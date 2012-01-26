@@ -9,6 +9,9 @@
 	Some Exceptional Exceptions  
 </h1>
 
-<P>  The last exception that was thrown is  <c:out value="${name}" /> </P>
+<P>Well <c:out value="${user.firstName}" />, there seems to have been an <c:out value="${name}" /> and 
+we've lost all your important details. Hard luck, please try again. </P>
+<p>Not  <c:out value="${user.firstName}" />  <c:out value="${user.surname}" />, please log out...</p>
+
 </body>
 </html>
