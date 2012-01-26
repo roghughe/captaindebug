@@ -9,8 +9,14 @@
 	Some Exceptional Code  
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
-<p>  <a href="ioexception">IOException</a>  </p>
+<p>  <a href="ioexception">Simple IOException Using Single Exception Handler</a>  </p>
+
+<h2> Exception Handler for an Array of Exception Classes</h2>
 <p>  <a href="my404">404 Not found</a>  </p>
+<p>  <a href="nullpointer">Throw a NullPointerException</a>  </p>
+
+<h2> Exception Thrown by a different controller </h2>
+<p>  <a href="anotherioexception">Throw another IOException using a different controller</a>  </p>
+
 </body>
 </html>

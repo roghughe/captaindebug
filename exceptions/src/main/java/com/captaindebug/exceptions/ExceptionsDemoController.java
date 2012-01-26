@@ -24,8 +24,7 @@ import com.captaindebug.exceptions.dao.UserDao;
 @Controller
 public class ExceptionsDemoController {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(ExceptionsDemoController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ExceptionsDemoController.class);
 
 	@Autowired
 	private UserDao userDao;
@@ -36,8 +35,7 @@ public class ExceptionsDemoController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/ioexception", method = RequestMethod.GET)
-	public String throwIoException(Locale locale, Model model)
-			throws IOException {
+	public String throwIoException(Locale locale, Model model) throws IOException {
 
 		logger.info("This will throw an IOExceptiom");
 
@@ -51,24 +49,47 @@ public class ExceptionsDemoController {
 	}
 
 	/**
-	 * Simply selects the home view to render by returning its name.
-	 * 
-	 * @throws IOException
-	 * @throws NoSuchRequestHandlingMethodException
+	 * http://static.springsource.org/spring/docs/3.0.x/spring-framework-
+	 * reference/html/mvc.html#mvc-exceptionhandlers
 	 */
+	@ExceptionHandler(IOException.class)
+	public ModelAndView handleIOException(IOException ex, HttpServletResponse response) {
+
+		logger.info("handleIOException - Catching: " + ex.getClass().getSimpleName());
+		return errorModelAndView(ex);
+	}
+
+	private ModelAndView errorModelAndView(Exception ex) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("error");
+		modelAndView.addObject("name", ex.getClass().getSimpleName());
+		modelAndView.addObject("user", userDao.readUserName());
+
+		return modelAndView;
+	}
+
 	@RequestMapping(value = "/my404", method = RequestMethod.GET)
-	public String throwNoSuchRequestHandlingMethodException(Locale locale,
-			Model model) throws NoSuchRequestHandlingMethodException {
+	public String throwNoSuchRequestHandlingMethodException(Locale locale, Model model)
+			throws NoSuchRequestHandlingMethodException {
 
 		logger.info("This will throw a NoSuchRequestHandlingMethodException, which is Spring's 404 not found");
 
 		boolean throwException = true;
 
 		if (throwException) {
-			throw new NoSuchRequestHandlingMethodException(
-					"This is my NoSuchRequestHandlingMethodException",
-					this.getClass());
+			throw new NoSuchRequestHandlingMethodException("This is my NoSuchRequestHandlingMethodException", this.getClass());
 		}
+
+		return "home";
+	}
+
+	@RequestMapping(value = "/nullpointer", method = RequestMethod.GET)
+	public String throwNullPointerException(Locale locale, Model model) throws NoSuchRequestHandlingMethodException {
+
+		logger.info("This will throw a NullPointerException");
+
+		String str = null; // Ensure that this is null.
+		str.length();
 
 		return "home";
 	}
@@ -77,18 +98,10 @@ public class ExceptionsDemoController {
 	 * http://static.springsource.org/spring/docs/3.0.x/spring-framework-
 	 * reference/html/mvc.html#mvc-exceptionhandlers
 	 */
-	@ExceptionHandler({ IOException.class,
-			NoSuchRequestHandlingMethodException.class })
-	public ModelAndView handleIOException(IOException ex,
-			HttpServletResponse response) {
+	@ExceptionHandler({ NullPointerException.class, NoSuchRequestHandlingMethodException.class })
+	public ModelAndView handleExceptionArray(Exception ex, HttpServletResponse response) {
 
-		logger.info("Catching: " + ex.getClass().getSimpleName());
-
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("error");
-		modelAndView.addObject("name", ex.getClass().getSimpleName());
-		modelAndView.addObject("user", userDao.readUserName());
-
-		return modelAndView;
+		logger.info("handleExceptionArray - Catching: " + ex.getClass().getSimpleName());
+		return errorModelAndView(ex);
 	}
 }
