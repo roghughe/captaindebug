@@ -27,7 +27,8 @@ import com.captaindebug.exceptions.dao.UserDao;
 @Controller
 public class ExceptionsDemoController {
 
-	private static final Logger logger = LoggerFactory.getLogger(ExceptionsDemoController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(ExceptionsDemoController.class);
 
 	@Autowired
 	private UserDao userDao;
@@ -36,7 +37,8 @@ public class ExceptionsDemoController {
 	 * Whoops, throw an IOException
 	 */
 	@RequestMapping(value = "/ioexception", method = RequestMethod.GET)
-	public String throwIoException(Locale locale, Model model) throws IOException {
+	public String throwAnException(Locale locale, Model model)
+			throws IOException {
 
 		logger.info("This will throw an IOExceptiom");
 
@@ -53,9 +55,11 @@ public class ExceptionsDemoController {
 	 * Catch IOException and redirect to a 'personal' page
 	 */
 	@ExceptionHandler(IOException.class)
-	public ModelAndView handleIOException(IOException ex, HttpServletResponse response) {
+	public ModelAndView handleIOException(IOException ex,
+			HttpServletResponse response) {
 
-		logger.info("handleIOException - Catching: " + ex.getClass().getSimpleName());
+		logger.info("handleIOException - Catching: "
+				+ ex.getClass().getSimpleName());
 		return errorModelAndView(ex);
 	}
 
@@ -72,22 +76,25 @@ public class ExceptionsDemoController {
 	}
 
 	@RequestMapping(value = "/my404", method = RequestMethod.GET)
-	public String throwNoSuchRequestHandlingMethodException(Locale locale, Model model)
-			throws NoSuchRequestHandlingMethodException {
+	public String throwNoSuchRequestHandlingMethodException(Locale locale,
+			Model model) throws NoSuchRequestHandlingMethodException {
 
 		logger.info("This will throw a NoSuchRequestHandlingMethodException, which is Spring's 404 not found");
 
 		boolean throwException = true;
 
 		if (throwException) {
-			throw new NoSuchRequestHandlingMethodException("This is my NoSuchRequestHandlingMethodException", this.getClass());
+			throw new NoSuchRequestHandlingMethodException(
+					"This is my NoSuchRequestHandlingMethodException",
+					this.getClass());
 		}
 
 		return "home";
 	}
 
 	@RequestMapping(value = "/nullpointer", method = RequestMethod.GET)
-	public String throwNullPointerException(Locale locale, Model model) throws NoSuchRequestHandlingMethodException {
+	public String throwNullPointerException(Locale locale, Model model)
+			throws NoSuchRequestHandlingMethodException {
 
 		logger.info("This will throw a NullPointerException");
 
@@ -97,10 +104,13 @@ public class ExceptionsDemoController {
 		return "home";
 	}
 
-	@ExceptionHandler({ NullPointerException.class, NoSuchRequestHandlingMethodException.class })
-	public ModelAndView handleExceptionArray(Exception ex, HttpServletResponse response) {
+	@ExceptionHandler({ NullPointerException.class,
+			NoSuchRequestHandlingMethodException.class })
+	public ModelAndView handleExceptionArray(Exception ex,
+			HttpServletResponse response) {
 
-		logger.info("handleExceptionArray - Catching: " + ex.getClass().getSimpleName());
+		logger.info("handleExceptionArray - Catching: "
+				+ ex.getClass().getSimpleName());
 		return errorModelAndView(ex);
 	}
 }
