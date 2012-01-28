@@ -3,8 +3,6 @@ package com.captaindebug.exceptions;
 import java.io.IOException;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +51,7 @@ public class ExceptionsDemoController {
 	 * Catch IOException and redirect to a 'personal' page
 	 */
 	@ExceptionHandler(IOException.class)
-	public ModelAndView handleIOException(IOException ex, HttpServletResponse response) {
+	public ModelAndView handleIOException(IOException ex) {
 
 		logger.info("handleIOException - Catching: " + ex.getClass().getSimpleName());
 		return errorModelAndView(ex);
@@ -98,7 +96,7 @@ public class ExceptionsDemoController {
 	}
 
 	@ExceptionHandler({ NullPointerException.class, NoSuchRequestHandlingMethodException.class })
-	public ModelAndView handleExceptionArray(Exception ex, HttpServletResponse response) {
+	public ModelAndView handleExceptionArray(Exception ex) {
 
 		logger.info("handleExceptionArray - Catching: " + ex.getClass().getSimpleName());
 		return errorModelAndView(ex);
