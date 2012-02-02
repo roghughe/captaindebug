@@ -58,9 +58,7 @@ public class ExceptionsDemoController {
 	 * Catch IOException and redirect to a 'personal' page.
 	 */
 	@ExceptionHandler(IOException.class)
-	@ResponseStatus(value = HttpStatus.OK, reason = "My Response Status Change....!!")
-	public ModelAndView handleIOException(IOException ex,
-			HttpServletResponse response) {
+	public ModelAndView handleIOException(IOException ex) {
 
 		logger.info("handleIOException - Catching: "
 				+ ex.getClass().getSimpleName());
@@ -110,8 +108,7 @@ public class ExceptionsDemoController {
 
 	@ExceptionHandler({ NullPointerException.class,
 			NoSuchRequestHandlingMethodException.class })
-	public ModelAndView handleExceptionArray(Exception ex,
-			HttpServletResponse response) {
+	public ModelAndView handleExceptionArray(Exception ex) {
 
 		logger.info("handleExceptionArray - Catching: "
 				+ ex.getClass().getSimpleName());
