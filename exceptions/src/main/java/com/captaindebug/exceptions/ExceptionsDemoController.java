@@ -43,7 +43,7 @@ public class ExceptionsDemoController {
 	public String throwAnException(Locale locale, Model model)
 			throws IOException {
 
-		logger.info("This will throw an IOExceptiom");
+		logger.info("This will throw an IOException");
 
 		boolean throwException = true;
 
@@ -122,7 +122,7 @@ public class ExceptionsDemoController {
 	public String throwDataFormatException(Locale locale, Model model)
 			throws DataFormatException {
 
-		logger.info("This will throw an IOExceptiom");
+		logger.info("This will throw an DataFormatException");
 
 		boolean throwException = true;
 
