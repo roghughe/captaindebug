@@ -96,7 +96,7 @@ public class ExceptionsDemoController {
 	}
 
 	@ExceptionHandler({ NullPointerException.class, NoSuchRequestHandlingMethodException.class })
-	public ModelAndView handleExceptionArray(Exception ex) {
+	public ModelAndView handleExceptionArray(NullPointerException ex) {
 
 		logger.info("handleExceptionArray - Catching: " + ex.getClass().getSimpleName());
 		return errorModelAndView(ex);
