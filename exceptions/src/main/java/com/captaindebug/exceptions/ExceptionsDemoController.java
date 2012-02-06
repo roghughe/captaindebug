@@ -2,15 +2,20 @@ package com.captaindebug.exceptions;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.util.zip.DataFormatException;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException;
 
@@ -34,9 +39,9 @@ public class ExceptionsDemoController {
 	 * Whoops, throw an IOException
 	 */
 	@RequestMapping(value = "/ioexception", method = RequestMethod.GET)
-	public String throwIoException(Locale locale, Model model) throws IOException {
+	public String throwAnException(Locale locale, Model model) throws IOException {
 
-		logger.info("This will throw an IOExceptiom");
+		logger.info("This will throw an IOException");
 
 		boolean throwException = true;
 
@@ -48,7 +53,7 @@ public class ExceptionsDemoController {
 	}
 
 	/**
-	 * Catch IOException and redirect to a 'personal' page
+	 * Catch IOException and redirect to a 'personal' page.
 	 */
 	@ExceptionHandler(IOException.class)
 	public ModelAndView handleIOException(IOException ex) {
@@ -96,9 +101,39 @@ public class ExceptionsDemoController {
 	}
 
 	@ExceptionHandler({ NullPointerException.class, NoSuchRequestHandlingMethodException.class })
-	public ModelAndView handleExceptionArray(NullPointerException ex) {
+	public ModelAndView handleExceptionArray(Exception ex) {
 
 		logger.info("handleExceptionArray - Catching: " + ex.getClass().getSimpleName());
 		return errorModelAndView(ex);
 	}
+
+	/**
+	 * Throw a DataFormatException
+	 */
+	@RequestMapping(value = "/dataformat", method = RequestMethod.GET)
+	public String throwDataFormatException(Locale locale, Model model) throws DataFormatException {
+
+		logger.info("This will throw an DataFormatException");
+
+		boolean throwException = true;
+
+		if (throwException) {
+			throw new DataFormatException("This is my DataFormatException");
+		}
+
+		return "home";
+	}
+
+	/**
+	 * If you add/alter in the ResponseStatus - then the server won't cope. Set
+	 * to OK and you get a blank screen. Set to an error (300+) and you'll see
+	 * the web server's default page - so go and fix the server configuration.
+	 */
+	@ExceptionHandler(DataFormatException.class)
+	@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "My Response Status Change....!!")
+	public void handleDataFormatException(DataFormatException ex, HttpServletResponse response) {
+
+		logger.info("Handlng DataFormatException - Catching: " + ex.getClass().getSimpleName());
+	}
+
 }

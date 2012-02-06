@@ -18,5 +18,8 @@
 <h2> Exception Thrown by a different controller </h2>
 <p>  <a href="anotherioexception">Throw another IOException using a different controller</a>  </p>
 
+<h2> Change the ResponseStatus </h2>
+<p>  <a href="dataformat">Throw a DataFormatException...</a>  </p>
+
 </body>
 </html>
