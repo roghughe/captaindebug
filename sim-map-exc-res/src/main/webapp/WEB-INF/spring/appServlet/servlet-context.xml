@@ -28,7 +28,8 @@
 		class="com.captaindebug.exceptions.SampleExceptionHandler">
 		<beans:property name="exceptionMappings">
 			<beans:map>
-				<beans:entry key="java.io.IOException" value="generic-error" />
+				<beans:entry key="java.io.IOException" value="io-exception" />
+				<beans:entry key="java.lang.Exception" value="generic-error" />
 			</beans:map>
 		</beans:property>
 	</beans:bean>

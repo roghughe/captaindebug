@@ -6,9 +6,12 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	Some Exceptional Code  
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<p>  <a href="ioexception">Simple IOException using SimpleMappingExceptionResolver</a>  </p>
+<p>  <a href="exception">Simple Exception Using using SimpleMappingExceptionResolver</a>  </p>
+
+
 </body>
 </html>
