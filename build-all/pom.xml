@@ -14,5 +14,7 @@
 		<module>../xml-tips-xmlbeans</module>
 		<module>../xml-tips-jaxb</module>
 		<module>../xml-tips-blog</module>
+		<module>../exceptions</module>
+		<module>../sim-map-exc-res</module>
 	</modules>
 </project>
