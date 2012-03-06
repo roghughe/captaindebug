@@ -215,7 +215,7 @@
     			<version>1.1</version>
 	            <configuration>
 	                     <server>myserver</server>
-	                     <url>http://localhost:8080/manager</url> 
+	                     <url>http://localhost:8080/manager/text</url> 
 	            </configuration>
 	        </plugin>
 			

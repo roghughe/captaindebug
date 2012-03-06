@@ -10,6 +10,7 @@
 </h1>
 
 <p>  <a href="ioexception">Simple IOException using SimpleMappingExceptionResolver</a>  </p>
+<p>  <a href="filenotfoundexception">Simple FileNotFoundException using SimpleMappingExceptionResolver</a>  </p>
 <p>  <a href="exception">Simple Exception Using using SimpleMappingExceptionResolver</a>  </p>
 
 <p>  <a href="image?imageName=sea.jpg">Load an Image</a>  </p>

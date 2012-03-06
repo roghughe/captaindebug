@@ -25,7 +25,7 @@
 	
 	<!-- Definition(s) for the SimpleMappingExceptionResolver -->
 	<beans:bean id="exceptionResolver"
-		class="com.captaindebug.exceptions.SampleExceptionHandler">
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<beans:property name="exceptionMappings">
 			<beans:map>
 				<beans:entry key="java.io.IOException" value="io-exception" />
