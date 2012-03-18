@@ -9,6 +9,6 @@
 	TELL DON'T ASK!!!  
 </h1>
 
-<P>Add Item to Shopping Cart: <aHat £20</P>
+<P>Add Item to Shopping Cart: <a href="addItem?code=hat&price=20"></a>Hat £20</a></P>
 </body>
 </html>
