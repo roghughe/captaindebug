@@ -3,6 +3,8 @@ package com.captaindebug.telldontask;
 import java.util.ArrayList;
 import java.util.List;
 
+import tell_dont_ask.payment.PaymentMethod;
+
 /**
  * Example of a TELL DON'T ASK object - items are added to the shopping cart and
  * then the cart is told to do something.
@@ -15,6 +17,8 @@ import java.util.List;
 public class ShoppingCart {
 
 	private final List<Item> items;
+
+	private PaymentMethod method;
 
 	public ShoppingCart() {
 		items = new ArrayList<Item>();
@@ -44,23 +48,13 @@ public class ShoppingCart {
 		return totalCost;
 	}
 
-	private Visa visa;
-
-	public void setVisa(Visa visa) {
-		this.visa = visa;
+	public void setPaymentMethod(PaymentMethod method) {
+		this.method = method;
 	}
 
-	public void payVisa(double shipping, double minShippingAmount) {
+	public void pay(double shipping, double minShippingAmount) {
 
 		double totalCost = calcTotalCost(shipping, minShippingAmount);
-		visa.pay(totalCost);
-	}
-
-}
-
-class Visa {
-
-	void pay(double amount) {
-		// blank;
+		method.pay(totalCost);
 	}
 }

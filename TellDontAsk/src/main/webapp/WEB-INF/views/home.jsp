@@ -6,9 +6,9 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	TELL DON'T ASK!!!  
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<P>Add Item to Shopping Cart: <aHat £20</P>
 </body>
 </html>

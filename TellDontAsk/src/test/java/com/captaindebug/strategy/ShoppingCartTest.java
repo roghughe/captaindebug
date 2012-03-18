@@ -3,20 +3,27 @@
  */
 package com.captaindebug.strategy;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import org.junit.Test;
+
+import tell_dont_ask.payment.PaymentMethod;
+import tell_dont_ask.payment.Visa;
 
 import com.captaindebug.telldontask.Item;
 
 /**
  * @author Roger
  * 
- *         Created 9:33:31 AM Mar 3, 2012
- * 
  */
 public class ShoppingCartTest {
 
+	/**
+	 * Demonstrate the strategy pattern using the ShoppingCart example
+	 */
 	@Test
 	public void payBillUsingVisa() {
 
@@ -28,11 +35,18 @@ public class ShoppingCartTest {
 		Item b = new Item("hat", 10.99);
 		instance.addItem(b);
 
-		Item c = new Item("scarf", 5.99);
-		instance.addItem(c);
+		Date expiryDate = getCardExpireyDate();
+		PaymentMethod visa = new Visa("CaptainDebug", "1234234534564567", expiryDate);
 
-		double totalCost = instance.calcTotalCost();
-		assertEquals(40.41, totalCost, 0.0001);
+		boolean result = instance.pay(visa);
+		assertTrue(result);
+
 	}
 
+	private Date getCardExpireyDate() {
+		Calendar cal = Calendar.getInstance();
+		cal.clear();
+		cal.set(2015, Calendar.JANUARY, 21);
+		return cal.getTime();
+	}
 }
