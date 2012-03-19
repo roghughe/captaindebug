@@ -3,8 +3,8 @@ package com.captaindebug.strategy;
 import java.util.ArrayList;
 import java.util.List;
 
-import tell_dont_ask.payment.PaymentMethod;
 
+import com.captaindebug.payment.PaymentMethod;
 import com.captaindebug.telldontask.Item;
 
 /**

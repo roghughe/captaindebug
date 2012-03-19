@@ -10,9 +10,9 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import tell_dont_ask.payment.PaymentMethod;
-import tell_dont_ask.payment.Visa;
 
+import com.captaindebug.payment.PaymentMethod;
+import com.captaindebug.payment.Visa;
 import com.captaindebug.telldontask.Item;
 
 /**

@@ -1,4 +1,4 @@
-package tell_dont_ask.payment;
+package com.captaindebug.payment;
 
 public interface PaymentMethod {
 

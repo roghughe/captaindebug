@@ -3,7 +3,8 @@ package com.captaindebug.telldontask;
 import java.util.ArrayList;
 import java.util.List;
 
-import tell_dont_ask.payment.PaymentMethod;
+import com.captaindebug.payment.PaymentMethod;
+
 
 /**
  * Example of a TELL DON'T ASK object - items are added to the shopping cart and

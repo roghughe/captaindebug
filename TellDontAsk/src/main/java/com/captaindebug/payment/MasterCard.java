@@ -1,14 +1,14 @@
-package tell_dont_ask.payment;
+package com.captaindebug.payment;
 
 import java.util.Date;
 
-public class Visa implements PaymentMethod {
+public class MasterCard implements PaymentMethod {
 
 	private final String name;
 	private final String cardNumber;
 	private final Date expires;
 
-	public Visa(String name, String cardNumber, Date expires) {
+	public MasterCard(String name, String cardNumber, Date expires) {
 		super();
 		this.name = name;
 		this.cardNumber = cardNumber;
