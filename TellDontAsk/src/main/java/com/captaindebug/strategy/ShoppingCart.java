@@ -3,7 +3,6 @@ package com.captaindebug.strategy;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.captaindebug.payment.PaymentMethod;
 import com.captaindebug.telldontask.Item;
 
@@ -41,5 +40,4 @@ public class ShoppingCart {
 		double totalCost = calcTotalCost();
 		return method.pay(totalCost);
 	}
-
 }
