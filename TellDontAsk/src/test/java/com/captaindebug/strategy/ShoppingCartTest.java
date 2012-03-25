@@ -11,6 +11,7 @@ import java.util.Date;
 import org.junit.Test;
 
 
+import com.captaindebug.bridge.ShoppingCart;
 import com.captaindebug.payment.PaymentMethod;
 import com.captaindebug.payment.Visa;
 import com.captaindebug.telldontask.Item;
