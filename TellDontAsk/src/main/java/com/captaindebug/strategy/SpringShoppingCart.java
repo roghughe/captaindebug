@@ -3,6 +3,9 @@ package com.captaindebug.strategy;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import com.captaindebug.payment.PaymentMethod;
 import com.captaindebug.telldontask.Item;
@@ -13,11 +16,16 @@ import com.captaindebug.telldontask.Item;
  * @author Roger
  * 
  */
-public class ShoppingCart {
+@Component
+public class SpringShoppingCart {
 
 	private final List<Item> items;
 
-	public ShoppingCart() {
+	@Autowired
+	@Qualifier("Visa")
+	private PaymentMethod method;
+
+	public SpringShoppingCart() {
 		items = new ArrayList<Item>();
 	}
 
@@ -36,10 +44,9 @@ public class ShoppingCart {
 		return total;
 	}
 
-	public boolean pay(PaymentMethod method) {
+	public boolean pay() {
 
 		double totalCost = calcTotalCost();
 		return method.pay(totalCost);
 	}
-
 }

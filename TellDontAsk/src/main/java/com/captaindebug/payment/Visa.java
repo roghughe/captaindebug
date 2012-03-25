@@ -2,6 +2,9 @@ package com.captaindebug.payment;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
+@Component("calculator")
 public class Visa implements PaymentMethod {
 
 	private final String name;
