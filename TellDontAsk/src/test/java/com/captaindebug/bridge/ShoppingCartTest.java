@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.captaindebug.strategy;
+package com.captaindebug.bridge;
 
 import static org.junit.Assert.assertTrue;
 
@@ -10,11 +10,9 @@ import java.util.Date;
 
 import org.junit.Test;
 
-
 import com.captaindebug.bridge.ShoppingCart;
 import com.captaindebug.payment.PaymentMethod;
 import com.captaindebug.payment.Visa;
-import com.captaindebug.strategy.ShoppingCart;
 import com.captaindebug.telldontask.Item;
 
 /**
