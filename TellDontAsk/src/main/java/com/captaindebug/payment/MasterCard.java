@@ -18,7 +18,7 @@ public class MasterCard implements PaymentMethod {
 	@Override
 	public boolean pay(double amount) {
 
-		// Open Comms to Visa
+		// Open Comms to Mastercard
 		// Verify connection
 		// Paybill using these details
 		return true; // if payment goes through

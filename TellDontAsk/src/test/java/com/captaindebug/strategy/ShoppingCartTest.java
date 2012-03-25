@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import com.captaindebug.payment.PaymentMethod;
 import com.captaindebug.payment.Visa;
+import com.captaindebug.strategy.ShoppingCart;
 import com.captaindebug.telldontask.Item;
 
 /**
