@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GovTalkMessage xmlns='http://www.govtalk.gov.uk/CM/envelope' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.govtalk.gov.uk/CM/envelope http://www.govtalk.gov.uk/schemas/CM/envelope-v2.xsd http://www.govtalk.gov.uk/taxation/EOY http://www.inlandrevenue.gov.uk/schemas/EOY-2005-v2-0.xsd'>
+  <EnvelopeVersion>2.0</EnvelopeVersion>
+  <Header>
+    <MessageDetails>
+      <Class>IR-PAYE-EOY</Class>
+      <Qualifier>request</Qualifier>
+      <Function>submit</Function>
+      <CorrelationID>Test_Submission_002</CorrelationID>
+      <Transformation>XML</Transformation>
+      <GatewayTest>0</GatewayTest>
+      <GatewayTimestamp>2005-04-06T08:46:08.08</GatewayTimestamp>
+    </MessageDetails>
+    <SenderDetails>
+      <IDAuthentication>
+        <SenderID>ISV147</SenderID>
+        <Authentication>
+          <Method>clear</Method>
+          <Role>principal</Role>
+          <Value>xxxxx</Value>
+        </Authentication>
+      </IDAuthentication>
+    </SenderDetails>
+  </Header>
+  <GovTalkDetails>
+    <Keys>
+      <Key Type='TaxOfficeNumber'>002</Key>
+      <Key Type='TaxOfficeReference'>T002</Key>
+    </Keys>
+    <TargetDetails>
+      <Organisation>IR</Organisation>
+    </TargetDetails>
+    <ChannelRouting>
+      <Channel>
+        <URI>FBI-VID04-CONS05001_017_1</URI>
+        <Name>0147</Name>
+        <Product>sdsteam</Product>
+        <Version>1</Version>
+      </Channel>
+    </ChannelRouting>
+  </GovTalkDetails>
+  <Body>
+    <IRenvelope xmlns='http://www.govtalk.gov.uk/taxation/EOY'>
+      <IRheader>
+	<TestMessage>0</TestMessage>
+        <Keys>
+          <Key Type='TaxOfficeNumber'>002</Key>
+      	  <Key Type='TaxOfficeReference'>T002</Key>
+        </Keys>
+        <PeriodEnd>2005-04-05</PeriodEnd>
+		<Principal>
+			<Contact>
+				<Name>
+					<!-- BVR = [] --><Ttl>Dr</Ttl>
+					<!-- BVR = [] --><Fore>James</Fore>
+					<!-- BVR = [] --><Fore>Arthur</Fore>
+					<!-- BVR = [] --><Sur>Bacon</Sur>
+				</Name>
+				<!-- BVR = [] --><Email Type="work" Preferred="no">email@email,com</Email>
+				<Telephone Type="work" Mobile="yes" Preferred="no">
+					<!-- BVR = [] --><Number>01952 121212</Number>
+					<!-- BVR = [] --><Extension>45657</Extension>
+				</Telephone>
+				<Fax Type="home" Mobile="yes" Preferred="yes">
+					<!-- BVR = [] --><Number>0123 8921</Number>
+					<!-- BVR = [] --><Extension>45621</Extension>
+				</Fax>
+			</Contact>
+		</Principal>
+		<Agent>
+			<!-- BVR = [] --><AgentID>Mr Agent</AgentID>
+			<!-- BVR = [] --><Company>Agents R Us</Company>
+			<Address>
+				<!-- BVR = [] --><Line>Agent Street</Line>
+				<!-- BVR = [] --><Line>Agent Town</Line>
+				<!-- BVR = [] --><Line>Agent County</Line>
+				<!-- BVR = [] --><Line>Agentland</Line>
+				<!-- BVR = [] --><PostCode>AG1 5NT</PostCode>
+				<!-- BVR = [] --><Country>UK</Country>
+			</Address>
+			<Contact>
+				<Name>
+					<!-- BVR = [] --><Ttl>Miss</Ttl>
+					<!-- BVR = [] --><Fore>jojo</Fore>
+					<!-- BVR = [] --><Fore>jo</Fore>
+					<!-- BVR = [] --><Sur>johns</Sur>
+				</Name>
+				<!-- BVR = [] --><Email Type="home" Preferred="yes">test@email.com</Email>
+				<Telephone Type="work" Mobile="yes" Preferred="yes">
+					<!-- BVR = [] --><Number>01952 666666</Number>
+					<!-- BVR = [] --><Extension>4156</Extension>
+				</Telephone>
+				<Fax Type="home" Mobile="no" Preferred="yes">
+					<!-- BVR = [] --><Number>1564</Number>
+					<!-- BVR = [] --><Extension>453</Extension>
+				</Fax>
+			</Contact>
+		</Agent>
+		<!-- BVR = [] --><DefaultCurrency>GBP</DefaultCurrency>
+		<Manifest>
+			<Contains>
+				<Reference>
+					<!-- BVR = [] --><Namespace>http://www.govtalk.gov.uk/taxation/EOY</Namespace>
+					<!-- BVR = [] --><SchemaVersion>2006-v2.0</SchemaVersion>
+					<!-- BVR = [] --><TopElementName>EndOfYearReturn</TopElementName>
+				</Reference>
+			</Contains>
+		</Manifest>
+		<!-- BVR = [] --><Sender>Agent</Sender>
+	</IRheader>
+
+    <EndOfYearReturn>
+        <!-- BVR = [1] --><ReturnType>original</ReturnType>
+        <!-- BVR = [2] --><SubmissionType>P14Part</SubmissionType>
+        <CompressedPart>QSBibG9nZ2VyLCBSb2dlciBIdWdoZXMsIGhhcyB3cml0dGVuIHVwIGEgc3RyaW5nIG9mIGJsb2dzIHJlY2VudGx5IHRoYXQgYXJlIHJlYWxseSBpbnNpZ2h0ZnVsISBUaGUgZmlyc3QgcG9zdCBpbnRyb2R1Y2VzIFNwcmluZyAzJ3MgQE51bWJlckZvcm1hdC4gVGhlIHNlY29uZCBpbnRyb2R1Y2VzIFNwcmluZyAzJ3MgQERhdGVUaW1lRm9ybWF0IGFubm90YXRpb24uIFRoZSB0aGlyZCBwb3N0IGludHJvZHVjZXMgU3ByaW5nIE1WQydzIENvbnZlbnRpb25zIGNsYXNzLCB3aGljaCBpcyBhdCB0aGUgaGVhcnQgb2Ygc29tZSBvZiB0aGUgbWFqb3IgY29udmVudGlvbi1vdmVyLWNvbmZpZ3VyYXRpb24gY2VudHJpYyBjaGFuZ2VzIHNlZW4gaW4gcmVjZW50IFNwcmluZyBNVkMgcmVsZWFzZXMgdGhhdCBsZXQgeW91LCBmb3IgZXhhbXBsZSwgYWRkIGFueSBvYmplY3QgdG8gdGhlIE1vZGVsIHRoYXQgaXMgbWFkZSBhdmFpbGFibGUgdG8gdGhlIHZpZXcgYW5kIG9taXQgdGhlIG5hbWUgdXNlZCB0byBzdG9yZSB0aGF0IG1vZGVsIGF0dHJpYnV0ZSwgZGVmZXJyaW5nIHRvIHRoZSBDb252ZW50aW9ucyBjbGFzcyB0byBwcm92aWRlIGEgc2FuZSBuYW1lIGJhc2VkIG9uIHRoZSBKYXZhQmVhbnMgc3BlY2lmaWNhdGlvbi4gSW4gdGhpcyBsYXRlc3QgcG9zdCwgaGUgY2F1dGlvbnMgdGhhdCB3aGlsZSB1c2luZyB0aGUgY29udmVudGlvbnMgaW4gc29tZSBjYXNlcyBjYW4gYmUgdmVyeSBoZWxwZnVsIChzdWNoIGFzIHdpdGggPG12Yzphbm5vdGF0aW9uLWRyaXZlbi8+KSwgdXNpbmcgc29tZSBkZWZhdWx0cyBjYW4gY2F1c2UgY29uZnVzaW9uLiBUaGlzIGlzIGEgZmFpciBwb2ludCwgYW5kIGl0J3MgbmljZSB0byBoYXZlIHRoZSBjaG9pY2UsIGVpdGhlciB3YXkuIE5pY2Ugd29yaywgUm9nZXIh</CompressedPart>        
+<PartTotals>
+            <!-- BVR = [48] --><P14Count>3</P14Count>
+            <!-- BVR = [49] --><TotalContributions>2400.00</TotalContributions>
+            <!-- BVR = [50] --><TotalTax>-600.00</TotalTax>
+            <!-- BVR = [51] --><TotalSSP>600.00</TotalSSP>
+            <!-- BVR = [52] --><TotalNICholidayClaimed>0.00</TotalNICholidayClaimed>
+            <!-- BVR = [53] --><TotalSMP>500.00</TotalSMP>
+            <!-- BVR = [54] --><TotalSPP>600.00</TotalSPP>
+            <!-- BVR = [55] --><TotalSAP>600.00</TotalSAP>
+            <!-- BVR = [56] --><TotalStudentLoanDeductions>600.00</TotalStudentLoanDeductions>
+            <!-- BVR = [57] --><TotalTaxCredits>600.00</TotalTaxCredits>
+        </PartTotals>
+        <!-- BVR = [3] --><UniqueID>10.1</UniqueID>
+    </EndOfYearReturn>
+
+
+    </IRenvelope>
+  </Body>
+</GovTalkMessage>
