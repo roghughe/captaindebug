@@ -16,5 +16,6 @@
 		<module>../xml-tips-blog</module>
 		<module>../exceptions</module>
 		<module>../sim-map-exc-res</module>
+		<module>../state-machine</module>
 	</modules>
 </project>
