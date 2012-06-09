@@ -5,10 +5,11 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
+<h1>Captain Debug's Social Samples</h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<P>
+<a href=timeline?id=BBCBreaking>Grab Twitter User Time Line for @BBCBreaking</a>
+
+</P>
 </body>
 </html>
