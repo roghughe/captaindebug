@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.captaindebug</groupId>
 	<artifactId>social</artifactId>
-	<name>abc</name>
+	<name>Captain Debug Social Samples</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -120,7 +120,7 @@
 		</dependency>   
 		
 		<!-- Spring Social -->
-		<dependency>
+<!-- 	<dependency>
 		    <groupId>org.springframework.social</groupId>
 		    <artifactId>spring-social-core</artifactId>
 		    <version>${spring-social.version}</version>
@@ -130,13 +130,26 @@
 		    <artifactId>spring-social-web</artifactId>
 		    <version>${spring-social.version}</version>
 		</dependency>
-				
+-->				
 		<!-- Twitter API -->
 		<dependency>
 		  <groupId>org.springframework.social</groupId>
 		  <artifactId>spring-social-twitter</artifactId>
 		  <version>${org.springframework.social-twitter-version}</version>
 		</dependency>
+
+		<!-- CGLIB, only required and used for @Configuration usage: could be removed in future release of Spring -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.captaindebug</groupId>
+			<artifactId>state-machine</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		
 		
 	</dependencies>
 	<build>
