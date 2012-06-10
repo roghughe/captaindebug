@@ -68,6 +68,7 @@ public class CheckHttpAction extends AbstractAction<TweetState> {
 
 		if (CHECK.charAt(pos++) != b) {
 			retVal = returnToRunning(b);
+			reset();
 		} else if (pos == CHECK.length()) {
 			retVal = TweetState.URL;
 			reset(); // fix 1
