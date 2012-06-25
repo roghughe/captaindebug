@@ -17,5 +17,6 @@
 		<module>../exceptions</module>
 		<module>../sim-map-exc-res</module>
 		<module>../state-machine</module>
+		<module>../social</module>
 	</modules>
 </project>

@@ -38,7 +38,8 @@ import com.captaindebug.statemachine.tweettohtml.strategy.UserNameStrategy;
 @Controller
 public class TwitterTimeLineController {
 
-	private static final Logger logger = LoggerFactory.getLogger(TwitterTimeLineController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(TwitterTimeLineController.class);
 
 	private final Twitter twitter;
 
@@ -67,7 +68,8 @@ public class TwitterTimeLineController {
 
 		TimelineOperations timelineOps = twitter.timelineOperations();
 		List<Tweet> results = timelineOps.getUserTimeline(screenName);
-		logger.info("Fond Twitter timeline for :" + screenName + " adding " + results.size() + " tweets to model");
+		logger.info("Fond Twitter timeline for :" + screenName + " adding " + results.size()
+				+ " tweets to model");
 		return results;
 	}
 
