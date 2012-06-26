@@ -14,6 +14,7 @@
 		<org.slf4j-version>1.5.10</org.slf4j-version>
 		<spring-social.version>1.0.2.RELEASE</spring-social.version>
 		<org.springframework.social-twitter-version>1.0.2.RELEASE</org.springframework.social-twitter-version>
+		<org.springframework.social-facebook-version>1.0.1.RELEASE</org.springframework.social-facebook-version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -120,12 +121,12 @@
 		</dependency>   
 		
 		<!-- Spring Social -->
-<!-- 	<dependency>
+	 	<dependency>
 		    <groupId>org.springframework.social</groupId>
 		    <artifactId>spring-social-core</artifactId>
 		    <version>${spring-social.version}</version>
 		</dependency>		
-		<dependency>
+<!--		<dependency>
 		    <groupId>org.springframework.social</groupId>
 		    <artifactId>spring-social-web</artifactId>
 		    <version>${spring-social.version}</version>
@@ -136,6 +137,13 @@
 		  <groupId>org.springframework.social</groupId>
 		  <artifactId>spring-social-twitter</artifactId>
 		  <version>${org.springframework.social-twitter-version}</version>
+		</dependency>
+
+		<!-- Facebook API -->
+		<dependency>
+		  <groupId>org.springframework.social</groupId>
+		  <artifactId>spring-social-facebook</artifactId>
+		  <version>${org.springframework.social-facebook-version}</version>
 		</dependency>
 
 		<!-- CGLIB, only required and used for @Configuration usage: could be removed in future release of Spring -->
