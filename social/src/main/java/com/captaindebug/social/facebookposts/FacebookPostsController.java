@@ -19,15 +19,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author Roger
  * 
  */
-public class FacebookFriendsController {
+public class FacebookPostsController {
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(FacebookFriendsController.class);
+			.getLogger(FacebookPostsController.class);
 
 	private final Facebook facebook;
 
 	@Autowired
-	public FacebookFriendsController(Facebook facebook) {
+	public FacebookPostsController(Facebook facebook) {
 		this.facebook = facebook;
 	}
 
