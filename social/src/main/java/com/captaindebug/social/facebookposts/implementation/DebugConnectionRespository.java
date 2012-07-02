@@ -18,8 +18,7 @@ import org.springframework.util.MultiValueMap;
  */
 public class DebugConnectionRespository implements ConnectionRepository {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(DebugConnectionRespository.class);
+	private static final Logger logger = LoggerFactory.getLogger(DebugConnectionRespository.class);
 
 	/**
 	 * @see org.springframework.social.connect.ConnectionRepository#findAllConnections()
@@ -54,8 +53,7 @@ public class DebugConnectionRespository implements ConnectionRepository {
 	 * @see org.springframework.social.connect.ConnectionRepository#findConnectionsToUsers(org.springframework.util.MultiValueMap)
 	 */
 	@Override
-	public MultiValueMap<String, Connection<?>> findConnectionsToUsers(
-			MultiValueMap<String, String> providerUserIds) {
+	public MultiValueMap<String, Connection<?>> findConnectionsToUsers(MultiValueMap<String, String> providerUserIds) {
 		logger.info("Method :  findConnectionsToUsers");
 		return null;
 	}
