@@ -52,12 +52,13 @@ public class FacebookConfig {
 
 	@Bean
 	public ProviderSignInController providerSignInController() {
-		return new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter());
+		return new ProviderSignInController(connectionFactoryLocator(),
+				usersConnectionRepository(), new SimpleSignInAdapter());
 	}
 
 	/**
-	 * A proxy to a request-scoped object representing the current user's
-	 * primary Facebook account.
+	 * A proxy to a request-scoped object representing the current user's primary Facebook
+	 * account.
 	 * 
 	 * @throws NotConnectedException
 	 *             if the user is not connected to facebook.
