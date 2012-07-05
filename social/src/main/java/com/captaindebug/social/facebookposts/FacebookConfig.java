@@ -53,7 +53,7 @@ public class FacebookConfig {
 	@Bean
 	public ProviderSignInController providerSignInController() {
 		return new ProviderSignInController(connectionFactoryLocator(),
-				usersConnectionRepository(), new SimpleSignInAdapter());
+				usersConnectionRepository(), // TODO This will be the SocialContext new SimpleSignInAdapter());
 	}
 
 	/**
