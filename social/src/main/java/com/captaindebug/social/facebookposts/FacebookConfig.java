@@ -11,7 +11,6 @@ import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.NotConnectedException;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
-import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 
@@ -50,12 +49,13 @@ public class FacebookConfig {
 		return usersConnectionRepository().createConnectionRepository("The unique user id");
 	}
 
-	@Bean
-	public ProviderSignInController providerSignInController() {
-		return new ProviderSignInController(connectionFactoryLocator(),
-				usersConnectionRepository(), // TODO This will be the SocialContext new SimpleSignInAdapter());
-	}
-
+	/*
+	 * // TODO Complete this - after the Social context
+	 * 
+	 * @Bean public ProviderSignInController providerSignInController() { return new
+	 * ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), //
+	 * TODO This will be the SocialContext new SimpleSignInAdapter()); }
+	 */
 	/**
 	 * A proxy to a request-scoped object representing the current user's primary Facebook
 	 * account.
