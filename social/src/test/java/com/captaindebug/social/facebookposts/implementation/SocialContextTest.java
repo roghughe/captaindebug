@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
@@ -44,6 +45,9 @@ public class SocialContextTest {
 
 	@Mock
 	private RedirectView signIn;
+
+	@Mock
+	private Connection<Facebook> facebookConnection;
 
 	// Use the real thing as this is lightweight;
 	private UserCookieGenerator userCookieGenerator;
@@ -107,6 +111,32 @@ public class SocialContextTest {
 		cookie = new Cookie(COOKIE_NAME, "");
 		response.addCookie(cookie);
 		signIn.render(null, request, response);
+
+		replay();
+		instance.preHandle(request, response, null);
+		verify();
+
+	}
+
+	@Test
+	public void testWithConnectedUserRequestingSign() throws Exception {
+
+		final String COOKIE_NAME = "captain_debug_social_user";
+		final String COOKIE_VALUE = "qwerty";
+		Cookie[] cookies = new Cookie[1];
+		Cookie cookie = new Cookie(COOKIE_NAME, COOKIE_VALUE);
+		cookies[0] = cookie;
+
+		expect(request.getCookies()).andReturn(cookies);
+
+		expect(userConnectionRespository.createConnectionRepository(COOKIE_VALUE)).andReturn(
+				connectionRespository);
+
+		expect(connectionRespository.findPrimaryConnection(Facebook.class)).andReturn(
+				facebookConnection);
+
+		expect(request.getServletPath()).andReturn("/signin");
+		expect(request.getServletPath()).andReturn("/signin");
 
 		replay();
 		instance.preHandle(request, response, null);

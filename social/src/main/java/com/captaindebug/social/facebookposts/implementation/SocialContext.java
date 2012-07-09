@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.web.SignInAdapter;
@@ -70,6 +71,9 @@ public class SocialContext extends HandlerInterceptorAdapter implements Connecti
 					signOut(request, response);
 				} else if (isRequestingSignIn(request)) {
 					retVal = true;
+				} else { // is already signed in...
+					// TODO debug this logic
+					retVal = true;
 				}
 			} else {
 				userCookieGenerator.removeCookie(response);
@@ -94,8 +98,11 @@ public class SocialContext extends HandlerInterceptorAdapter implements Connecti
 
 	private boolean isConnectedFacebookUser(String userId) {
 
-		return connectionRepository.createConnectionRepository(userId).findPrimaryConnection(
-				Facebook.class) != null;
+		ConnectionRepository connectionRepo = connectionRepository
+				.createConnectionRepository(userId);
+		Connection<Facebook> facebookConnection = connectionRepo
+				.findPrimaryConnection(Facebook.class);
+		return facebookConnection != null;
 	}
 
 	private boolean isUserSigningOut(HttpServletRequest request) {
