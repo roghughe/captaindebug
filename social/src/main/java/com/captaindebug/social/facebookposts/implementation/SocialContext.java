@@ -125,4 +125,15 @@ public class SocialContext extends HandlerInterceptorAdapter implements Connecti
 		signInView.render(null, request, response);
 	}
 
+	@Override
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
+			Object handler, Exception ex) throws Exception {
+		currentUser.set(null);
+	}
+
+	public String getUserId() {
+
+		return currentUser.get();
+	}
+
 }
