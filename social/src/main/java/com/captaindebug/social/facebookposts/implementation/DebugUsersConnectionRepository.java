@@ -3,6 +3,7 @@
  */
 package com.captaindebug.social.facebookposts.implementation;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -17,30 +18,46 @@ import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 
 /**
- * This is a demo class, responsible for showing how the app's users are
- * connected to Spring social without all the tedious mucking about with JDBC
- * and SQL databases.
+ * This is a demo class, responsible for showing how the app's users are connected to Spring
+ * social without all the tedious mucking about with JDBC and SQL databases.
  * 
  * @author Roger
  * 
  */
 public class DebugUsersConnectionRepository implements UsersConnectionRepository {
 
-	private static final Logger logger = LoggerFactory.getLogger(DebugUsersConnectionRepository.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(DebugUsersConnectionRepository.class);
 
+	/** Map the user id to the connection (one user has one connection) */
 	private final Map<String, ConnectionRepository> repositoryMap = new HashMap<String, ConnectionRepository>();
 
 	/**
-	 * @see org.springframework.social.connect.UsersConnectionRepository#findUserIdsWithConnection(org.springframework.social.connect.Connection)
+	 * Suggest that this loops through the map values, getting the connection respositories. If
+	 * this connection is in the repo then add the repos user id to the list
 	 */
 	@Override
 	public List<String> findUserIdsWithConnection(Connection<?> connection) {
 
-		logger.info("Finding users Ids with connection: " + connection);
+		logger.info("Finding users Ids with connection: " + connection.getKey().toString());
+		List<String> userIds = new ArrayList<String>();
+		ConnectionKey connectionKey = connection.getKey();
+		String providerId = connectionKey.getProviderId();
+		Set<String> keys = repositoryMap.keySet();
+		for (String userId : keys) {
 
-		ConnectionKey key = connection.getKey();
+			ConnectionRepository repo = repositoryMap.get(userId);
 
-		return Collections.emptyList();
+			List<Connection<?>> connections = repo.findConnections(providerId);
+			for (Connection<?> con : connections) {
+
+				if (con.equals(connection)) {
+					userIds.add(userId);
+				}
+			}
+		}
+
+		return userIds;
 	}
 
 	/**

@@ -24,7 +24,7 @@ import org.springframework.web.util.CookieGenerator;
  * 
  * @author Keith Donald
  */
-final class UserCookieGenerator {
+public final class UserCookieGenerator {
 
 	private final CookieGenerator cookieGenerator = new CookieGenerator();
 

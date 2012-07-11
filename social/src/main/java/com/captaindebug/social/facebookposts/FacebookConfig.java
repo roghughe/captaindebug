@@ -5,7 +5,7 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -19,8 +19,10 @@ import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.captaindebug.social.facebookposts.implementation.SocialContext;
+import com.captaindebug.social.facebookposts.implementation.UserCookieGenerator;
 
 @Configuration
 public class FacebookConfig {
@@ -30,14 +32,35 @@ public class FacebookConfig {
 	private static final String appId = "439291719425239";
 	private static final String appSecret = "65646c3846ab46f0b44d73bb26087f06";
 
-	private final SocialContext socialContext;
+	private SocialContext socialContext;
+
+	private final UsersConnectionRepository userConnectionRepositiory;
 
 	@Inject
 	private DataSource dataSource;
 
-	@Autowired
-	public FacebookConfig(SocialContext socialContext) {
-		this.socialContext = socialContext;
+	public FacebookConfig() {
+
+		userConnectionRepositiory = new JdbcUsersConnectionRepository(dataSource,
+				connectionFactoryLocator(), Encryptors.noOpText());
+	}
+
+	@Bean
+	@Qualifier("socialContext")
+	public SocialContext createSocialContext() {
+
+		if (isNotNull(socialContext)) {
+
+			socialContext = new SocialContext(userConnectionRepositiory,
+					new UserCookieGenerator(), new RedirectView());
+
+		}
+
+		return socialContext;
+	}
+
+	private boolean isNotNull(Object obj) {
+		return obj != null;
 	}
 
 	@Bean
