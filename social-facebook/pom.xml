@@ -4,14 +4,18 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.captaindebug</groupId>
 	<artifactId>social</artifactId>
-	<name>abc</name>
+	<name>Facebook Sample</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.6</java-version>
 		<org.springframework-version>3.0.6.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.9</org.aspectj-version>
+		<spring-social.version>1.0.2.RELEASE</spring-social.version>
+		<org.springframework.social-facebook-version>1.0.1.RELEASE</org.springframework.social-facebook-version>
+		<unitils.version>3.1</unitils.version>
 		<org.slf4j-version>1.5.10</org.slf4j-version>
+		<org.springframework.security.crypto-version>3.1.0.RELEASE</org.springframework.security.crypto-version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -115,7 +119,63 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency>  
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId>
+			<version>${org.springframework.security.crypto-version}</version>
+		</dependency>
+
+		
+		<!-- Spring Social -->
+	 	<dependency>
+		    <groupId>org.springframework.social</groupId>
+		    <artifactId>spring-social-core</artifactId>
+		    <version>${spring-social.version}</version>
+		</dependency>		
+		<dependency>
+		    <groupId>org.springframework.social</groupId>
+		    <artifactId>spring-social-web</artifactId>
+		    <version>${spring-social.version}</version>
+		</dependency>
+				
+		<!-- Facebook API -->
+		<dependency>
+		  <groupId>org.springframework.social</groupId>
+		  <artifactId>spring-social-facebook</artifactId>
+		  <version>${org.springframework.social-facebook-version}</version>
+		</dependency>
+
+
+
+		<!-- CGLIB, only required and used for @Configuration usage: could be removed in future release of Spring -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>2.2</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.unitils</groupId>
+    		<artifactId>unitils-core</artifactId>
+		    <version>${unitils.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.unitils</groupId>
+    		<artifactId>unitils-easymock</artifactId>
+		    <version>${unitils.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.unitils</groupId>
+    		<artifactId>unitils-spring</artifactId>
+		    <version>${unitils.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		
+		      
 	</dependencies>
 	<build>
 		<plugins>

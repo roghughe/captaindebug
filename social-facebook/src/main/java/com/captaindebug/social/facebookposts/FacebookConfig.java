@@ -41,8 +41,8 @@ public class FacebookConfig {
 
 	public FacebookConfig() {
 
-		userConnectionRepositiory = new JdbcUsersConnectionRepository(dataSource,
-				connectionFactoryLocator(), Encryptors.noOpText());
+		userConnectionRepositiory = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(),
+				Encryptors.noOpText());
 	}
 
 	@Bean
@@ -51,8 +51,7 @@ public class FacebookConfig {
 
 		if (isNotNull(socialContext)) {
 
-			socialContext = new SocialContext(userConnectionRepositiory,
-					new UserCookieGenerator(), new RedirectView());
+			socialContext = new SocialContext(userConnectionRepositiory, new UserCookieGenerator(), new RedirectView());
 
 		}
 
@@ -73,18 +72,20 @@ public class FacebookConfig {
 	}
 
 	/**
-	 * Singleton data access object providing access to connections across all users.
+	 * Singleton data access object providing access to connections across all
+	 * users.
 	 */
 	@Bean
 	public UsersConnectionRepository usersConnectionRepository() {
-		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(
-				dataSource, connectionFactoryLocator(), Encryptors.noOpText());
+		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(),
+				Encryptors.noOpText());
 		repository.setConnectionSignUp(socialContext);
 		return repository;
 	}
 
 	/**
-	 * Request-scoped data access object providing access to the current user's connections.
+	 * Request-scoped data access object providing access to the current user's
+	 * connections.
 	 */
 	@Bean
 	@Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
@@ -95,8 +96,8 @@ public class FacebookConfig {
 	}
 
 	/**
-	 * A proxy to a request-scoped object representing the current user's primary Facebook
-	 * account.
+	 * A proxy to a request-scoped object representing the current user's
+	 * primary Facebook account.
 	 * 
 	 * @throws NotConnectedException
 	 *             if the user is not connected to facebook.
@@ -111,26 +112,30 @@ public class FacebookConfig {
 	 * 
 	 * @Bean public UsersConnectionRepository usersConnectionRepository() {
 	 * 
-	 * logger.info("usersConnectionRepository"); DebugUsersConnectionRepository repository =
-	 * new DebugUsersConnectionRepository( connectionFactoryLocator ); //
-	 * repository.setConnectionSignUp(new DebugConnectionSignup()); return repository; }
+	 * logger.info("usersConnectionRepository"); DebugUsersConnectionRepository
+	 * repository = new DebugUsersConnectionRepository( connectionFactoryLocator
+	 * ); // repository.setConnectionSignUp(new DebugConnectionSignup()); return
+	 * repository; }
 	 * 
 	 * @Bean
 	 * 
 	 * @Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES) public
-	 * ConnectionRepository connectionRepository() { logger.info("connectionRepository");
-	 * return usersConnectionRepository().createConnectionRepository("The unique user id"); }
+	 * ConnectionRepository connectionRepository() {
+	 * logger.info("connectionRepository"); return
+	 * usersConnectionRepository().createConnectionRepository
+	 * ("The unique user id"); }
 	 */
 	/*
 	 * // TODO Complete this - after the Social context
 	 * 
-	 * @Bean public ProviderSignInController providerSignInController() { return new
-	 * ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), //
-	 * TODO This will be the SocialContext new SimpleSignInAdapter()); }
+	 * @Bean public ProviderSignInController providerSignInController() { return
+	 * new ProviderSignInController(connectionFactoryLocator(),
+	 * usersConnectionRepository(), // TODO This will be the SocialContext new
+	 * SimpleSignInAdapter()); }
 	 */
 	/**
-	 * A proxy to a request-scoped object representing the current user's primary Facebook
-	 * account.
+	 * A proxy to a request-scoped object representing the current user's
+	 * primary Facebook account.
 	 * 
 	 * @throws NotConnectedException
 	 *             if the user is not connected to facebook.
@@ -138,8 +143,8 @@ public class FacebookConfig {
 	/*
 	 * @Bean
 	 * 
-	 * @Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES) public Facebook
-	 * facebook() {
+	 * @Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES) public
+	 * Facebook facebook() {
 	 * 
 	 * logger.info("creating facebook connection"); return
 	 * connectionRepository().getPrimaryConnection(Facebook.class).getApi(); }

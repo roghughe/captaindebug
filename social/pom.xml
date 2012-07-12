@@ -14,7 +14,6 @@
 		<org.slf4j-version>1.5.10</org.slf4j-version>
 		<spring-social.version>1.0.2.RELEASE</spring-social.version>
 		<org.springframework.social-twitter-version>1.0.2.RELEASE</org.springframework.social-twitter-version>
-		<org.springframework.social-facebook-version>1.0.1.RELEASE</org.springframework.social-facebook-version>
 		<unitils.version>3.1</unitils.version>
 	</properties>
 	<dependencies>
@@ -121,30 +120,11 @@
 			<scope>test</scope>
 		</dependency>   
 		
-		<!-- Spring Social -->
-	 	<dependency>
-		    <groupId>org.springframework.social</groupId>
-		    <artifactId>spring-social-core</artifactId>
-		    <version>${spring-social.version}</version>
-		</dependency>		
-		<dependency>
-		    <groupId>org.springframework.social</groupId>
-		    <artifactId>spring-social-web</artifactId>
-		    <version>${spring-social.version}</version>
-		</dependency>
-				
 		<!-- Twitter API -->
 		<dependency>
 		  <groupId>org.springframework.social</groupId>
 		  <artifactId>spring-social-twitter</artifactId>
 		  <version>${org.springframework.social-twitter-version}</version>
-		</dependency>
-
-		<!-- Facebook API -->
-		<dependency>
-		  <groupId>org.springframework.social</groupId>
-		  <artifactId>spring-social-facebook</artifactId>
-		  <version>${org.springframework.social-facebook-version}</version>
 		</dependency>
 
 		<!-- CGLIB, only required and used for @Configuration usage: could be removed in future release of Spring -->
@@ -158,25 +138,6 @@
 			<groupId>com.captaindebug</groupId>
 			<artifactId>state-machine</artifactId>
 			<version>1.0-SNAPSHOT</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.unitils</groupId>
-    		<artifactId>unitils-core</artifactId>
-		    <version>${unitils.version}</version>
-		    <scope>test</scope>
-		</dependency>
-		<dependency>
-		    <groupId>org.unitils</groupId>
-    		<artifactId>unitils-easymock</artifactId>
-		    <version>${unitils.version}</version>
-		    <scope>test</scope>
-		</dependency>
-		<dependency>
-		    <groupId>org.unitils</groupId>
-    		<artifactId>unitils-spring</artifactId>
-		    <version>${unitils.version}</version>
-		    <scope>test</scope>
 		</dependency>
 		
 	</dependencies>
