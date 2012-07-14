@@ -5,7 +5,7 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -25,7 +25,7 @@ import com.captaindebug.social.facebookposts.implementation.SocialContext;
 import com.captaindebug.social.facebookposts.implementation.UserCookieGenerator;
 
 @Configuration
-public class FacebookConfig {
+public class FacebookConfig implements InitializingBean {
 
 	private static final Logger logger = LoggerFactory.getLogger(FacebookConfig.class);
 
@@ -34,32 +34,21 @@ public class FacebookConfig {
 
 	private SocialContext socialContext;
 
-	private final UsersConnectionRepository userConnectionRepositiory;
+	private UsersConnectionRepository userConnectionRepositiory;
 
 	@Inject
 	private DataSource dataSource;
 
-	public FacebookConfig() {
-
-		userConnectionRepositiory = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(),
-				Encryptors.noOpText());
-	}
-
+	/**
+	 * Point to note: the name of the bean is either the name of the method
+	 * "socialContext" or can be set by an attribute
+	 * 
+	 * @Bean(name="myBean")
+	 */
 	@Bean
-	@Qualifier("socialContext")
-	public SocialContext createSocialContext() {
-
-		if (isNotNull(socialContext)) {
-
-			socialContext = new SocialContext(userConnectionRepositiory, new UserCookieGenerator(), new RedirectView());
-
-		}
+	public SocialContext socialContext() {
 
 		return socialContext;
-	}
-
-	private boolean isNotNull(Object obj) {
-		return obj != null;
 	}
 
 	@Bean
@@ -77,10 +66,8 @@ public class FacebookConfig {
 	 */
 	@Bean
 	public UsersConnectionRepository usersConnectionRepository() {
-		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(),
-				Encryptors.noOpText());
-		repository.setConnectionSignUp(socialContext);
-		return repository;
+
+		return userConnectionRepositiory;
 	}
 
 	/**
@@ -108,45 +95,16 @@ public class FacebookConfig {
 		return connectionRepository().getPrimaryConnection(Facebook.class).getApi();
 	}
 
-	/*
-	 * 
-	 * @Bean public UsersConnectionRepository usersConnectionRepository() {
-	 * 
-	 * logger.info("usersConnectionRepository"); DebugUsersConnectionRepository
-	 * repository = new DebugUsersConnectionRepository( connectionFactoryLocator
-	 * ); // repository.setConnectionSignUp(new DebugConnectionSignup()); return
-	 * repository; }
-	 * 
-	 * @Bean
-	 * 
-	 * @Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES) public
-	 * ConnectionRepository connectionRepository() {
-	 * logger.info("connectionRepository"); return
-	 * usersConnectionRepository().createConnectionRepository
-	 * ("The unique user id"); }
-	 */
-	/*
-	 * // TODO Complete this - after the Social context
-	 * 
-	 * @Bean public ProviderSignInController providerSignInController() { return
-	 * new ProviderSignInController(connectionFactoryLocator(),
-	 * usersConnectionRepository(), // TODO This will be the SocialContext new
-	 * SimpleSignInAdapter()); }
-	 */
-	/**
-	 * A proxy to a request-scoped object representing the current user's
-	 * primary Facebook account.
-	 * 
-	 * @throws NotConnectedException
-	 *             if the user is not connected to facebook.
-	 */
-	/*
-	 * @Bean
-	 * 
-	 * @Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES) public
-	 * Facebook facebook() {
-	 * 
-	 * logger.info("creating facebook connection"); return
-	 * connectionRepository().getPrimaryConnection(Facebook.class).getApi(); }
-	 */
+	@Override
+	public void afterPropertiesSet() throws Exception {
+
+		JdbcUsersConnectionRepository userConnectionRepositiory = new JdbcUsersConnectionRepository(dataSource,
+				connectionFactoryLocator(), Encryptors.noOpText());
+
+		socialContext = new SocialContext(userConnectionRepositiory, new UserCookieGenerator(), new RedirectView(/* TODO */));
+
+		userConnectionRepositiory.setConnectionSignUp(socialContext);
+		this.userConnectionRepositiory = userConnectionRepositiory;
+	}
+
 }

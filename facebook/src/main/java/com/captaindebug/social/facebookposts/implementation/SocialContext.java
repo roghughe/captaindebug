@@ -19,14 +19,14 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.view.RedirectView;
 
 /**
- * Based upon the Spring idea of an application Context, this class is responsible for grouping
- * together the various components in the Spring social quick start app
+ * Based upon the Spring idea of an application Context, this class is
+ * responsible for grouping together the various components in the Spring social
+ * quick start app
  * 
  * @author Roger
  * 
  */
-public class SocialContext extends HandlerInterceptorAdapter implements ConnectionSignUp,
-		SignInAdapter {
+public class SocialContext extends HandlerInterceptorAdapter implements ConnectionSignUp, SignInAdapter {
 
 	private final AtomicLong userIdSequence = new AtomicLong();
 
@@ -38,8 +38,8 @@ public class SocialContext extends HandlerInterceptorAdapter implements Connecti
 
 	private final RedirectView signInView;
 
-	public SocialContext(UsersConnectionRepository connectionRepository,
-			UserCookieGenerator userCookieGenerator, RedirectView redirectView) {
+	public SocialContext(UsersConnectionRepository connectionRepository, UserCookieGenerator userCookieGenerator,
+			RedirectView redirectView) {
 		this.connectionRepository = connectionRepository;
 		this.userCookieGenerator = userCookieGenerator;
 		this.signInView = redirectView;
@@ -47,8 +47,7 @@ public class SocialContext extends HandlerInterceptorAdapter implements Connecti
 
 	@Override
 	public String signIn(String userId, Connection<?> connection, NativeWebRequest request) {
-		userCookieGenerator.addCookie(userId,
-				request.getNativeResponse(HttpServletResponse.class));
+		userCookieGenerator.addCookie(userId, request.getNativeResponse(HttpServletResponse.class));
 		return null;
 	}
 
@@ -58,8 +57,7 @@ public class SocialContext extends HandlerInterceptorAdapter implements Connecti
 	}
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-			Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
 		boolean retVal = false;
 		String userId = userCookieGenerator.readCookieValue(request);
@@ -98,10 +96,8 @@ public class SocialContext extends HandlerInterceptorAdapter implements Connecti
 
 	private boolean isConnectedFacebookUser(String userId) {
 
-		ConnectionRepository connectionRepo = connectionRepository
-				.createConnectionRepository(userId);
-		Connection<Facebook> facebookConnection = connectionRepo
-				.findPrimaryConnection(Facebook.class);
+		ConnectionRepository connectionRepo = connectionRepository.createConnectionRepository(userId);
+		Connection<Facebook> facebookConnection = connectionRepo.findPrimaryConnection(Facebook.class);
 		return facebookConnection != null;
 	}
 
@@ -110,8 +106,7 @@ public class SocialContext extends HandlerInterceptorAdapter implements Connecti
 	}
 
 	private void signOut(HttpServletRequest request, HttpServletResponse response) {
-		connectionRepository.createConnectionRepository(currentUser.get()).removeConnections(
-				"facebook");
+		connectionRepository.createConnectionRepository(currentUser.get()).removeConnections("facebook");
 		userCookieGenerator.removeCookie(response);
 		currentUser.set(null);
 	}
@@ -120,14 +115,13 @@ public class SocialContext extends HandlerInterceptorAdapter implements Connecti
 		return request.getServletPath().startsWith("/signin");
 	}
 
-	private void signIn(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	private void signIn(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		signInView.render(null, request, response);
 	}
 
 	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
-			Object handler, Exception ex) throws Exception {
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+			throws Exception {
 		currentUser.set(null);
 	}
 
@@ -135,5 +129,4 @@ public class SocialContext extends HandlerInterceptorAdapter implements Connecti
 
 		return currentUser.get();
 	}
-
 }

@@ -5,10 +5,12 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
+<h1>Captain Debug's Social Samples</h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<P>
+<a href=posts>Try to get the posts without an ID</a><br />
+
+
+</P>
 </body>
 </html>

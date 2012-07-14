@@ -14,6 +14,7 @@ import org.springframework.social.facebook.api.Post;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Roger
@@ -21,8 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 public class FacebookPostsController {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(FacebookPostsController.class);
+	private static final Logger logger = LoggerFactory.getLogger(FacebookPostsController.class);
 
 	private final Facebook facebook;
 
@@ -31,8 +31,18 @@ public class FacebookPostsController {
 		this.facebook = facebook;
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
+	@RequestMapping(value = "/posts", method = RequestMethod.GET)
+	public String showPostsForUser(@RequestParam("id") String userId, Model model) {
+
+		/*
+		 * Logic goes something like this
+		 * 
+		 * if parameter == nil then sign in to get Access Token else already
+		 * have access token
+		 * 
+		 * Use access token to get Facebook data.
+		 */
+
 		FeedOperations feedOps = facebook.feedOperations();
 
 		List<Post> posts = feedOps.getPosts();

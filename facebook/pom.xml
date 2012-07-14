@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.captaindebug</groupId>
-	<artifactId>social</artifactId>
+	<artifactId>facebook</artifactId>
 	<name>Facebook Sample</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
@@ -147,7 +147,17 @@
 		  <version>${org.springframework.social-facebook-version}</version>
 		</dependency>
 
-
+		<!-- JdbcUserConfiguration -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+	        <version>${org.springframework-version}</version>
+	    </dependency>	
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.3.159</version>
+	    </dependency>
 
 		<!-- CGLIB, only required and used for @Configuration usage: could be removed in future release of Spring -->
 		<dependency>
@@ -191,7 +201,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
-					<warName>abc</warName>
+					<warName>captaindebug-social-facebook</warName>
 				</configuration>
 			</plugin>
 			<plugin>
