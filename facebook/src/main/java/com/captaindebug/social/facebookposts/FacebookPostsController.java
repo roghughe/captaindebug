@@ -31,7 +31,7 @@ public class FacebookPostsController {
 		this.facebook = facebook;
 	}
 
-	@RequestMapping(value = "/posts", method = RequestMethod.GET)
+	@RequestMapping(value = "posts", method = RequestMethod.GET)
 	public String showPostsForUser(@RequestParam("id") String userId, Model model) {
 
 		/*

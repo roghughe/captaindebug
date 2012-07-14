@@ -8,7 +8,7 @@
 <h1>Captain Debug's Social Samples</h1>
 
 <P>
-<a href=posts>Try to get the posts without an ID</a><br />
+<a href="posts?id=tt">Try to get the posts without an ID</a><br />
 
 
 </P>
