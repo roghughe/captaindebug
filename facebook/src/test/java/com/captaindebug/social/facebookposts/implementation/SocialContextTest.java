@@ -89,7 +89,7 @@ public class SocialContextTest {
 		signIn.render(null, request, response);
 
 		replay();
-		instance.preHandle(request, response, null);
+		instance.isSignedIn(request, response);
 		verify();
 	}
 
@@ -104,8 +104,7 @@ public class SocialContextTest {
 
 		expect(request.getCookies()).andReturn(cookies);
 
-		expect(userConnectionRespository.createConnectionRepository(COOKIE_VALUE)).andReturn(
-				connectionRespository);
+		expect(userConnectionRespository.createConnectionRepository(COOKIE_VALUE)).andReturn(connectionRespository);
 		expect(connectionRespository.findPrimaryConnection(Facebook.class)).andReturn(null);
 
 		cookie = new Cookie(COOKIE_NAME, "");
@@ -113,7 +112,7 @@ public class SocialContextTest {
 		signIn.render(null, request, response);
 
 		replay();
-		instance.preHandle(request, response, null);
+		instance.isSignedIn(request, response);
 		verify();
 
 	}
@@ -129,17 +128,15 @@ public class SocialContextTest {
 
 		expect(request.getCookies()).andReturn(cookies);
 
-		expect(userConnectionRespository.createConnectionRepository(COOKIE_VALUE)).andReturn(
-				connectionRespository);
+		expect(userConnectionRespository.createConnectionRepository(COOKIE_VALUE)).andReturn(connectionRespository);
 
-		expect(connectionRespository.findPrimaryConnection(Facebook.class)).andReturn(
-				facebookConnection);
+		expect(connectionRespository.findPrimaryConnection(Facebook.class)).andReturn(facebookConnection);
 
 		expect(request.getServletPath()).andReturn("/signin");
 		expect(request.getServletPath()).andReturn("/signin");
 
 		replay();
-		instance.preHandle(request, response, null);
+		instance.isSignedIn(request, response);
 		verify();
 
 	}

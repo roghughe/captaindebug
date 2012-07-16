@@ -5,6 +5,9 @@ package com.captaindebug.social.facebookposts;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import com.captaindebug.social.facebookposts.implementation.SocialContext;
 
 /**
  * @author Roger
@@ -26,15 +30,18 @@ public class FacebookPostsController {
 
 	private static final Logger logger = LoggerFactory.getLogger(FacebookPostsController.class);
 
+	private final SocialContext socialContext;
+
 	private final Facebook facebook;
 
 	@Autowired
-	public FacebookPostsController(Facebook facebook) {
+	public FacebookPostsController(Facebook facebook, SocialContext socialContext) {
 		this.facebook = facebook;
+		this.socialContext = socialContext;
 	}
 
 	@RequestMapping(value = "posts", method = RequestMethod.GET)
-	public String showPostsForUser(@RequestParam("id") String userId, Model model) {
+	public String showPostsForUser(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
 		/*
 		 * Logic goes something like this
@@ -45,13 +52,21 @@ public class FacebookPostsController {
 		 * Use access token to get Facebook data.
 		 */
 
-		FeedOperations feedOps = facebook.feedOperations();
+		String nextView = "posts";
 
-		List<Post> posts = feedOps.getPosts();
-		logger.debug("Retrieved " + posts.size() + " from the Facebook authenticated user");
+		if (socialContext.isSignedIn(request, response)) {
 
-		model.addAttribute("posts", posts);
-		return "home";
+			FeedOperations feedOps = facebook.feedOperations();
+
+			List<Post> posts = feedOps.getHomeFeed();
+			logger.info("Retrieved " + posts.size() + " from the Facebook authenticated user");
+
+			model.addAttribute("posts", posts);
+
+		} else {
+			nextView = socialContext.signIn(request, response);
+		}
+
+		return nextView;
 	}
-
 }

@@ -15,7 +15,6 @@ import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.web.context.request.NativeWebRequest;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.view.RedirectView;
 
 /**
@@ -26,7 +25,7 @@ import org.springframework.web.servlet.view.RedirectView;
  * @author Roger
  * 
  */
-public class SocialContext extends HandlerInterceptorAdapter implements ConnectionSignUp, SignInAdapter {
+public class SocialContext implements ConnectionSignUp, SignInAdapter {
 
 	private final AtomicLong userIdSequence = new AtomicLong();
 
@@ -36,13 +35,13 @@ public class SocialContext extends HandlerInterceptorAdapter implements Connecti
 
 	private final UsersConnectionRepository connectionRepository;
 
-	private final RedirectView signInView;
+	// private final RedirectView signInView; // not used
 
 	public SocialContext(UsersConnectionRepository connectionRepository, UserCookieGenerator userCookieGenerator,
 			RedirectView redirectView) {
 		this.connectionRepository = connectionRepository;
 		this.userCookieGenerator = userCookieGenerator;
-		this.signInView = redirectView;
+		// this.signInView = redirectView;
 	}
 
 	@Override
@@ -56,8 +55,7 @@ public class SocialContext extends HandlerInterceptorAdapter implements Connecti
 		return Long.toString(userIdSequence.incrementAndGet());
 	}
 
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+	public boolean isSignedIn(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		boolean retVal = false;
 		String userId = userCookieGenerator.readCookieValue(request);
@@ -75,12 +73,10 @@ public class SocialContext extends HandlerInterceptorAdapter implements Connecti
 				}
 			} else {
 				userCookieGenerator.removeCookie(response);
-				signIn(request, response);
 			}
 
 			currentUser.set(userId);
 		} else {
-			signIn(request, response);
 		}
 
 		return retVal;
@@ -115,13 +111,13 @@ public class SocialContext extends HandlerInterceptorAdapter implements Connecti
 		return request.getServletPath().startsWith("/signin");
 	}
 
-	private void signIn(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		signInView.render(null, request, response);
+	public String signIn(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// signInView.render(null, request, response);
+		return "signin";
 	}
 
-	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
+	public void afterCompletion() {
+
 		currentUser.set(null);
 	}
 

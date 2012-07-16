@@ -5,10 +5,10 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>Captain Debug's Social Samples</h1>
+<h1>Captain Debug's Facebook Social Sample</h1>
 
 <P>
-<a href="posts?id=tt">Try to get the posts without an ID</a><br />
+<a href="posts">Display your posts</a><br />
 
 
 </P>

@@ -17,6 +17,7 @@ import org.springframework.social.connect.NotConnectedException;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
+import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.web.servlet.view.RedirectView;
@@ -95,13 +96,22 @@ public class FacebookConfig implements InitializingBean {
 		return connectionRepository().getPrimaryConnection(Facebook.class).getApi();
 	}
 
+	@Bean
+	public ProviderSignInController providerSignInController() {
+		ProviderSignInController providerSigninController = new ProviderSignInController(connectionFactoryLocator(),
+				usersConnectionRepository(), socialContext);
+		providerSigninController.setPostSignInUrl("/posts");
+		return providerSigninController;
+	}
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 
 		JdbcUsersConnectionRepository userConnectionRepositiory = new JdbcUsersConnectionRepository(dataSource,
 				connectionFactoryLocator(), Encryptors.noOpText());
 
-		socialContext = new SocialContext(userConnectionRepositiory, new UserCookieGenerator(), new RedirectView(/* TODO */));
+		socialContext = new SocialContext(userConnectionRepositiory, new UserCookieGenerator(), new RedirectView("/signin",
+				true));
 
 		userConnectionRepositiory.setConnectionSignUp(socialContext);
 		this.userConnectionRepositiory = userConnectionRepositiory;
