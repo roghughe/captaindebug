@@ -18,18 +18,26 @@ import org.springframework.web.context.request.NativeWebRequest;
 
 /**
  * Based upon the Spring idea of an application Context, this class is
- * responsible for grouping together the various components in the Spring social
- * quick start app
+ * responsible for gluing your application to spring social.
+ * 
+ * It does this by grouping together the minimum number of the various
+ * components in the Spring social quick start app
  * 
  * @author Roger
  * 
  */
 public class SocialContext implements ConnectionSignUp, SignInAdapter {
 
+	/** Create a user id */
 	private final AtomicLong userIdSequence = new AtomicLong();
 
+	/**
+	 * Manage cookies - Use cookies to remember state between calls to the
+	 * server(s)
+	 */
 	private final UserCookieGenerator userCookieGenerator;
 
+	/** Store the user id between calls to the server */
 	private static final ThreadLocal<String> currentUser = new ThreadLocal<String>();
 
 	private final UsersConnectionRepository connectionRepository;

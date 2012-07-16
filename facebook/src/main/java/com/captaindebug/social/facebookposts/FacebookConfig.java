@@ -110,14 +110,12 @@ public class FacebookConfig implements InitializingBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 
-		if (socialContext == null) {
-			JdbcUsersConnectionRepository userConnectionRepositiory = new JdbcUsersConnectionRepository(dataSource,
-					connectionFactoryLocator(), Encryptors.noOpText());
+		JdbcUsersConnectionRepository userConnectionRepositiory = new JdbcUsersConnectionRepository(dataSource,
+				connectionFactoryLocator(), Encryptors.noOpText());
 
-			socialContext = new SocialContext(userConnectionRepositiory, new UserCookieGenerator(), facebook());
+		socialContext = new SocialContext(userConnectionRepositiory, new UserCookieGenerator(), facebook());
 
-			userConnectionRepositiory.setConnectionSignUp(socialContext);
-			this.userConnectionRepositiory = userConnectionRepositiory;
-		}
+		userConnectionRepositiory.setConnectionSignUp(socialContext);
+		this.userConnectionRepositiory = userConnectionRepositiory;
 	}
 }
