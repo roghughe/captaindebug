@@ -40,13 +40,13 @@ public class FacebookPostsController {
 	@RequestMapping(value = "posts", method = RequestMethod.GET)
 	public String showPostsForUser(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
-		String nextView = "show-posts";
+		String nextView;
 
 		if (socialContext.isSignedIn(request, response)) {
 
 			List<Post> posts = retrievePosts();
 			model.addAttribute("posts", posts);
-
+			nextView = "show-posts";
 		} else {
 			nextView = "signin";
 		}
