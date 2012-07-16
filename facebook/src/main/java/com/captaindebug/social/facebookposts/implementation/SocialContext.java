@@ -15,7 +15,6 @@ import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.web.context.request.NativeWebRequest;
-import org.springframework.web.servlet.view.RedirectView;
 
 /**
  * Based upon the Spring idea of an application Context, this class is
@@ -35,13 +34,13 @@ public class SocialContext implements ConnectionSignUp, SignInAdapter {
 
 	private final UsersConnectionRepository connectionRepository;
 
-	// private final RedirectView signInView; // not used
+	private final Facebook facebook;
 
 	public SocialContext(UsersConnectionRepository connectionRepository, UserCookieGenerator userCookieGenerator,
-			RedirectView redirectView) {
+			Facebook facebook) {
 		this.connectionRepository = connectionRepository;
 		this.userCookieGenerator = userCookieGenerator;
-		// this.signInView = redirectView;
+		this.facebook = facebook;
 	}
 
 	@Override
@@ -55,30 +54,20 @@ public class SocialContext implements ConnectionSignUp, SignInAdapter {
 		return Long.toString(userIdSequence.incrementAndGet());
 	}
 
-	public boolean isSignedIn(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public boolean isSignedIn(HttpServletRequest request, HttpServletResponse response) {
 
 		boolean retVal = false;
 		String userId = userCookieGenerator.readCookieValue(request);
 		if (isValidId(userId)) {
 
 			if (isConnectedFacebookUser(userId)) {
-
-				if (isUserSigningOut(request)) {
-					signOut(request, response);
-				} else if (isRequestingSignIn(request)) {
-					retVal = true;
-				} else { // is already signed in...
-					// TODO debug this logic
-					retVal = true;
-				}
+				retVal = true;
 			} else {
 				userCookieGenerator.removeCookie(response);
 			}
-
-			currentUser.set(userId);
-		} else {
 		}
 
+		currentUser.set(userId);
 		return retVal;
 	}
 
@@ -97,32 +86,13 @@ public class SocialContext implements ConnectionSignUp, SignInAdapter {
 		return facebookConnection != null;
 	}
 
-	private boolean isUserSigningOut(HttpServletRequest request) {
-		return request.getServletPath().startsWith("/signout");
-	}
-
-	private void signOut(HttpServletRequest request, HttpServletResponse response) {
-		connectionRepository.createConnectionRepository(currentUser.get()).removeConnections("facebook");
-		userCookieGenerator.removeCookie(response);
-		currentUser.set(null);
-	}
-
-	private boolean isRequestingSignIn(HttpServletRequest request) {
-		return request.getServletPath().startsWith("/signin");
-	}
-
-	public String signIn(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// signInView.render(null, request, response);
-		return "signin";
-	}
-
-	public void afterCompletion() {
-
-		currentUser.set(null);
-	}
-
 	public String getUserId() {
 
 		return currentUser.get();
 	}
+
+	public Facebook getFacebook() {
+		return facebook;
+	}
+
 }

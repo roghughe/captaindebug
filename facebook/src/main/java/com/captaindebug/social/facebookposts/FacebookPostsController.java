@@ -32,41 +32,35 @@ public class FacebookPostsController {
 
 	private final SocialContext socialContext;
 
-	private final Facebook facebook;
-
 	@Autowired
-	public FacebookPostsController(Facebook facebook, SocialContext socialContext) {
-		this.facebook = facebook;
+	public FacebookPostsController(SocialContext socialContext) {
 		this.socialContext = socialContext;
 	}
 
 	@RequestMapping(value = "posts", method = RequestMethod.GET)
 	public String showPostsForUser(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
-		/*
-		 * Logic goes something like this
-		 * 
-		 * if parameter == nil then sign in to get Access Token else already
-		 * have access token
-		 * 
-		 * Use access token to get Facebook data.
-		 */
-
-		String nextView = "posts";
+		String nextView = "show-posts";
 
 		if (socialContext.isSignedIn(request, response)) {
 
-			FeedOperations feedOps = facebook.feedOperations();
-
-			List<Post> posts = feedOps.getHomeFeed();
-			logger.info("Retrieved " + posts.size() + " from the Facebook authenticated user");
-
+			List<Post> posts = retrievePosts();
 			model.addAttribute("posts", posts);
 
 		} else {
-			nextView = socialContext.signIn(request, response);
+			nextView = "signin";
 		}
 
 		return nextView;
+	}
+
+	private List<Post> retrievePosts() {
+
+		Facebook facebook = socialContext.getFacebook();
+		FeedOperations feedOps = facebook.feedOperations();
+
+		List<Post> posts = feedOps.getHomeFeed();
+		logger.info("Retrieved " + posts.size() + " posts from the Facebook authenticated user");
+		return posts;
 	}
 }

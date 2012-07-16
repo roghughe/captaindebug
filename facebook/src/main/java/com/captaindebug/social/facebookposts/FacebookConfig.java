@@ -20,7 +20,6 @@ import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.captaindebug.social.facebookposts.implementation.SocialContext;
 import com.captaindebug.social.facebookposts.implementation.UserCookieGenerator;
@@ -96,6 +95,10 @@ public class FacebookConfig implements InitializingBean {
 		return connectionRepository().getPrimaryConnection(Facebook.class).getApi();
 	}
 
+	/**
+	 * Create the ProviderSignInController that handles the OAuth2 stuff and
+	 * tell it to redirect back to /posts once sign in has completed
+	 */
 	@Bean
 	public ProviderSignInController providerSignInController() {
 		ProviderSignInController providerSigninController = new ProviderSignInController(connectionFactoryLocator(),
@@ -107,14 +110,14 @@ public class FacebookConfig implements InitializingBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 
-		JdbcUsersConnectionRepository userConnectionRepositiory = new JdbcUsersConnectionRepository(dataSource,
-				connectionFactoryLocator(), Encryptors.noOpText());
+		if (socialContext == null) {
+			JdbcUsersConnectionRepository userConnectionRepositiory = new JdbcUsersConnectionRepository(dataSource,
+					connectionFactoryLocator(), Encryptors.noOpText());
 
-		socialContext = new SocialContext(userConnectionRepositiory, new UserCookieGenerator(), new RedirectView("/signin",
-				true));
+			socialContext = new SocialContext(userConnectionRepositiory, new UserCookieGenerator(), facebook());
 
-		userConnectionRepositiory.setConnectionSignUp(socialContext);
-		this.userConnectionRepositiory = userConnectionRepositiory;
+			userConnectionRepositiory.setConnectionSignUp(socialContext);
+			this.userConnectionRepositiory = userConnectionRepositiory;
+		}
 	}
-
 }
