@@ -3,7 +3,8 @@
  */
 package com.captaindebug.social.facebookposts.implementation;
 
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Calendar;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,8 +29,11 @@ import org.springframework.web.context.request.NativeWebRequest;
  */
 public class SocialContext implements ConnectionSignUp, SignInAdapter {
 
-	/** Create a user id */
-	private final AtomicLong userIdSequence = new AtomicLong();
+	/**
+	 * Use a random number generator to generate IDs to avoid cookie clashes
+	 * between server restarts
+	 */
+	private static Random rand;
 
 	/**
 	 * Manage cookies - Use cookies to remember state between calls to the
@@ -49,6 +53,8 @@ public class SocialContext implements ConnectionSignUp, SignInAdapter {
 		this.connectionRepository = connectionRepository;
 		this.userCookieGenerator = userCookieGenerator;
 		this.facebook = facebook;
+
+		rand = new Random(Calendar.getInstance().getTimeInMillis());
 	}
 
 	@Override
@@ -59,7 +65,7 @@ public class SocialContext implements ConnectionSignUp, SignInAdapter {
 
 	@Override
 	public String execute(Connection<?> connection) {
-		return Long.toString(userIdSequence.incrementAndGet());
+		return Long.toString(rand.nextLong());
 	}
 
 	public boolean isSignedIn(HttpServletRequest request, HttpServletResponse response) {
