@@ -34,7 +34,7 @@ public class FacebookConfig implements InitializingBean {
 
 	private SocialContext socialContext;
 
-	private UsersConnectionRepository userConnectionRepositiory;
+	private UsersConnectionRepository usersConnectionRepositiory;
 
 	@Inject
 	private DataSource dataSource;
@@ -67,7 +67,7 @@ public class FacebookConfig implements InitializingBean {
 	@Bean
 	public UsersConnectionRepository usersConnectionRepository() {
 
-		return userConnectionRepositiory;
+		return usersConnectionRepositiory;
 	}
 
 	/**
@@ -110,12 +110,12 @@ public class FacebookConfig implements InitializingBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 
-		JdbcUsersConnectionRepository userConnectionRepositiory = new JdbcUsersConnectionRepository(dataSource,
+		JdbcUsersConnectionRepository usersConnectionRepositiory = new JdbcUsersConnectionRepository(dataSource,
 				connectionFactoryLocator(), Encryptors.noOpText());
 
-		socialContext = new SocialContext(userConnectionRepositiory, new UserCookieGenerator(), facebook());
+		socialContext = new SocialContext(usersConnectionRepositiory, new UserCookieGenerator(), facebook());
 
-		userConnectionRepositiory.setConnectionSignUp(socialContext);
-		this.userConnectionRepositiory = userConnectionRepositiory;
+		usersConnectionRepositiory.setConnectionSignUp(socialContext);
+		this.usersConnectionRepositiory = usersConnectionRepositiory;
 	}
 }
