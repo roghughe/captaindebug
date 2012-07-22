@@ -1,0 +1,69 @@
+This repository contains sample code linked to Captain Debug’s Blog (www.captaindebug.com). The sample projects are:
+
+TellDontAsk - see: 
+
+http://www.captaindebug.com/2012/03/defining-tell-dont-ask-well-almost.html
+http://www.captaindebug.com/2012/03/disassembling-tell-dont-ask.html
+
+
+address - see: blogs on testing techniques:
+
+http://www.captaindebug.com/p/blogs-on-testing-techniques.html
+
+
+dependency-injection-factory - covers blogs on the Dependency Injection:
+
+http://www.captaindebug.com/2011/09/looking-into-magic-of-dependency_29.html
+http://www.captaindebug.com/2011/09/looking-into-magic-of-dependency_30.html
+http://www.captaindebug.com/2011/10/looking-into-magic-of-dependency.html
+http://www.captaindebug.com/2011/10/looking-into-magic-of-dependency_06.html
+
+
+exceptions - a project relating to the blogs on Spring MVC Exception Handling. See:
+
+http://www.captaindebug.com/2012/02/spring-3-mvc-exception-handlers.html
+http://www.captaindebug.com/2012/02/spring-3-mvc-exception-handlers-and.html
+http://www.captaindebug.com/2012/02/spring-3-mvc-exception-handlers-and_14.html
+http://www.captaindebug.com/2012/02/using-springs-simplemappingexceptionhan.html
+
+
+facebook - Spring Social facebook sample:
+
+http://www.captaindebug.com/2012/07/getting-started-with-spring-social-part.html
+
+
+powermock-tips - samples for the Powermock blogs:
+
+http://www.captaindebug.com/2011/10/using-powermock-to-mock-static-methods.html
+http://www.captaindebug.com/2011/10/why-use-powermock-to-mock-private.html
+http://www.captaindebug.com/2011/10/using-powermock-to-mock-constructors.html
+http://www.captaindebug.com/2011/10/testing-objects-internal-state-with.html
+http://www.captaindebug.com/2011/11/reviewing-powermocks-features.html
+
+
+sim-map-exc-res Sample SimpleMappingExceptionResolver for the Spring Exception Handling blogs:
+
+http://www.captaindebug.com/2012/02/spring-3-mvc-exception-handlers.html
+http://www.captaindebug.com/2012/02/spring-3-mvc-exception-handlers-and.html
+http://www.captaindebug.com/2012/02/spring-3-mvc-exception-handlers-and_14.html
+http://www.captaindebug.com/2012/02/using-springs-simplemappingexceptionhan.html
+
+
+social - The Spring Social sample code for 
+
+http://www.captaindebug.com/2012/06/getting-started-with-spring-social.html
+
+
+state-machine
+
+See: http://www.captaindebug.com/2012/04/implementing-state-machine-pattern-as.html
+
+
+xml-tips-blog, xml-tips-jaxb, xml-tips-xmlbeans - blogs on Approaches to XML
+
+http://www.captaindebug.com/2012/01/approaches-to-xml-part-1-xml-is-not.html
+http://www.captaindebug.com/2012/01/approaches-to-xml-part-2-what-about-sax.html
+http://www.captaindebug.com/2012/01/approaches-to-xml-part-3-jaxb.html
+http://www.captaindebug.com/2012/01/approaches-to-xml-part-4-xmlbeans.html
+http://www.captaindebug.com/2012/01/approaches-to-xml-review.html
+
