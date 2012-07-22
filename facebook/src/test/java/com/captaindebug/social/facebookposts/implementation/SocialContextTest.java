@@ -4,6 +4,8 @@
 package com.captaindebug.social.facebookposts.implementation;
 
 import static org.easymock.EasyMock.expect;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.unitils.easymock.EasyMockUnitils.replay;
 import static org.unitils.easymock.EasyMockUnitils.verify;
 
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
@@ -44,6 +47,9 @@ public class SocialContextTest {
 	@Mock
 	private Facebook facebook;
 
+	@Mock
+	private Connection<Facebook> facebookConnection;
+
 	// Use the real thing as this is lightweight;
 	private UserCookieGenerator userCookieGenerator;
 
@@ -58,17 +64,19 @@ public class SocialContextTest {
 	}
 
 	@Test
-	public void testPreHandleWithNoExistingCookieAvailable() throws Exception {
+	public void testIsSignedInWithNoExistingCookieAvailable() throws Exception {
 
 		expect(request.getCookies()).andReturn(null);
 
 		replay();
-		instance.isSignedIn(request, response);
+		boolean results = instance.isSignedIn(request, response);
 		verify();
+
+		assertFalse(results);
 	}
 
 	@Test
-	public void testPreHandleWithDisconnectedUser() throws Exception {
+	public void testIsSignedInWithDisconnectedUser() throws Exception {
 
 		final String COOKIE_NAME = "captain_debug_social_user";
 		final String COOKIE_VALUE = "qwerty";
@@ -77,7 +85,6 @@ public class SocialContextTest {
 		cookies[0] = cookie;
 
 		expect(request.getCookies()).andReturn(cookies);
-
 		expect(userConnectionRespository.createConnectionRepository(COOKIE_VALUE)).andReturn(connectionRespository);
 		expect(connectionRespository.findPrimaryConnection(Facebook.class)).andReturn(null);
 
@@ -85,8 +92,30 @@ public class SocialContextTest {
 		response.addCookie(cookie);
 
 		replay();
-		instance.isSignedIn(request, response);
+		boolean result = instance.isSignedIn(request, response);
 		verify();
 
+		assertFalse(result);
 	}
+
+	@Test
+	public void testIsSignedIn() {
+
+		final String COOKIE_NAME = "captain_debug_social_user";
+		final String COOKIE_VALUE = "qwerty";
+		Cookie[] cookies = new Cookie[1];
+		Cookie cookie = new Cookie(COOKIE_NAME, COOKIE_VALUE);
+		cookies[0] = cookie;
+
+		expect(request.getCookies()).andReturn(cookies);
+		expect(userConnectionRespository.createConnectionRepository(COOKIE_VALUE)).andReturn(connectionRespository);
+		expect(connectionRespository.findPrimaryConnection(Facebook.class)).andReturn(facebookConnection);
+
+		replay();
+		boolean result = instance.isSignedIn(request, response);
+		verify();
+
+		assertTrue(result);
+	}
+
 }
