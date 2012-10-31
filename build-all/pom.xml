@@ -17,7 +17,9 @@
 		<module>../exceptions</module>
 		<module>../sim-map-exc-res</module>
 		<module>../state-machine</module>
+		<module>../telldontask</module>
 		<module>../social</module>
 		<module>../facebook</module>
+		<module>../deadlocks</module>
 	</modules>
 </project>
