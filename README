@@ -10,6 +10,12 @@ address - see: blogs on testing techniques:
 
 http://www.captaindebug.com/p/blogs-on-testing-techniques.html
 
+deadlocks - see: the blogs on Investigating Deadlocks
+http://www.captaindebug.com/2012/10/investigating-deadlocks-part-1.html
+http://www.captaindebug.com/2012/10/investigating-deadlocks-part-2.html
+http://www.captaindebug.com/2012/10/investigating-deadlocks-part-3.html
+http://www.captaindebug.com/2012/10/investigating-deadlocks-part-4-fixing.html
+
 
 dependency-injection-factory - covers blogs on the Dependency Injection:
 
