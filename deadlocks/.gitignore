@@ -1,4 +1,12 @@
+<<<<<<< HEAD
+/.project
+/.settings
+/target
+/.classpath
+/.gitignore
+=======
 /target
 /.settings
 /.classpath
 /.project
+>>>>>>> refs/remotes/origin/master
