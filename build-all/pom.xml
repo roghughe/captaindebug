@@ -21,5 +21,7 @@
 		<module>../social</module>
 		<module>../facebook</module>
 		<module>../deadlocks</module>
+		<module>../spring-security/tomcat-ssl</module>
+		<module>../unit-testing-threads</module>
 	</modules>
 </project>
