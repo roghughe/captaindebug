@@ -11,41 +11,37 @@ package com.captaindebug.threading.bad_example;
  */
 public class ThreadWrapper {
 
-	private boolean result;
-
-	/**
-	 * Any old worker thread...
-	 */
-	class MyThread extends Thread {
-
-		@Override
-		public void run() {
-
-			try {
-				System.out.println("Start of the thread");
-				Thread.sleep(4000);
-				result = true;
-				System.out.println("End of the thread method");
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 	/**
 	 * Start the thread running so that it does some work.
 	 */
 	public void doWork() {
 
-		Thread thread = new MyThread();
+		Thread thread = new Thread() {
+
+			/**
+			 * Run method adding data to a fictitious database
+			 */
+			@Override
+			public void run() {
+
+				System.out.println("Start of the thread");
+				addDataToDB();
+				System.out.println("End of the thread method");
+			}
+
+			private void addDataToDB() {
+
+				try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+
+		};
+
 		thread.start();
 		System.out.println("Off and running...");
 	}
 
-	/**
-	 * Retrieve the result.
-	 */
-	public boolean getResult() {
-		return result;
-	}
 }

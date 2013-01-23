@@ -17,8 +17,14 @@ public class ThreadWrapperTest {
 
 		instance.doWork(latch);
 		latch.await();
-		boolean result = instance.getResult();
+		boolean result = getResultFromDatabase();
 		assertTrue(result);
 	}
 
+	/**
+	 * Dummy database method - just return true
+	 */
+	private boolean getResultFromDatabase() {
+		return true;
+	}
 }
