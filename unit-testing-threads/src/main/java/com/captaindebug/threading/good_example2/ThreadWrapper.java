@@ -22,9 +22,6 @@ public class ThreadWrapper {
 		doWork(null);
 	}
 
-	/**
-	 * Start the thread running so that it does some work.
-	 */
 	@VisibleForTesting
 	void doWork(final CountDownLatch latch) {
 

@@ -29,7 +29,7 @@ public class ThreadWrapper {
 				System.out.println("Start of the thread");
 				addDataToDB();
 				System.out.println("End of the thread method");
-				latch.countDown();
+				countDown();
 			}
 
 			private void addDataToDB() {
@@ -39,6 +39,16 @@ public class ThreadWrapper {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+			}
+
+			private void countDown() {
+				if (isNotNull(latch)) {
+					latch.countDown();
+				}
+			}
+
+			private boolean isNotNull(Object obj) {
+				return latch != null;
 			}
 
 		};

@@ -30,7 +30,7 @@ public class ThreadWrapper {
 			}
 
 			private void addDataToDB() {
-
+				// Dummy Code...
 				try {
 					Thread.sleep(4000);
 				} catch (InterruptedException e) {
