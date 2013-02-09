@@ -12,7 +12,34 @@ public class Message implements Comparable<Message> {
 
 	private final String name;
 	private final long time;
+	private final String matchTime;
 	private final String messageText;
+
+	public Message(String name, long time, String messageText, String matchTime) {
+		this.name = name;
+		this.time = time;
+		this.messageText = messageText;
+		this.matchTime = matchTime;
+	}
+
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 * 
+	 * @return a negative integer, zero, or a positive integer as this object is less than,
+	 *         equal to, or greater than the specified object
+	 */
+	@Override
+	public int compareTo(Message compareTime) {
+
+		int retVal = (int) (time - compareTime.time);
+
+		return retVal;
+	}
+
+	@Override
+	public String toString() {
+		return name + " - " + messageText;
+	}
 
 	public String getName() {
 		return name;
@@ -26,23 +53,8 @@ public class Message implements Comparable<Message> {
 		return time;
 	}
 
-	public Message(String name, long time, String messageText) {
-		this.name = name;
-		this.time = time;
-		this.messageText = messageText;
+	public String getMatchTime() {
+		return matchTime;
 	}
 
-	/**
-	 * @see java.lang.Comparable#compareTo(java.lang.Object)
-	 * 
-	 * @return a negative integer, zero, or a positive integer as this object is
-	 *         less than, equal to, or greater than the specified object
-	 */
-	@Override
-	public int compareTo(Message compareTime) {
-
-		int retVal = (int) (time - compareTime.time);
-
-		return retVal;
-	}
 }

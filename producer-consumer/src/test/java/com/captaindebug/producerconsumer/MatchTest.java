@@ -13,9 +13,11 @@ public class MatchTest {
 
 	private static final String UPDATE_TEXT = "This is an update";
 
-	private static final String DATA1 = "55:00 " + UPDATE_TEXT;
+	private static final String DATA1 = "55:30 " + UPDATE_TEXT;
 
 	private static final String DATA2 = "25:00 " + UPDATE_TEXT;
+
+	private static final String DATA3 = UPDATE_TEXT;
 
 	private Match instance;
 
@@ -29,7 +31,7 @@ public class MatchTest {
 
 		assertEquals(1, results.size());
 
-		final long expectedTime = 55 * 600;
+		final long expectedTime = 55500;
 
 		Message result = results.get(0);
 		assertEquals(expectedTime, result.getTime());
@@ -37,6 +39,14 @@ public class MatchTest {
 		assertEquals(UPDATE_TEXT, result.getMessageText());
 
 		assertEquals(MATCH_NAME, result.getName());
+	}
+
+	@Test(expected = NumberFormatException.class)
+	public void testGetUpdates_with_missing_time() {
+
+		List<String> arg1 = Arrays.asList(DATA3);
+		instance = new Match(MATCH_NAME, arg1);
+
 	}
 
 	@Test
@@ -49,13 +59,13 @@ public class MatchTest {
 
 		assertEquals(2, results.size());
 
-		long expectedTime = 25 * 600;
+		long expectedTime = 25000;
 		Message result = results.get(0);
 		assertEquals(expectedTime, result.getTime());
 		assertEquals(UPDATE_TEXT, result.getMessageText());
 		assertEquals(MATCH_NAME, result.getName());
 
-		expectedTime = 55 * 600;
+		expectedTime = 55500;
 		result = results.get(1);
 		assertEquals(expectedTime, result.getTime());
 		assertEquals(UPDATE_TEXT, result.getMessageText());
@@ -72,13 +82,13 @@ public class MatchTest {
 
 		assertEquals(2, results.size());
 
-		long expectedTime = 25 * 600;
+		long expectedTime = 25000;
 		Message result = results.get(0);
 		assertEquals(expectedTime, result.getTime());
 		assertEquals(UPDATE_TEXT, result.getMessageText());
 		assertEquals(MATCH_NAME, result.getName());
 
-		expectedTime = 55 * 600;
+		expectedTime = 55500;
 		result = results.get(1);
 		assertEquals(expectedTime, result.getTime());
 		assertEquals(UPDATE_TEXT, result.getMessageText());

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+   		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+ 
+ 	<import resource="matches.xml" />
+ 
+ 	<bean id="theQueue" class="java.util.concurrent.LinkedBlockingQueue"/>
+ 
+ 	<bean id="BillSkyes" class="com.captaindebug.producerconsumer.MatchReporter">
+ 		<constructor-arg ref="Fulham vs Manchester United"/>
+ 		<constructor-arg ref="theQueue"/>
+ 	</bean>
+ 
+ 	<bean id="JohnSmith" class="com.captaindebug.producerconsumer.MatchReporter">
+ 		<constructor-arg ref="Stoke City Vs Arsenal"/>
+ 		<constructor-arg ref="theQueue"/>
+ 	</bean>
+ 
+ 	<bean id="StudioTeletype" class="com.captaindebug.producerconsumer.Teletype">
+ 		<constructor-arg ref="theQueue"/>
+ 	</bean>
+
+</beans>
