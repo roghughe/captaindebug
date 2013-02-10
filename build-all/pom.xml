@@ -23,5 +23,6 @@
 		<module>../deadlocks</module>
 		<module>../spring-security/tomcat-ssl</module>
 		<module>../unit-testing-threads</module>
+		<module>../producer-consumer</module>
 	</modules>
 </project>
