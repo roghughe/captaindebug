@@ -4,6 +4,8 @@
 package com.captaindebug.producerconsumer;
 
 /**
+ * Model the printhead. Primarily a class to simplfy testing.
+ * 
  * @author Roger
  * 
  */

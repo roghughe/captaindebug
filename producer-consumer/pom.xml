@@ -10,7 +10,7 @@
 	<properties>
 		<slf4jVersion>1.6.1</slf4jVersion>
 		<org.springframework-version>3.0.5.RELEASE</org.springframework-version>
-		
+
 	</properties>
 	<dependencies>
 		<!-- Using slf4j as an alternative to commons logging This is the main 
@@ -45,7 +45,12 @@
 			<artifactId>spring-context</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

@@ -25,8 +25,8 @@ public class Message implements Comparable<Message> {
 	/**
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 * 
-	 * @return a negative integer, zero, or a positive integer as this object is less than,
-	 *         equal to, or greater than the specified object
+	 * @return a negative integer, zero, or a positive integer as this object is
+	 *         less than, equal to, or greater than the specified object
 	 */
 	@Override
 	public int compareTo(Message compareTime) {
@@ -38,7 +38,7 @@ public class Message implements Comparable<Message> {
 
 	@Override
 	public String toString() {
-		return name + " - " + messageText;
+		return matchTime + " - " + name + " - " + messageText;
 	}
 
 	public String getName() {

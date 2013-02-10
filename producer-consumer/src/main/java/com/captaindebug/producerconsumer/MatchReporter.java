@@ -3,6 +3,15 @@ package com.captaindebug.producerconsumer;
 import java.util.List;
 import java.util.Queue;
 
+/**
+ * Models a reporter at the match. The reporter knows about the match and sends
+ * updates to the queue at the appropriate moment.
+ * 
+ * @author Roger
+ * 
+ *         Created 12:08:31 10 Feb 2013
+ * 
+ */
 public class MatchReporter implements Runnable {
 
 	private final Match match;
@@ -36,12 +45,12 @@ public class MatchReporter implements Runnable {
 
 		for (Message message : matchUpdates) {
 
-			delay(now, message.getTime());
+			delayUntilNextUpdate(now, message.getTime());
 			queue.add(message);
 		}
 	}
 
-	private void delay(long now, long messageTime) {
+	private void delayUntilNextUpdate(long now, long messageTime) {
 
 		while (System.currentTimeMillis() < now + messageTime) {
 

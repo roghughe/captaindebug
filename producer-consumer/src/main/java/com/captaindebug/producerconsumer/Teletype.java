@@ -2,6 +2,15 @@ package com.captaindebug.producerconsumer;
 
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * Models a teletype. Takes messaged from the queue and prints them. Blocks
+ * until messages appear.
+ * 
+ * @author Roger
+ * 
+ *         Created 12:09:47 10 Feb 2013
+ * 
+ */
 public class Teletype implements Runnable {
 
 	private final BlockingQueue<Message> queue;

@@ -8,7 +8,5 @@ public class Main {
 
 		System.out.println("Producer Consumer Demo Code...");
 		new ClassPathXmlApplicationContext("context.xml");
-
-		System.out.println("Producer Consumer - main exit");
 	}
 }
