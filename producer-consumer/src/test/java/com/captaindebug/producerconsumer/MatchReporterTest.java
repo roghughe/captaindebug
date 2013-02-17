@@ -16,6 +16,10 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.captaindebug.producerconsumer.Match;
+import com.captaindebug.producerconsumer.MatchReporter;
+import com.captaindebug.producerconsumer.Message;
+
 /**
  * @author Roger
  * 
@@ -49,7 +53,8 @@ public class MatchReporterTest {
 	}
 
 	/**
-	 * Test method for {@link com.captaindebug.producerconsumer.MatchReporter#run()}.
+	 * Test method for
+	 * {@link com.captaindebug.producerconsumer.MatchReporter#run()}.
 	 */
 	@Test
 	public void testRun() {
@@ -59,10 +64,12 @@ public class MatchReporterTest {
 		instance.run();
 		long duration = System.currentTimeMillis() - start;
 
-		// The max time should be a little greater than the largest time in the test data
+		// The max time should be a little greater than the largest time in the
+		// test data
 		assertTrue(duration > 6250);
 
-		// The max time should be less than the largest test data time plus a couple of clock
+		// The max time should be less than the largest test data time plus a
+		// couple of clock
 		// iterations
 		assertTrue(duration < 6450);
 
@@ -71,7 +78,8 @@ public class MatchReporterTest {
 	}
 
 	/**
-	 * Test method for {@link com.captaindebug.producerconsumer.MatchReporter#start()}.
+	 * Test method for
+	 * {@link com.captaindebug.producerconsumer.MatchReporter#start()}.
 	 * 
 	 * @throws InterruptedException
 	 */
@@ -94,10 +102,12 @@ public class MatchReporterTest {
 		latch.await(1, TimeUnit.MINUTES);
 		long duration = System.currentTimeMillis() - start;
 
-		// The max time should be a little greater than the largest time in the test data
+		// The max time should be a little greater than the largest time in the
+		// test data
 		assertTrue(duration > 6250);
 
-		// The max time should be less than the largest test data time plus a couple of clock
+		// The max time should be less than the largest test data time plus a
+		// couple of clock
 		// iterations
 		assertTrue(duration < 6450);
 

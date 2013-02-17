@@ -1,4 +1,4 @@
-package com.captaindebug.producerconsumer;
+package com.captaindebug.producerconsumer.original;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

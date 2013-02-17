@@ -1,7 +1,7 @@
 /**
  * Copyright 2013 Marin Solutions
  */
-package com.captaindebug.producerconsumer;
+package com.captaindebug.producerconsumer.original;
 
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.anyString;
@@ -18,6 +18,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.captaindebug.producerconsumer.Message;
+import com.captaindebug.producerconsumer.PrintHead;
 import com.captaindebug.producerconsumer.original.Teletype;
 
 /**
