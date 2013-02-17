@@ -24,7 +24,7 @@
  
  	<bean id="printHead" class="com.captaindebug.producerconsumer.PrintHead"/>
  
- 	<bean id="StudioTeletype" class="com.captaindebug.producerconsumer.Teletype">
+ 	<bean id="StudioTeletype" class="com.captaindebug.producerconsumer.original.Teletype">
  		<constructor-arg ref="printHead"/>
  		<constructor-arg ref="theQueue"/>
  	</bean>

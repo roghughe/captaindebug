@@ -18,6 +18,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.captaindebug.producerconsumer.original.Teletype;
+
 /**
  * 
  * TODO This will be part of another blog....
@@ -48,7 +50,7 @@ public class TeletypeTest {
 	}
 
 	/**
-	 * Test method for {@link com.captaindebug.producerconsumer.Teletype#run()}.
+	 * Test method for {@link com.captaindebug.producerconsumer.original.Teletype#run()}.
 	 */
 	@Ignore
 	public void testRun() {
@@ -76,7 +78,7 @@ public class TeletypeTest {
 
 	/**
 	 * Test method for
-	 * {@link com.captaindebug.producerconsumer.Teletype#start()}.
+	 * {@link com.captaindebug.producerconsumer.original.Teletype#start()}.
 	 */
 	@Ignore
 	public void testStart() {

@@ -1,6 +1,9 @@
-package com.captaindebug.producerconsumer;
+package com.captaindebug.producerconsumer.original;
 
 import java.util.concurrent.BlockingQueue;
+
+import com.captaindebug.producerconsumer.Message;
+import com.captaindebug.producerconsumer.PrintHead;
 
 /**
  * Models a teletype. Takes messaged from the queue and prints them. Blocks
