@@ -20,7 +20,6 @@ import org.junit.Test;
 
 import com.captaindebug.producerconsumer.Message;
 import com.captaindebug.producerconsumer.PrintHead;
-import com.captaindebug.producerconsumer.original.Teletype;
 
 /**
  * 
@@ -52,7 +51,8 @@ public class TeletypeTest {
 	}
 
 	/**
-	 * Test method for {@link com.captaindebug.producerconsumer.original.Teletype#run()}.
+	 * Test method for
+	 * {@link com.captaindebug.producerconsumer.original.Teletype#run()}.
 	 */
 	@Ignore
 	public void testRun() {
@@ -89,7 +89,7 @@ public class TeletypeTest {
 
 	@Test
 	public void dummy() {
-		// blanl
+		// blank
 	}
 
 }

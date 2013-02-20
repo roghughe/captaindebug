@@ -3,6 +3,7 @@ package com.captaindebug.producerconsumer;
 import java.util.List;
 import java.util.Queue;
 
+
 /**
  * Models a reporter at the match. The reporter knows about the match and sends
  * updates to the queue at the appropriate moment.
