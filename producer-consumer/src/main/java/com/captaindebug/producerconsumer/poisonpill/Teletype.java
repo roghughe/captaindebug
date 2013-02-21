@@ -4,6 +4,7 @@ import java.util.concurrent.BlockingQueue;
 
 import com.captaindebug.producerconsumer.Message;
 import com.captaindebug.producerconsumer.PrintHead;
+import com.google.common.annotations.VisibleForTesting;
 
 /**
  * Models a teletype. Takes messaged from the queue and prints them. Blocks
@@ -73,7 +74,8 @@ public class Teletype implements Runnable {
 		return pillsRecieved == matchesPlayed ? true : false;
 	}
 
-	public boolean isRunning() {
+	@VisibleForTesting
+	boolean isRunning() {
 		return run;
 	}
 }
