@@ -3,11 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:jee="http://www.springframework.org/schema/jee"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
 		 http://www.springframework.org/schema/context 
-		 http://www.springframework.org/schema/beans/spring-context-3.0.xsd
+		 http://www.springframework.org/schema/beans/spring-context-3.2.xsd
 		 http://www.springframework.org/schema/jee  
-		 http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
+		 http://www.springframework.org/schema/jee/spring-jee-3.2.xsd">
 
 	<!-- Primary JNDI datasource -->
 	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/LiveDataSource"/>			

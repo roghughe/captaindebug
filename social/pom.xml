@@ -9,7 +9,7 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.springframework-version>3.0.6.RELEASE</org.springframework-version>
+		<org.springframework-version>3.2.1.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<org.slf4j-version>1.5.10</org.slf4j-version>
 		<spring-social.version>1.0.2.RELEASE</spring-social.version>
@@ -33,6 +33,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
 				
@@ -127,13 +132,6 @@
 		  <version>${org.springframework.social-twitter-version}</version>
 		</dependency>
 
-		<!-- CGLIB, only required and used for @Configuration usage: could be removed in future release of Spring -->
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-			<version>2.2</version>
-		</dependency>
-		
 		<dependency>
 			<groupId>com.captaindebug</groupId>
 			<artifactId>state-machine</artifactId>
