@@ -24,5 +24,6 @@
 		<module>../spring-security/tomcat-ssl</module>
 		<module>../unit-testing-threads</module>
 		<module>../producer-consumer</module>
+		<module>../defensive</module>
 	</modules>
 </project>
