@@ -46,5 +46,4 @@ public class BodyMassIndexTest {
 
 		instance.calculate(0.0, 1.8);
 	}
-
 }

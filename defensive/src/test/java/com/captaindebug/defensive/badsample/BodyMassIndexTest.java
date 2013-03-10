@@ -51,4 +51,16 @@ public class BodyMassIndexTest {
 		Double result = instance.calculate(0.0, 1.8);
 		assertNull(result);
 	}
+
+	@Test
+	public void test_zero_weight_input_forces_additional_checks() {
+
+		Double result = instance.calculate(0.0, 1.8);
+		if (result == null) {
+			System.out.println("Incorrect input to BMI calculation");
+			// process the error
+		} else {
+			System.out.println("Your BMI is: " + result.doubleValue());
+		}
+	}
 }

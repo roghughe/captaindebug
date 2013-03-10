@@ -17,8 +17,8 @@ public class BodyMassIndex {
 		Validate.notNull(weight, "Your weight cannot be null");
 		Validate.notNull(height, "Your height cannot be null");
 
-		Validate.validState(weight.doubleValue() > 0);
-		Validate.validState(height.doubleValue() > 0);
+		Validate.validState(weight.doubleValue() > 0, "Your weight cannot be zero");
+		Validate.validState(height.doubleValue() > 0, "Your height cannot be zero");
 
 		Double tmp = weight / (height * height);
 
