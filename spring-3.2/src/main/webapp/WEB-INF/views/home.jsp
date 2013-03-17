@@ -13,8 +13,8 @@
 
 <h2>The Rudimentary Menu</h2>
 <ul>
-<li><a href="userdetails">Get User Name (and throw an IOException)</a></li>
-<li><a href="useraddress">Get User Address (and throw an IOException)</a></li>
+<li><a href="userdetails">Get My Credit Card Details (and throw an IOException)</a></li>
+<li><a href="useraddress">Get My Address (and throw an IOException)</a></li>
 <li></li>
 </ul>
 
