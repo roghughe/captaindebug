@@ -11,11 +11,15 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 
-<h2>The Rudimentary Menu</h2>
+<h2>@ControlerAdvice</h2>
 <ul>
 <li><a href="userdetails">Get My Credit Card Details (and throw an IOException)</a></li>
 <li><a href="useraddress">Get My Address (and throw an IOException)</a></li>
-<li></li>
+</ul>
+
+<h2>Matrix Variables</h2>
+<ul>
+<li><a href="stocks/BT.A=276.70,+10.40,+3.91;AZN=3,236.00,+103.00,+3.29;SBRY=375.50,+7.60,+2.07">Stocks -- BT.A=276.70,+10.40,+3.91;AZN=3,236.00,+103.00,+3.29;SBRY=375.50,+7.60,+2.07</a></li>
 </ul>
 
 </body>
