@@ -16,36 +16,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MatrixVariableController {
 
-	private static final String GAP = "    ";
-
 	private static final Logger logger = LoggerFactory.getLogger(MatrixVariableController.class);
 
 	@RequestMapping(value = "/stocks/{portfolio}", method = RequestMethod.GET)
-	public String storeLatestPortfolioValues(@MatrixVariable Map<String, List<String>> matrixVars, Model model) {
+	public String showPortfolioValues(@MatrixVariable Map<String, List<String>> matrixVars, Model model) {
 
 		logger.info("Storing {} Values...", matrixVars.size());
 
-		List<String> outList = new ArrayList<String>();
+		List<List<String>> outlist = new ArrayList<List<String>>();
+		model.addAttribute("stocks", outlist);
 
 		Set<String> stocks = matrixVars.keySet();
 
 		for (String stock : stocks) {
 
+			List<String> rowList = new ArrayList<String>();
+			rowList.add(stock);
+
 			List<String> values = matrixVars.get(stock);
 			logger.info("Found stock {} and value: {}", new Object[] { stock, values });
 
-			StringBuilder sb = new StringBuilder(GAP);
-			sb.append(stock);
-			sb.append(GAP);
-			for (String value : values) {
-				sb.append(value);
-				sb.append(GAP);
-			}
-			outList.add(sb.toString());
+			rowList.addAll(values);
 
+			logger.info("Added outlist: {} ", rowList);
+			outlist.add(rowList);
 		}
-		logger.info("Added outlist: {} ", outList);
-		model.addAttribute("stocks", outList);
 		return "stocks";
 	}
 }
