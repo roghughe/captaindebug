@@ -18,7 +18,7 @@ public class MatrixVariableController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MatrixVariableController.class);
 
-	@RequestMapping(value = "/stocks/{portfolio}", method = RequestMethod.GET)
+	@RequestMapping(value = "/matrixvars/{stocks}", method = RequestMethod.GET)
 	public String showPortfolioValues(@MatrixVariable Map<String, List<String>> matrixVars, Model model) {
 
 		logger.info("Storing {} Values...", matrixVars.size());
@@ -43,4 +43,12 @@ public class MatrixVariableController {
 		}
 		return "stocks";
 	}
+
+	@RequestMapping(value = "/matrixvars/{stocks}/{account}", method = RequestMethod.GET)
+	public String showPortfolioValuesWithAccountInfo(@MatrixVariable(pathVar = "stocks") Map<String, List<String>> stocks,
+			@MatrixVariable(pathVar = "account") Map<String, List<String>> accounts, Model model) {
+		System.out.println("Account call");
+		return "TODO";
+	}
+
 }
