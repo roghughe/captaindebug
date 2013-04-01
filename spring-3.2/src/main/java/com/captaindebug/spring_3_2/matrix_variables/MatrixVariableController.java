@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller
+@Controller("/matrixvars")
 public class MatrixVariableController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MatrixVariableController.class);
 
-	@RequestMapping(value = "/matrixvars/{stocks}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{stocks}", method = RequestMethod.GET)
 	public String showPortfolioValues(@MatrixVariable Map<String, List<String>> matrixVars, Model model) {
 
 		logger.info("Storing {} Values...", matrixVars.size());
@@ -44,7 +44,7 @@ public class MatrixVariableController {
 		return "stocks";
 	}
 
-	@RequestMapping(value = "/matrixvars/{stocks}/{account}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{stocks}/{account}", method = RequestMethod.GET)
 	public String showPortfolioValuesWithAccountInfo(@MatrixVariable(pathVar = "stocks") Map<String, List<String>> stocks,
 			@MatrixVariable(pathVar = "account") Map<String, List<String>> accounts, Model model) {
 		System.out.println("Account call");
