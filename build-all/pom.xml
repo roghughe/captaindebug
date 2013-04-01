@@ -25,5 +25,6 @@
 		<module>../unit-testing-threads</module>
 		<module>../producer-consumer</module>
 		<module>../defensive</module>
+		<module>../spring-3.2</module>
 	</modules>
 </project>

@@ -23,6 +23,7 @@ import java.util.List;
  */
 public class SitePropertiesManager implements Serializable, PropertiesManager {
 
+	private static final long serialVersionUID = 1L;
 	private static final String GLOBAL_LOCALE = "gbl";
 	private static final String sql = "select * from properties";
 

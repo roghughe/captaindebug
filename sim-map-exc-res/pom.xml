@@ -134,10 +134,6 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
@@ -157,6 +153,15 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+	        <plugin>
+	            <groupId>org.codehaus.mojo</groupId>
+	            <artifactId>tomcat-maven-plugin</artifactId>
+    			<version>1.1</version>
+	            <configuration>
+	                     <server>myserver</server>
+	                     <url>http://localhost:8080/manager/text</url> 
+	            </configuration>
+	        </plugin>
 		</plugins>
 	</build>
 </project>

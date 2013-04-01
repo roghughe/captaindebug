@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Handles requests for user name address
+ * Handles requests for user credit card details
  */
 @Controller
 public class UserCreditCardController {
