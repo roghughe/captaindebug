@@ -19,8 +19,10 @@
 
 <h2>Matrix Variables</h2>
 <ul>
+
 <li><a href="matrixvars/stocks;BT.A=276.70,+10.40,+3.91;AZN=236.00,+103.00,+3.29;SBRY=375.50,+7.60,+2.07">Stocks -- BT.A=276.70,+10.40,+3.91;AZN=236.00,+103.00,+3.29;SBRY=375.50,+7.60,+2.07</a></li>
-<li><a href="matrixvars/stocks;BT.A=276.70,+10.40,+3.91;AZN=236.00,+103.00,+3.29;SBRY=375.50,+7.60,+2.07/account;name=roger;number=105,location=stoke-on-trent,UK">Stocks -- BT.A=276.70,+10.40,+3.91;AZN=236.00,+103.00,+3.29;SBRY=375.50,+7.60,+2.07 and account info</a></li>
+<li><a href="matrixvars/stocks;BT.A=276.70,+10.40,+3.91;AZN=236.00,,+3.29;SBRY=375.50,,">Stocks -- BT.A=276.70,+10.40,+3.91;AZN=236.00,,+3.29;SBRY=375.50,,</a></li>
+<li><a href="matrixvars/stocks;BT.A=276.70,,+3.91;AZN=236.00,+103.00,+4.05;SBRY=375.50/account;name=roger;number=105;location=stoke-on-trent">Stocks -- BT.A=276.70,+10.40,+3.91;AZN=236.00,+103.00,+3.29;SBRY=375.50,+7.60,+2.07 and account info</a></li>
 </ul>
 
 </body>

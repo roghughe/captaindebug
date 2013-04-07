@@ -15,8 +15,9 @@
 </head>
 <body>
 	<div class="container">
-		<div class="span-24">
-		<h2>Your Stock Portfolio</h2>
+		<div class="span-16 append-8">
+			<h2>Your Stock Portfolio</h2>
+			<hr />
 		</div>
 		<div class="span-4 border">
 			<p>Stock</p>
@@ -31,9 +32,8 @@
 			<p>Var %</p>
 		</div>
 		<div class="span-16 append-8">
-		<hr/>
+			<hr />
 		</div>
-
 		<c:forEach items="${stocks}" var="stocklist">
 			<c:forEach items="${stocklist}" var="item" varStatus="status">
 				<div class="span-4  ${not status.last ? 'border' : 'append-8 last'}">
@@ -43,6 +43,30 @@
 				</div>
 			</c:forEach>
 		</c:forEach>
+
+		<div class="span-16 append-8">
+			<hr />
+		</div>
+
+		<c:if test="${not empty accountDetails}">
+			<div class="span-16 append-8">
+				<h2>Account Details</h2>
+				<hr />
+			</div>
+			<c:forEach items="${accountDetails}" var="accountDetails">
+				<c:forEach items="${accountDetails}" var="item" varStatus="status">
+					<div
+						class="span-4  ${not status.last ? 'border' : 'append-16 last'}">
+						<p>
+							<c:out value="${item}" />
+						<p>
+					</div>
+				</c:forEach>
+			</c:forEach>
+			<div class="span-16 append-8">
+				<hr />
+			</div>
+		</c:if>
 	</div>
 </body>
 </html>
