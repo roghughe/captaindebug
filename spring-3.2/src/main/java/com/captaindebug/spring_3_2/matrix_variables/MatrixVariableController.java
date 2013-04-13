@@ -32,7 +32,7 @@ public class MatrixVariableController {
 	@RequestMapping(value = "/{stocks}", method = RequestMethod.GET)
 	public String showPortfolioValues(@MatrixVariable Map<String, List<String>> matrixVars, Model model) {
 
-		logger.info("Storing {} Values...", matrixVars.size());
+		logger.info("Storing {} Values which are: {}", new Object[] { matrixVars.size(), matrixVars });
 
 		List<List<String>> outlist = map2List(matrixVars);
 		model.addAttribute("stocks", outlist);
