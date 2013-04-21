@@ -31,11 +31,26 @@
         data: serializedData
     });
 
-// This is jQuery 1.8
+    // This is jQuery 1.8
     // callback handler that will be called on success
-    request.done(function (response, textStatus, jqXHR){
+    request.done(function (data){
         // log a message to the console
-        console.log("Hooray, it worked!");
+        console.log("Hooray, it worked. UUID: " + data.uuid);
+        var items =  data.items;
+        
+        
+        
+        for(var i = 0;i < items.length;i++) {
+        	var item = items[i];
+        	
+        	$("<div class='span-4 append-10 last'><p>" + item.price + "</p></div>").insertAfter('#insertHere');
+        	$("<div class='span-6'><p>" + item.description + "</p></div>").insertAfter('#insertHere');
+        	$("<div class='span-4'><p>" + item.name + "</p></div>").insertAfter('#insertHere');
+        	
+            console.log("Item: " + item.name + "  Description: " + item.description + " Price: " + item.price);
+        }
+        
+    	$("<div class='span-16 append-8'><p>You have add the following to your basket:</p></div>").insertAfter('#insertHere');
     });
 
     // callback handler that will be called on failure

@@ -21,7 +21,11 @@
 <body>
 	<div id="mask" style="display: none;"></div>
 	<div id="popup" style="display: none;">
-		This should be a pop-up window    <a href="#" onclick="closePopup();">Close  X</a>
+		<div class="container">
+			<div id="insertHere" class="span-1 append-23 last">
+				<p><a href="#" onclick="closePopup();">Close</a></p>
+			</div>
+		</div>
 	</div>
 	<div class="container">
 		<div class="span-17 append-7">
