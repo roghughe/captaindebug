@@ -6,9 +6,12 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	Shopping AJAX JSON Example
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+
+<a href="shopping">Shopping Page</a>
+
 </body>
 </html>

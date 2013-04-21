@@ -1,0 +1,119 @@
+<html lang="en">
+  <head>
+    <title>Shopping</title>
+	<link rel="stylesheet" href="../main/webapp/resources/blueprint/screen.css" type="text/css" media="screen, projection"/>
+  	<link rel="stylesheet" href="../main/webapp/resources/blueprint/print.css"  type="text/css" media="print" /> 
+  	<!--[if lt IE 8]>
+    <link rel="stylesheet" href="http://localhost:8080/store/resources/blueprint/ie.css" type="text/css" media="screen, projection" />
+  	<![endif]-->    
+  
+	<script type="text/javascript" src="../main/webapp/resources/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="../main/webapp/resources/shopping.js"></script>
+  </head>
+<body>
+	<div id="mask" style="display: none;"></div>
+	<div id="popup" style="display: none;">
+		This should be a pop-up window    <a href="#" onclick="closePopup();">Close  X</a>
+	</div>
+	<div class="container">
+		<div class="span-17 append-7">
+			<h2>Shopping Page</h2>
+			<hr />
+		</div>
+		<div class="span-4 border">
+			<p>Item</p>
+		</div>
+		<div class="span-8 border">
+			<p>Description</p>
+		</div>
+		<div class="span-4 border">
+			<p>Price</p>
+		</div>
+		<div class="span-4 append-4 last">
+			<p>&nbsp;</p>
+		</div>
+		<div class="span-17 append-7">
+			<hr />
+		</div>
+		<form id="userSelections" action="http://localhost:8080/store/confirm" method="post">
+			
+				<div class="span-4 border">
+					<p>Hat</p>
+				</div>
+				<div class="span-8 border">
+					<p>A nice hat</p>
+				</div>
+				<div class="span-4 border">
+					<p>12.34</p>
+				</div>
+				<div class="span-4 append-4 last">
+					<p><input id="selection1" name="selection" type="checkbox" value="1"/><input type="hidden" name="_selection" value="on"/></p>
+				</div>
+			
+				<div class="span-4 border">
+					<p>Socks</p>
+				</div>
+				<div class="span-8 border">
+					<p>Second Hand Socks</p>
+				</div>
+				<div class="span-4 border">
+					<p>15.20</p>
+				</div>
+				<div class="span-4 append-4 last">
+					<p><input id="selection2" name="selection" type="checkbox" value="2"/><input type="hidden" name="_selection" value="on"/></p>
+				</div>
+			
+				<div class="span-4 border">
+					<p>Trousers</p>
+				</div>
+				<div class="span-8 border">
+					<p>Some blue jeans</p>
+				</div>
+				<div class="span-4 border">
+					<p>9.54</p>
+				</div>
+				<div class="span-4 append-4 last">
+					<p><input id="selection3" name="selection" type="checkbox" value="3"/><input type="hidden" name="_selection" value="on"/></p>
+				</div>
+			
+				<div class="span-4 border">
+					<p>Pants</p>
+				</div>
+				<div class="span-8 border">
+					<p>Yellow Pants</p>
+				</div>
+				<div class="span-4 border">
+					<p>8.78</p>
+				</div>
+				<div class="span-4 append-4 last">
+					<p><input id="selection4" name="selection" type="checkbox" value="4"/><input type="hidden" name="_selection" value="on"/></p>
+				</div>
+			
+				<div class="span-4 border">
+					<p>Jumper</p>
+				</div>
+				<div class="span-8 border">
+					<p>Something for the Cool Weather</p>
+				</div>
+				<div class="span-4 border">
+					<p>76.99</p>
+				</div>
+				<div class="span-4 append-4 last">
+					<p><input id="selection5" name="selection" type="checkbox" value="5"/><input type="hidden" name="_selection" value="on"/></p>
+				</div>
+		<div class="prepend-12 span-4 append-12">
+			<p><input class="command"
+								type="submit" name="action"
+								value="Add To Basket"
+								accesskey="A" /></p>
+		</div>			
+		</form>
+		<div class="span-17 append-7">
+			<hr />
+		</div>
+	</div>
+	<script type="text/javascript">	
+</script>	
+	
+</body>
+</html>
