@@ -26,5 +26,6 @@
 		<module>../producer-consumer</module>
 		<module>../defensive</module>
 		<module>../spring-3.2</module>
+		<module>../ajax-json</module>
 	</modules>
 </project>
