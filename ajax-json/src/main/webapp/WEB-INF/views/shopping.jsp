@@ -21,8 +21,8 @@
 <body>
 	<div id="mask" style="display: none;"></div>
 	<div id="popup" style="display: none;">
-		<div class="container">
-			<div id="insertHere" class="span-1 append-23 last">
+		<div class="container" id="insertHere">
+			<div class="span-1 append-23 last">
 				<p><a href="#" onclick="closePopup();">Close</a></p>
 			</div>
 		</div>
@@ -56,7 +56,7 @@
 					<p><c:out value="${item.description}" /></p>
 				</div>
 				<div class="span-4 border">
-					<p><c:out value="${item.price}" /></p>
+					<p>&#163;<c:out value="${item.price}" /></p>
 				</div>
 				<div class="span-4 append-4 last">
 					<p><form:checkbox value="${item.id}" path="selection"/></p>
@@ -65,7 +65,7 @@
 			<div class="prepend-12 span-4 append-12">
 				<p><input class="command"
 									type="submit" name="action"
-									value="Add To Basket"
+									value="Confirm Purchase"
 									accesskey="A" /></p>
 			</div>
 		</form:form>

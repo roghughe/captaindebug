@@ -1,5 +1,8 @@
 package com.captaindebug.store.beans;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Models the user's selections - data returned by the form.
  * 
@@ -10,13 +13,26 @@ package com.captaindebug.store.beans;
  */
 public class UserSelections {
 
-	private String selection;
+	private List<String> selection = Collections.emptyList();
 
-	public String getSelection() {
+	public List<String> getSelection() {
 		return selection;
 	}
 
-	public void setSelection(String selection) {
+	public void setSelection(List<String> selection) {
 		this.selection = selection;
+	}
+
+	@Override
+	public String toString() {
+
+		StringBuilder sb = new StringBuilder("Selections are: ");
+
+		for (String str : selection) {
+			sb.append(str);
+			sb.append(",  ");
+		}
+
+		return sb.toString();
 	}
 }

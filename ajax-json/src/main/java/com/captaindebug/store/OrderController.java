@@ -50,16 +50,22 @@ public class OrderController {
 	public String createForm(Model model) {
 
 		logger.debug("Displaying items available in the store...");
+		addDisplayItemsToModel(model);
 
-		// Add the items to display
-		List<Item> items = catalogue.read();
-		model.addAttribute("items", items);
-
-		// Add an order form - for the form to submit
-		UserSelections userSelection = new UserSelections();
-		model.addAttribute("userSelections", userSelection);
+		addFormObjectToModel(model);
 
 		return FORM_VIEW;
+	}
+
+	private void addDisplayItemsToModel(Model model) {
+
+		List<Item> items = catalogue.read();
+		model.addAttribute("items", items);
+	}
+
+	private void addFormObjectToModel(Model model) {
+		UserSelections userSelections = new UserSelections();
+		model.addAttribute(userSelections);
 	}
 
 	/**
@@ -67,39 +73,34 @@ public class OrderController {
 	 */
 	@RequestMapping(value = "/confirm", method = RequestMethod.POST)
 	public @ResponseBody
-	OrderForm confirmPurchases(@ModelAttribute("userSelection") UserSelections userSelection) {
+	OrderForm confirmPurchases(@ModelAttribute("userSelections") UserSelections userSelections) {
 
-		String[] selections = getSelections(userSelection);
-		OrderForm orderForm = createOrderForm(selections);
+		logger.debug("Confirming purchases...");
+		OrderForm orderForm = createOrderForm(userSelections.getSelection());
 		return orderForm;
 	}
 
-	private String[] getSelections(UserSelections userSelection) {
+	private OrderForm createOrderForm(List<String> selections) {
 
-		String[] retVal;
-		String selectionStr = userSelection.getSelection();
+		List<Item> items = findItemsInCatalogue(selections);
+		String purchaseId = getPurchaseId();
 
-		if (isNotNull(selectionStr)) {
-			retVal = selectionStr.split(",");
-		} else {
-			retVal = new String[0];
-		}
-		return retVal;
+		OrderForm orderForm = new OrderForm(items, purchaseId);
+		return orderForm;
 	}
 
-	private boolean isNotNull(Object obj) {
-		return obj != null;
-	}
-
-	private OrderForm createOrderForm(String[] selections) {
+	private List<Item> findItemsInCatalogue(List<String> selections) {
 
 		List<Item> items = new ArrayList<Item>();
 		for (String selection : selections) {
 			Item item = catalogue.findItem(Integer.valueOf(selection));
 			items.add(item);
 		}
-		OrderForm orderForm = new OrderForm(items, UUID.randomUUID().toString());
-		return orderForm;
+		return items;
+	}
+
+	private String getPurchaseId() {
+		return UUID.randomUUID().toString();
 	}
 
 }

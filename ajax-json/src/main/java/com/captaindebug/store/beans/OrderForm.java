@@ -3,7 +3,7 @@ package com.captaindebug.store.beans;
 import java.util.List;
 
 /**
- * Model an order form
+ * Model an order form. This is a list of items and a unique purchase id.
  * 
  * @author Roger
  * 
@@ -14,19 +14,19 @@ public class OrderForm {
 
 	private final List<Item> items;
 
-	private final String uuid;
+	private final String purchaseId;
 
-	public OrderForm(List<Item> items, String uuid) {
+	public OrderForm(List<Item> items, String purchaseId) {
 		super();
 		this.items = items;
-		this.uuid = uuid;
+		this.purchaseId = purchaseId;
 	}
 
 	public List<Item> getItems() {
 		return items;
 	}
 
-	public String getUuid() {
-		return uuid;
+	public String getPurchaseId() {
+		return purchaseId;
 	}
 }

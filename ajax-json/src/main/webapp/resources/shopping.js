@@ -1,90 +1,87 @@
-	$(document).ready(function() {
-		console.log("Okay let's go...");
-	});
+$(document).ready(function() {
+	console.log("Okay let's go...");
+});
 
-
-
-	$(document)
-			.ready(
+$(document).ready(
+		function() {
+			$('form').submit(
 					function() {
-						$('form')
-								.submit(
-										function() {
-   // abort any pending request
-    if (request) {
-        request.abort();
-    }
-    // setup some local variables
-    var $form = $(this);
-    // let's select and cache all the fields
-    var $inputs = $form.find("input");
-    // serialize the data in the form
-    var serializedData = $form.serialize();
+						
+						$('.tmp').remove();		// Remove any divs added by the last request
+									
+						if (request) {
+							request.abort();	// abort any pending request
+						}
+						
+						var $form = $(this);
+						// let's select and cache all the fields
+						var $inputs = $form.find("input");
+						// serialize the data in the form
+						var serializedData = $form.serialize();
 
-    // let's disable the inputs for the duration of the ajax request
-    $inputs.prop("disabled", true);
+						// let's disable the inputs for the duration of the ajax request
+						$inputs.prop("disabled", true);
 
-    // fire off the request to /form.php
-    var request = $.ajax({
-        url: "http://localhost:8080/store/confirm",
-        type: "post",
-        data: serializedData
-    });
+						// fire off the request to OrderController
+						var request = $.ajax({
+							url : "http://localhost:8080/store/confirm",
+							type : "post",
+							data : serializedData
+						});
 
-    // This is jQuery 1.8
-    // callback handler that will be called on success
-    request.done(function (data){
-        // log a message to the console
-        console.log("Hooray, it worked. UUID: " + data.uuid);
-        var items =  data.items;
-        
-        
-        
-        for(var i = 0;i < items.length;i++) {
-        	var item = items[i];
-        	
-        	$("<div class='span-4 append-10 last'><p>" + item.price + "</p></div>").insertAfter('#insertHere');
-        	$("<div class='span-6'><p>" + item.description + "</p></div>").insertAfter('#insertHere');
-        	$("<div class='span-4'><p>" + item.name + "</p></div>").insertAfter('#insertHere');
-        	
-            console.log("Item: " + item.name + "  Description: " + item.description + " Price: " + item.price);
-        }
-        
-    	$("<div class='span-16 append-8'><p>You have add the following to your basket:</p></div>").insertAfter('#insertHere');
-    });
+						// This is jQuery 1.8+
+						// callback handler that will be called on success
+						request.done(function(data) {
 
-    // callback handler that will be called on failure
-    request.fail(function (jqXHR, textStatus, errorThrown){
-        // log the error to the console
-        console.error(
-            "The following error occured: "+
-            textStatus, errorThrown
-        );
-    });
+							console.log("Resulting UUID: " + data.uuid);
+							$("<div class='span-16 append-8 tmp'><p>You have confirmed the following purchases:</p></div>")
+							.appendTo('#insertHere');
 
-    // callback handler that will be called regardless
-    // if the request failed or succeeded
-    request.always(function () {
-        // reenable the inputs
-        $inputs.prop("disabled", false);
-    });
+							var items = data.items;
+							// Add the data from the request as <div>s to the pop up <div>
+							for ( var i = 0; i < items.length; i++) {
+								var item = items[i];
 
-    // prevent default posting of form
-    event.preventDefault();
+								var newDiv = "<div class='span-4  tmp'><p>" + item.name + "</p></div>";
+								$(newDiv).appendTo('#insertHere');
 
+								newDiv = "<div class='span-6 tmp'><p>" + item.description + "</p></div>";
+								$(newDiv).appendTo('#insertHere');
 
-											showPopup();
-										});
+								newDiv = "<div class='span-4 append-10 last tmp'><p>&#163;" + item.price + "</p></div>";
+								$(newDiv).appendTo('#insertHere');
+
+								console.log("Item: " + item.name + "  Description: " + item.description + " Price: "
+										+ item.price);
+							}
+
+						});
+
+						// callback handler that will be called on failure
+						request.fail(function(jqXHR, textStatus, errorThrown) {
+							// log the error to the console
+							alert("The following error occured: " + textStatus, errorThrown);
+						});
+
+						// callback handler that will be called regardless if the request failed or succeeded
+						request.always(function() {
+							$inputs.prop("disabled", false);	// re-enable the inputs
+						});
+
+						event.preventDefault(); 	// prevent default posting of form
+
+						showPopup();
 					});
+		});
 
-	function showPopup() {
-		$('body').css('overflow', 'hidden');
-		$('#popup').fadeIn('fast');
-		$('#mask').fadeIn('fast');
-	}
+function showPopup() {
+	$('body').css('overflow', 'hidden');
+	$('#popup').fadeIn('fast');
+	$('#mask').fadeIn('fast');
+}
 
-	function closePopup() {
-		$('#popup').fadeOut('fast');
-		$('#mask').fadeOut('fast');
-		$('body').css('overflow', 'auto');
-	}
+function closePopup() {
+	$('#popup').fadeOut('fast');
+	$('#mask').fadeOut('fast');
+	$('body').css('overflow', 'auto');
+}
