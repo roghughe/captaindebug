@@ -9,10 +9,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -30,7 +30,7 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class CartControllerTest {
+public class OrderControllerTest {
 
 	private static final String FORM_VIEW = "shopping";
 
@@ -71,9 +71,9 @@ public class CartControllerTest {
 		String[] selections = { "1", "2" };
 		userSelection.setSelection(Arrays.asList(selections));
 
-		Item item1 = new Item();
+		Item item1 = Item.getInstance(1, "name", "description", new BigDecimal("1.00"));
 		when(catalogue.findItem(1)).thenReturn(item1);
-		Item item2 = new Item();
+		Item item2 = Item.getInstance(2, "name2", "description2", new BigDecimal("2.00"));
 		when(catalogue.findItem(2)).thenReturn(item2);
 
 		instance.confirmPurchases(userSelection);
@@ -84,19 +84,22 @@ public class CartControllerTest {
 	/**
 	 * The result should be an Object that gets converted into JSON
 	 * 
-	 * @throws IOException
-	 * @throws JsonMappingException
-	 * @throws JsonGenerationException
 	 */
 	@Test
 	public void testDemonstrateJSON() throws JsonGenerationException, JsonMappingException, IOException {
 
-		Catalogue catalogue = new Catalogue();
+		UserSelections userSelection = new UserSelections();
+		String[] selections = { "1", "2" };
+		userSelection.setSelection(Arrays.asList(selections));
 
-		List<Item> items = catalogue.read();
-		OrderForm orderForm = new OrderForm(items, UUID.randomUUID().toString());
+		Item item1 = Item.getInstance(1, "name", "description", new BigDecimal("1.00"));
+		when(catalogue.findItem(1)).thenReturn(item1);
+		Item item2 = Item.getInstance(2, "name2", "description2", new BigDecimal("2.00"));
+		when(catalogue.findItem(2)).thenReturn(item2);
+
+		OrderForm orderForm = instance.confirmPurchases(userSelection);
+
 		ObjectMapper mapper = new ObjectMapper();
-
 		String result = mapper.writeValueAsString(orderForm);
 
 		System.out.println(result);

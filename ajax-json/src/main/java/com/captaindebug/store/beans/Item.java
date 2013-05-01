@@ -14,26 +14,24 @@ import java.math.BigDecimal;
  */
 public class Item {
 
-	private int id;
+	private final int id;
 
-	private String description;
+	private final String description;
 
-	private String name;
+	private final String name;
 
-	private BigDecimal price;
+	private final BigDecimal price;
 
-	public Item() {
-		// Intentionally Blank
+	private Item(int id, String name, String description, BigDecimal price) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.price = price;
 	}
 
 	public final BigDecimal getPrice() {
 
 		return price;
-	}
-
-	public final void setPrice(BigDecimal price) {
-
-		this.price = price;
 	}
 
 	public final int getId() {
@@ -51,26 +49,9 @@ public class Item {
 		return name;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public static Item getInstance(int id, String name, String description, BigDecimal price) {
 
-		Item item = new Item();
-		item.setId(id);
-		item.setName(name);
-		item.setDescription(description);
-		item.setPrice(price);
-
+		Item item = new Item(id, name, description, price);
 		return item;
 	}
 
