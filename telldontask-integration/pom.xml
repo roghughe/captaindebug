@@ -14,7 +14,7 @@
 		<meta.filter></meta.filter>
 		<threads>1</threads>
 		<skip>false</skip>
-		<stories>**/EtsyDotComStories.java</stories>
+		<stories>**/stories/*.java</stories>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<jbehave.site.version>3.1.1</jbehave.site.version>
 	</properties>
