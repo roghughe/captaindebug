@@ -14,12 +14,11 @@ $(document).ready(
 						}
 						
 						var $form = $(this);
-						// let's select and cache all the fields
 						var $inputs = $form.find("input");
-						// serialize the data in the form
+						// serialize the data in the form ready for output
 						var serializedData = $form.serialize();
 
-						// let's disable the inputs for the duration of the ajax request
+						// disable the inputs for the duration of the AJAX	 request
 						$inputs.prop("disabled", true);
 
 						// fire off the request to OrderController
