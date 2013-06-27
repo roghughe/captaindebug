@@ -23,6 +23,9 @@ public class HomeController {
 
 	/**
 	 * Simply selects the home view to render by returning its name.
+	 * 
+	 * The @Audit annotation is applied to the Before advice to log the user's visit to the
+	 * page.
 	 */
 	@Audit("Home")
 	@RequestMapping(value = "/", method = RequestMethod.GET)

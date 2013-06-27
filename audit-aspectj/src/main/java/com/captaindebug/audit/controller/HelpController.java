@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.captaindebug.audit.aspectj.Audit;
 
 /**
+ * Help Controller, displays some help...
+ * 
  * @author Roger
  * 
  */
 @Controller()
 public class HelpController {
 
-	@Audit("Help")
+	@Audit("Help")  // User has visited the help page
 	@RequestMapping(value = "/help", method = RequestMethod.GET)
 	public String showHelp(@RequestParam int pageId, Model model) {
 
