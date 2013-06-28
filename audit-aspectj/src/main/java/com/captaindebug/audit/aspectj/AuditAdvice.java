@@ -28,7 +28,7 @@ public class AuditAdvice {
 	 *            Audit annotation holds the name of the screen we're auditing.
 	 */
 	@Before("execution(public String com.captaindebug.audit.controller.*Controller.*(..)) && @annotation(auditAnnotation) ")
-	public void myBeforeLogger(Audit auditAnnotation) {
+	public void auditScreen(Audit auditAnnotation) {
 
 		auditService.audit(auditAnnotation.value());
 	}
