@@ -28,17 +28,15 @@ import com.captaindebug.social.facebookposts.implementation.SocialContext;
 @Controller
 public class FacebookPostsController {
 
-	private static final Logger logger = LoggerFactory.getLogger(FacebookPostsController.class);
-
-	private final SocialContext socialContext;
+	private static final Logger logger = LoggerFactory
+			.getLogger(FacebookPostsController.class);
 
 	@Autowired
-	public FacebookPostsController(SocialContext socialContext) {
-		this.socialContext = socialContext;
-	}
+	private SocialContext socialContext;
 
 	@RequestMapping(value = "posts", method = RequestMethod.GET)
-	public String showPostsForUser(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+	public String showPostsForUser(HttpServletRequest request, HttpServletResponse response,
+			Model model) throws Exception {
 
 		String nextView;
 
@@ -60,7 +58,8 @@ public class FacebookPostsController {
 		FeedOperations feedOps = facebook.feedOperations();
 
 		List<Post> posts = feedOps.getHomeFeed();
-		logger.info("Retrieved " + posts.size() + " posts from the Facebook authenticated user");
+		logger.info("Retrieved " + posts.size()
+				+ " posts from the Facebook authenticated user");
 		return posts;
 	}
 }

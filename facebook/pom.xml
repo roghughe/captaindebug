@@ -9,7 +9,7 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.springframework-version>3.2.1.RELEASE</org.springframework-version>
+		<org.springframework-version>3.2.3.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<spring-social.version>1.0.3.RELEASE</spring-social.version>
 		<org.springframework.social-facebook-version>1.0.1.RELEASE</org.springframework.social-facebook-version>
@@ -125,14 +125,26 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>  
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework-version}</version>
+			<scope>test</scope>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-crypto</artifactId>
 			<version>${org.springframework.security.crypto-version}</version>
 		</dependency>
-
-		
+				
 		<!-- Spring Social -->
 	 	<dependency>
 		    <groupId>org.springframework.social</groupId>
