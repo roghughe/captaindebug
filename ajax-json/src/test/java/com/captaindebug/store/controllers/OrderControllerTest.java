@@ -82,11 +82,15 @@ public class OrderControllerTest {
 	}
 
 	/**
-	 * The result should be an Object that gets converted into JSON
-	 * 
+	 * The result should be an Object that gets converted into JSON Return value is :
+	 * {"items":[
+	 * {"id":1,"description":"description","name":"name","price":1.00},{"id":2,"description"
+	 * :"description2"
+	 * ,"name":"name2","price":2.00}],"purchaseId":"aabf118e-abe9-4b59-88d2-0b897796c8c0"}
 	 */
 	@Test
-	public void testDemonstrateJSON() throws JsonGenerationException, JsonMappingException, IOException {
+	public void testDemonstrateJSON() throws JsonGenerationException, JsonMappingException,
+			IOException {
 
 		UserSelections userSelection = new UserSelections();
 		String[] selections = { "1", "2" };
