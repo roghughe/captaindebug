@@ -26,6 +26,8 @@ import org.springframework.social.facebook.api.FeedOperations;
 import org.springframework.social.facebook.api.Post;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.captaindebug.social.facebookposts.FacebookPostsController;
@@ -68,8 +70,12 @@ public class FacebookPostsControllerTest {
 		HttpServletResponse response = anyObject();
 		when(socialContext.isSignedIn(request, response)).thenReturn(false);
 
-		mockMvc.perform(get("/posts").accept(MediaType.ALL)).andExpect(status().isOk())
-				.andExpect(view().name("signin"));
+		MockHttpServletRequestBuilder getRequest = get("/posts").accept(MediaType.ALL);
+
+		ResultActions results = mockMvc.perform(getRequest);
+
+		results.andExpect(status().isOk());
+		results.andExpect(view().name("signin"));
 	}
 
 	@Test
