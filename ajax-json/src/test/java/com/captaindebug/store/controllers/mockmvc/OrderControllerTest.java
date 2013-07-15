@@ -45,11 +45,13 @@ public class OrderControllerTest {
 	 * "purchaseId":"aabf118e-abe9-4b59-88d2-0b897796c8c0"}
 	 */
 	@Test
-	public void testDemonstrateJSON() throws Exception {
+	public void testConfirmPurchases_selection_1_returns_a_hat() throws Exception {
 
 		final String mediaType = "application/json;charset=UTF-8";
 
-		MockHttpServletRequestBuilder postRequest = post("/confirm").param("selection", "1");
+		MockHttpServletRequestBuilder postRequest = post("/confirm");
+		postRequest = postRequest.param("selection", "1");
+
 		ResultActions resultActions = mockMvc.perform(postRequest);
 
 		resultActions.andDo(print());
@@ -62,7 +64,7 @@ public class OrderControllerTest {
 	}
 
 	@Test
-	public void testDemonstrateJSON_spring_style() throws Exception {
+	public void testConfirmPurchases_spring_style() throws Exception {
 
 		mockMvc.perform(post("/confirm").param("selection", "1")).andDo(print())
 				.andExpect(content().contentType("application/json;charset=UTF-8")).andExpect(status().isOk())
