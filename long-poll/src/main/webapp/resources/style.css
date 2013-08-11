@@ -1,0 +1,22 @@
+#mask {
+	height: 100%;
+	width: 100%;
+	background: #000000;
+	position: absolute;
+	top: 0;
+	-moz-opacity:0.75;
+	-khtml-opacity: 0.75;
+	opacity: 0.75;
+	filter: alpha(opacity=75);
+}
+
+#popup {
+	margin: 0 auto;
+	border: 1px solid #000000;
+	background: #ffffff;
+	position: absolute;
+	top: 200px;
+	width:470px;
+	height: 500px;
+	left: 25%;
+}
