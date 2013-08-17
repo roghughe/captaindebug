@@ -1,8 +1,10 @@
-package com.captaindebug.longpoll;
+package com.captaindebug.longpoll.source;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import com.captaindebug.longpoll.Message;
 
 public class Match {
 

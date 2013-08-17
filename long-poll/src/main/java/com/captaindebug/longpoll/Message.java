@@ -1,6 +1,5 @@
 package com.captaindebug.longpoll;
 
-import org.springframework.stereotype.Component;
 
 /**
  * A simple message that contains a match update, which is placed on the queue.
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Component;
  *         Created 16:24:19 3 Feb 2013
  * 
  */
-@Component
 public class Message implements Comparable<Message> {
 
 	private final String name;

@@ -10,7 +10,7 @@
  
  
 
-	<bean id="the-match" class="com.captaindebug.longpoll.Match">
+	<bean id="the-match" class="com.captaindebug.longpoll.source.Match">
 		<constructor-arg value="Arsenal vs Stoke City" />
         <constructor-arg>
             <list>

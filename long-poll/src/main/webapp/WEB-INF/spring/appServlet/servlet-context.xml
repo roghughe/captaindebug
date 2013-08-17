@@ -7,9 +7,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-	    http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util.xsd"
-   		default-init-method="start" 
-		default-destroy-method="destroy">		
+	    http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util.xsd">
+		
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -28,7 +27,8 @@
 	<context:component-scan base-package="com.captaindebug.longpoll" />
 	
 	
-	<view-controller path="matchupdate" view-name="/matchupdate" />
+	<view-controller path="simplematchupdate" view-name="/simplematchupdate" />
+	<view-controller path="deferredmatchupdate" view-name="deferredmatchupdate" />
 	
 	
 	<!-- The config that loads the Match and reporters -->
@@ -37,7 +37,7 @@
  
  	<beans:bean id="theQueue" class="java.util.concurrent.LinkedBlockingQueue"/>
 
-  	<beans:bean id="BillSkyes" class="com.captaindebug.longpoll.MatchReporter">
+  	<beans:bean id="BillSkyes" class="com.captaindebug.longpoll.source.MatchReporter">
  		<beans:constructor-arg ref="the-match"/>
  		<beans:constructor-arg ref="theQueue"/>
  	</beans:bean>

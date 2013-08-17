@@ -7,8 +7,7 @@ import org.springframework.ui.Model;
 
 public class MatchUpdateTest {
 
-
-	private MatchUpdateController instance;
+	private SimpleMatchUpdateController instance;
 
 	@Mock
 	private Model model;
@@ -17,7 +16,7 @@ public class MatchUpdateTest {
 	public void setUp() throws Exception {
 
 		MockitoAnnotations.initMocks(this);
-		instance = new MatchUpdateController();
+		instance = new SimpleMatchUpdateController();
 	}
 
 }
