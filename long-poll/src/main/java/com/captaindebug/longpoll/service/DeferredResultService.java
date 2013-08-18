@@ -21,6 +21,10 @@ public class DeferredResultService implements Runnable {
 
 	private final BlockingQueue<DeferredResult<Message>> resultQueue = new LinkedBlockingQueue<>();
 
+	private Thread thread;
+
+	private volatile boolean start = true;
+
 	@Autowired
 	@Qualifier("theQueue")
 	private LinkedBlockingQueue<Message> queue;
@@ -32,9 +36,20 @@ public class DeferredResultService implements Runnable {
 	public void subscribe() {
 		logger.info("Starting server");
 		matchReporter.start();
+		startThread();
+	}
 
-		Thread thread = new Thread(this, "Studio Teletype");
-		thread.start();
+	private void startThread() {
+
+		if (start) {
+			synchronized (this) {
+				if (start) {
+					start = false;
+					thread = new Thread(this, "Studio Teletype");
+					thread.start();
+				}
+			}
+		}
 	}
 
 	@Override
