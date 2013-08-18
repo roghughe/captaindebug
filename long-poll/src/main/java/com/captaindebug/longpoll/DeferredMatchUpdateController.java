@@ -4,12 +4,13 @@
 package com.captaindebug.longpoll;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.async.DeferredResult;
+
+import com.captaindebug.longpoll.service.DeferredResultService;
 
 /**
  * Long pole example - uses the match update example.
@@ -21,8 +22,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 public class DeferredMatchUpdateController {
 
 	@Autowired
-	@Qualifier("DeferredService")
-	private UpdateService updateService;
+	private DeferredResultService updateService;
 
 	@RequestMapping(value = "/matchupdate/begin" + "", method = RequestMethod.GET)
 	@ResponseBody

@@ -28,7 +28,7 @@
 	
 	
 	<view-controller path="simplematchupdate" view-name="/simplematchupdate" />
-	<view-controller path="deferredmatchupdate" view-name="deferredmatchupdate" />
+	<view-controller path="deferredmatchupdate" view-name="/deferredmatchupdate" />
 	
 	
 	<!-- The config that loads the Match and reporters -->

@@ -11,7 +11,8 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 
-<a href="matchupdate">Stoke City vs Arsenal</a>
+<a href="simplematchupdate">Stoke City vs Arsenal - Using the a simple (don't do this) technique</a><br/>
+<a href="deferredmatchupdate">Stoke City vs Arsenal - Using the DeferredRequest technique</a>
 
 </body>
 </html>

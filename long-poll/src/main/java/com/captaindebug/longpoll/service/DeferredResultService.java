@@ -12,11 +12,10 @@ import org.springframework.web.context.request.async.DeferredResult;
 
 import com.captaindebug.longpoll.Message;
 import com.captaindebug.longpoll.UpdateException;
-import com.captaindebug.longpoll.UpdateService;
 import com.captaindebug.longpoll.source.MatchReporter;
 
 @Service("DeferredService")
-public class DeferredResultService implements UpdateService, Runnable {
+public class DeferredResultService implements Runnable {
 
 	private static final Logger logger = LoggerFactory.getLogger(DeferredResultService.class);
 
@@ -30,7 +29,6 @@ public class DeferredResultService implements UpdateService, Runnable {
 	@Qualifier("BillSkyes")
 	private MatchReporter matchReporter;
 
-	@Override
 	public void subscribe() {
 		logger.info("Starting server");
 		matchReporter.start();
@@ -56,12 +54,6 @@ public class DeferredResultService implements UpdateService, Runnable {
 		}
 	}
 
-	@Override
-	public Message getUpdate() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public void getUpdate(DeferredResult<Message> result) {
 		resultQueue.add(result);
 	}

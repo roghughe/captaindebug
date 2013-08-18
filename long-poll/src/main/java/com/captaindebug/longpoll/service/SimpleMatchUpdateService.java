@@ -5,11 +5,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.async.DeferredResult;
 
 import com.captaindebug.longpoll.Message;
 import com.captaindebug.longpoll.UpdateException;
-import com.captaindebug.longpoll.UpdateService;
 import com.captaindebug.longpoll.source.MatchReporter;
 
 /**
@@ -25,7 +23,7 @@ import com.captaindebug.longpoll.source.MatchReporter;
  * 
  */
 @Service("SimpleService")
-public class SimpleMatchUpdateService implements UpdateService {
+public class SimpleMatchUpdateService {
 
 	@Autowired
 	@Qualifier("theQueue")
@@ -37,19 +35,15 @@ public class SimpleMatchUpdateService implements UpdateService {
 
 	/**
 	 * Subscribe to a match
-	 * 
-	 * @see com.captaindebug.longpoll.UpdateService#subscribe()
 	 */
-	@Override
 	public void subscribe() {
 		matchReporter.start();
 	}
 
 	/**
 	 * 
-	 * @see com.captaindebug.longpoll.UpdateService#getUpdate()
+	 * Get hold of the latest match update
 	 */
-	@Override
 	public Message getUpdate() {
 
 		try {
@@ -58,11 +52,6 @@ public class SimpleMatchUpdateService implements UpdateService {
 		} catch (InterruptedException e) {
 			throw new UpdateException("Cannot get latest update. " + e.getMessage(), e);
 		}
-	}
-
-	@Override
-	public void getUpdate(DeferredResult<Message> result) {
-		throw new UnsupportedOperationException();
 	}
 
 }
