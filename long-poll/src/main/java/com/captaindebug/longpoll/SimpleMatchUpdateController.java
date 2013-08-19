@@ -40,7 +40,7 @@ public class SimpleMatchUpdateController {
 	 */
 	@RequestMapping(value = "/matchupdate/simple", method = RequestMethod.GET)
 	@ResponseBody
-	public Message dontDoThis() {
+	public Message getUpdate() {
 
 		Message message = updateService.getUpdate();
 		logger.info("Got the next update in a really bad way: {}", message.getMessageText());
