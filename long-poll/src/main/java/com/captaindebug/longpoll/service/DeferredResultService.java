@@ -12,6 +12,8 @@ import org.springframework.web.context.request.async.DeferredResult;
 
 import com.captaindebug.longpoll.Message;
 import com.captaindebug.longpoll.UpdateException;
+import com.captaindebug.longpoll.shutdown.Hook;
+import com.captaindebug.longpoll.shutdown.ShutdownService;
 import com.captaindebug.longpoll.source.MatchReporter;
 
 @Service("DeferredService")
@@ -24,6 +26,11 @@ public class DeferredResultService implements Runnable {
 	private Thread thread;
 
 	private volatile boolean start = true;
+
+	@Autowired
+	private ShutdownService shutdownService;
+
+	private Hook hook;
 
 	@Autowired
 	@Qualifier("theQueue")
@@ -46,6 +53,7 @@ public class DeferredResultService implements Runnable {
 				if (start) {
 					start = false;
 					thread = new Thread(this, "Studio Teletype");
+					hook = shutdownService.createHook(thread);
 					thread.start();
 				}
 			}
@@ -55,7 +63,8 @@ public class DeferredResultService implements Runnable {
 	@Override
 	public void run() {
 
-		while (true) {
+		logger.info("Thread running");
+		while (hook.keepRunning()) {
 			try {
 
 				DeferredResult<Message> result = resultQueue.take();
@@ -67,6 +76,8 @@ public class DeferredResultService implements Runnable {
 				throw new UpdateException("Cannot get latest update. " + e.getMessage(), e);
 			}
 		}
+		logger.info("Thread ending");
+
 	}
 
 	public void getUpdate(DeferredResult<Message> result) {
