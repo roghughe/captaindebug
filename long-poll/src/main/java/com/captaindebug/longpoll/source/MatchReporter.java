@@ -6,12 +6,15 @@ import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.captaindebug.longpoll.Message;
+import com.captaindebug.longpoll.shutdown.Hook;
+import com.captaindebug.longpoll.shutdown.ShutdownService;
 
 /**
- * Models a reporter at the match. The reporter knows about the match and sends
- * updates to the queue at the appropriate moment.
+ * Models a reporter at the match. The reporter knows about the match and sends updates to the
+ * queue at the appropriate moment.
  * 
  * @author Roger
  * 
@@ -27,6 +30,11 @@ public class MatchReporter implements Runnable {
 	private final Queue<Message> queue;
 
 	private volatile boolean start = true;
+
+	@Autowired
+	private ShutdownService shutdownService;
+
+	private Hook hook;
 
 	public MatchReporter(Match theBigMatch, Queue<Message> queue) {
 		this.match = theBigMatch;
@@ -45,6 +53,7 @@ public class MatchReporter implements Runnable {
 					logger.info("Starting the Match Reporter...");
 					String name = match.getName();
 					Thread thread = new Thread(this, name);
+					hook = shutdownService.createHook(thread);
 
 					thread.start();
 				}
@@ -52,7 +61,6 @@ public class MatchReporter implements Runnable {
 		} else {
 			logger.warn("Game already in progress");
 		}
-
 	}
 
 	/**
@@ -70,6 +78,9 @@ public class MatchReporter implements Runnable {
 		for (Message message : matchUpdates) {
 
 			delayUntilNextUpdate(now, message.getTime());
+			if (!hook.keepRunning()) {
+				break;
+			}
 			logger.info("Add message to queue: {}", message.getMessageText());
 			queue.add(message);
 		}
@@ -81,7 +92,7 @@ public class MatchReporter implements Runnable {
 		try {
 			TimeUnit.SECONDS.sleep(10);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			logger.info("Sleep interrupted...");
 		}
 	}
 
@@ -92,7 +103,7 @@ public class MatchReporter implements Runnable {
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				logger.info("MatchReporter Thread interrupted...");
 			}
 		}
 	}

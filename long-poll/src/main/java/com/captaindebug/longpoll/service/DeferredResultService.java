@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import com.captaindebug.longpoll.Message;
-import com.captaindebug.longpoll.UpdateException;
 import com.captaindebug.longpoll.shutdown.Hook;
 import com.captaindebug.longpoll.shutdown.ShutdownService;
 import com.captaindebug.longpoll.source.MatchReporter;
@@ -63,7 +62,7 @@ public class DeferredResultService implements Runnable {
 	@Override
 	public void run() {
 
-		logger.info("Thread running");
+		logger.info("DeferredResultService - Thread running");
 		while (hook.keepRunning()) {
 			try {
 
@@ -73,11 +72,11 @@ public class DeferredResultService implements Runnable {
 				result.setResult(message);
 
 			} catch (InterruptedException e) {
-				throw new UpdateException("Cannot get latest update. " + e.getMessage(), e);
+				System.out.println("Interrupted when waiting for latest update. "
+						+ e.getMessage());
 			}
 		}
-		logger.info("Thread ending");
-
+		System.out.println("DeferredResultService - Thread ending");
 	}
 
 	public void getUpdate(DeferredResult<Message> result) {

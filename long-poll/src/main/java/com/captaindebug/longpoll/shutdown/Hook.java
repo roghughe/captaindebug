@@ -38,14 +38,13 @@ public class Hook {
 	}
 
 	/**
-	 * Tell the client daemon thread to shutdown and wait for it to close gracefully. Give it
-	 * 500mS before abandoning it
+	 * Tell the client daemon thread to shutdown and wait for it to close gracefully.
 	 */
 	public void shutdown() {
 		keepRunning = false;
 		thread.interrupt();
 		try {
-			thread.join(500);
+			thread.join();
 		} catch (InterruptedException e) {
 			logger.error("Error shutting down thread with hook", e);
 		}
