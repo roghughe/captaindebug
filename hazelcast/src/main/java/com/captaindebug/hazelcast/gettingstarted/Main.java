@@ -22,21 +22,16 @@ public class Main {
 		rand = new Random(System.currentTimeMillis());
 
 		int totalNumUsers = users.size();
-		int logInUsers = rand.nextInt(totalNumUsers);
 
 		while (true) {
 
-			for (int i = 0; i < logInUsers; i++) {
+			User user = users.get(rand.nextInt(totalNumUsers));
+			String name = user.getUsername();
 
-				User user = users.get(rand.nextInt(totalNumUsers));
-				String name = user.getUsername();
-
-				if (application.isLoggedOn(name)) {
-					application.logout(name);
-				} else {
-					application.logon(user.getUsername());
-				}
-				TimeUnit.MILLISECONDS.sleep(50);
+			if (application.isLoggedOn(name)) {
+				application.logout(name);
+			} else {
+				application.logon(user.getUsername());
 			}
 
 			application.displayUsers();
