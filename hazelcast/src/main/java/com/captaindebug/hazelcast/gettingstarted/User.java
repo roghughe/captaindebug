@@ -3,6 +3,8 @@
  */
 package com.captaindebug.hazelcast.gettingstarted;
 
+import java.io.Serializable;
+
 /**
  * 
  * A simple user class. Instantiated when the user is logged on
@@ -10,8 +12,9 @@ package com.captaindebug.hazelcast.gettingstarted;
  * @author Roger
  * 
  */
-public class User {
+public class User implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private final String username;
 	private final String firstName;
 	private final String lastName;
