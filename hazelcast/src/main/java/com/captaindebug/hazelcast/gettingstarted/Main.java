@@ -3,7 +3,6 @@
  */
 package com.captaindebug.hazelcast.gettingstarted;
 
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -12,26 +11,20 @@ import java.util.concurrent.TimeUnit;
  */
 public class Main {
 
-	private static Random rand;
-
 	public static void main(String[] args) throws InterruptedException {
 
+		BigWideWorld theWorld = new BigWideWorld();
+
 		MyApplication application = new MyApplication();
-		Users users = new Users();
-
-		rand = new Random(System.currentTimeMillis());
-
-		int totalNumUsers = users.size();
 
 		while (true) {
 
-			User user = users.get(rand.nextInt(totalNumUsers));
-			String name = user.getUsername();
+			String username = theWorld.nextUser();
 
-			if (application.isLoggedOn(name)) {
-				application.logout(name);
+			if (application.isLoggedOn(username)) {
+				application.logout(username);
 			} else {
-				application.logon(user.getUsername());
+				application.logon(username);
 			}
 
 			application.displayUsers();
