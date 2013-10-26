@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Map;
 
-import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 
@@ -32,8 +31,7 @@ public class MyApplication {
 
 	public MyApplication() {
 
-		Config cfg = new Config();
-		HazelcastInstance instance = Hazelcast.newHazelcastInstance(cfg);
+		HazelcastInstance instance = Hazelcast.newHazelcastInstance();
 
 		loggedOnUsers = instance.getMap("Users");
 	}
