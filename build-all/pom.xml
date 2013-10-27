@@ -28,5 +28,7 @@
 		<module>../spring-3.2</module>
 		<module>../ajax-json</module>
 		<module>../audit-aspectj</module>
+		<module>../hazelcast</module>
+		<module>../long-poll</module>
 	</modules>
 </project>
