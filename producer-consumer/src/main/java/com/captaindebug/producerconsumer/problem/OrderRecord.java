@@ -51,7 +51,7 @@ public class OrderRecord implements Runnable {
 	 * @throws InterruptedException
 	 */
 	public void recordOrder(Order order) throws InterruptedException {
-		TimeUnit.MILLISECONDS.sleep(500);
+		TimeUnit.SECONDS.sleep(1);
 	}
 
 }

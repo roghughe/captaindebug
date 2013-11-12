@@ -3,6 +3,8 @@
  */
 package com.captaindebug.producerconsumer.problem;
 
+import java.util.Arrays;
+
 /**
  * @author Roger
  * 
@@ -19,11 +21,13 @@ public class Order {
 
 	private final long time;
 
+	private final long[] padding;
+
 	/**
 	 * @param id
 	 *            The order id
 	 * @param code
-	 *            The stcok code
+	 *            The stock code
 	 * @param amount
 	 *            the number of shares
 	 * @param price
@@ -38,6 +42,11 @@ public class Order {
 		this.amount = amount;
 		this.price = price;
 		this.time = time;
+		// This just makes the Order object bigger so that
+		// the example runs out of heap more quickly.
+		this.padding = new long[3000];
+		Arrays.fill(padding, 0, padding.length - 1, -2);
+
 	}
 
 	public int getId() {

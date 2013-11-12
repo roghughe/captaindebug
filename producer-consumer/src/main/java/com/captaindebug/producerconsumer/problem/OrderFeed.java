@@ -47,8 +47,7 @@ public class OrderFeed implements Runnable {
 
 	private Order createOrder() {
 
-		final String[] stocks = { "BLND.L", "DGE.L", "MKS.L", "PSON.L", "RIO.L", "PRU.L",
-				"LSE.L", "WMH.L" };
+		final String[] stocks = { "BLND.L", "DGE.L", "MKS.L", "PSON.L", "RIO.L", "PRU.L", "LSE.L", "WMH.L" };
 		int next = rand.nextInt(stocks.length);
 		long now = System.currentTimeMillis();
 
@@ -58,7 +57,7 @@ public class OrderFeed implements Runnable {
 
 	private void sleep() {
 		try {
-			TimeUnit.MILLISECONDS.sleep(50);
+			TimeUnit.MILLISECONDS.sleep(100);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
