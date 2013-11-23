@@ -46,7 +46,6 @@ public class Order {
 		// the example runs out of heap more quickly.
 		this.padding = new long[3000];
 		Arrays.fill(padding, 0, padding.length - 1, -2);
-
 	}
 
 	public int getId() {

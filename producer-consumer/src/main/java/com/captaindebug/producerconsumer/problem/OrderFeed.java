@@ -32,9 +32,7 @@ public class OrderFeed implements Runnable {
 		thread.start();
 	}
 
-	/**
-	 * The main run loop
-	 */
+	/** The main run loop */
 	@Override
 	public void run() {
 
@@ -47,7 +45,8 @@ public class OrderFeed implements Runnable {
 
 	private Order createOrder() {
 
-		final String[] stocks = { "BLND.L", "DGE.L", "MKS.L", "PSON.L", "RIO.L", "PRU.L", "LSE.L", "WMH.L" };
+		final String[] stocks = { "BLND.L", "DGE.L", "MKS.L", "PSON.L", "RIO.L", "PRU.L",
+				"LSE.L", "WMH.L" };
 		int next = rand.nextInt(stocks.length);
 		long now = System.currentTimeMillis();
 
@@ -62,5 +61,4 @@ public class OrderFeed implements Runnable {
 			e.printStackTrace();
 		}
 	}
-
 }
