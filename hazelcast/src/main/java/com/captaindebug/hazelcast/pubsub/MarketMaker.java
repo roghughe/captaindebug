@@ -79,15 +79,15 @@ public class MarketMaker implements Runnable {
 		return stockPrice;
 	}
 
-	private double variance(double price) {
-		return (price * 0.01);
-	}
-
 	private double createPrice() {
 
 		int val = random.nextInt(2010 - 1520) + 1520;
 		double retVal = (double) val / 100;
 		return retVal;
+	}
+
+	private double variance(double price) {
+		return (price * 0.01);
 	}
 
 	private void sleep() {

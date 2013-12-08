@@ -3,7 +3,6 @@
  */
 package com.captaindebug.hazelcast.pubsub;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.ITopic;
@@ -14,14 +13,9 @@ import com.hazelcast.core.MessageListener;
  * @author Roger
  * 
  */
-public class PriceListener implements MessageListener<StockPrice> {
+public class Client implements MessageListener<StockPrice> {
 
-	public PriceListener(String topicName) {
-		createTopicListener(topicName);
-	}
-
-	@VisibleForTesting
-	void createTopicListener(String topicName) {
+	public Client(String topicName) {
 		HazelcastInstance hzInstance = Hazelcast.newHazelcastInstance();
 		ITopic<StockPrice> topic = hzInstance.getTopic(topicName);
 		topic.addMessageListener(this);
@@ -37,10 +31,7 @@ public class PriceListener implements MessageListener<StockPrice> {
 
 	public static void main(String[] args) {
 
-		PriceListener substriber = new PriceListener("STOCKS");
-		new PriceListener("STOCKS");
-		new PriceListener("STOCKS");
-
+		new Client("STOCKS");
 	}
 
 }
