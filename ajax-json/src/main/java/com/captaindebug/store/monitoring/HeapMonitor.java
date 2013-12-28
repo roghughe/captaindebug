@@ -4,9 +4,6 @@
 package com.captaindebug.store.monitoring;
 
 import java.lang.Thread.UncaughtExceptionHandler;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.DelayQueue;
 import java.util.concurrent.ExecutorService;
 
 import org.springframework.stereotype.Service;
@@ -20,10 +17,6 @@ public class HeapMonitor implements Runnable, UncaughtExceptionHandler {
 
 	private ExecutorService executor;
 
-	private List<Point> heapHistory;
-
-	private DelayQueue<Point> currentPoints;
-
 	/** Called by Spring to start the object up */
 	public void start() {
 
@@ -34,7 +27,6 @@ public class HeapMonitor implements Runnable, UncaughtExceptionHandler {
 	}
 
 	private void createStorage() {
-		heapHistory = new ArrayList<Point>();
 
 	}
 
