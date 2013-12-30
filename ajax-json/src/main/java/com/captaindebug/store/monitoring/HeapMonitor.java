@@ -8,22 +8,20 @@ import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 /**
  * @author Roger
  * 
  */
-@Service
+// @Service
 public class HeapMonitor extends SingleThreadRunner {
 
 	private static Logger logger = LoggerFactory.getLogger(HeapMonitor.class);
 
-	@Value("interval")
+	// @Value("interval")
 	private long interval;
 
-	@Value("TimeUnit")
+	// @Value("TimeUnit")
 	private TimeUnit timeUnit;
 
 	private TimedList<Point> list;
