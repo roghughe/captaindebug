@@ -11,22 +11,47 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
- * A queue implementation where items are only in the queue for a certain amount of time...
+ * A list implementation where items are only in the list for a certain amount of time...
  * 
  * @author Roger
  * 
  */
-public class TimedList<T extends Delayed> implements List<T> {
+public class TimedList<T extends Delayed> extends SingleThreadRunner implements List<T> {
 
-	private final List<T> list = new CopyOnWriteArrayList<T>();
+	private static final Logger logger = LoggerFactory.getLogger(TimedList.class);
 
-	private final DelayQueue<T> currentItems;
+	private final List<T> list;
+
+	private final DelayQueue<T> delayQueue;
 
 	public TimedList() {
+		super("TimedList");
+		list = new CopyOnWriteArrayList<T>();
+		delayQueue = new DelayQueue<T>();
+		startRunnable();
+	}
 
-		currentItems = new DelayQueue<T>();
+	@Override
+	protected Runnable getRunnable() {
+		Runnable runnable = new Runnable() {
 
+			@Override
+			public void run() {
+				while (true) {
+					try {
+						T item = delayQueue.take();
+						list.remove(item);
+					} catch (InterruptedException e) {
+						logger.warn("InterruptedException:", e);
+					}
+				}
+			}
+		};
+		return runnable;
 	}
 
 	/**
@@ -82,7 +107,7 @@ public class TimedList<T extends Delayed> implements List<T> {
 	 */
 	@Override
 	public boolean add(T e) {
-		currentItems.put(e);
+		delayQueue.put(e);
 		return list.add(e);
 	}
 
@@ -91,7 +116,7 @@ public class TimedList<T extends Delayed> implements List<T> {
 	 */
 	@Override
 	public boolean remove(Object o) {
-		currentItems.remove(o);
+		delayQueue.remove(o);
 		return list.remove(o);
 	}
 
@@ -108,7 +133,7 @@ public class TimedList<T extends Delayed> implements List<T> {
 	 */
 	@Override
 	public boolean addAll(Collection<? extends T> c) {
-		currentItems.addAll(c);
+		delayQueue.addAll(c);
 		return list.addAll(c);
 	}
 
@@ -117,7 +142,7 @@ public class TimedList<T extends Delayed> implements List<T> {
 	 */
 	@Override
 	public boolean addAll(int index, Collection<? extends T> c) {
-		currentItems.addAll(c);
+		delayQueue.addAll(c);
 		return list.addAll(index, c);
 	}
 
@@ -126,7 +151,7 @@ public class TimedList<T extends Delayed> implements List<T> {
 	 */
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		currentItems.removeAll(c);
+		delayQueue.removeAll(c);
 		return list.removeAll(c);
 	}
 
@@ -135,7 +160,7 @@ public class TimedList<T extends Delayed> implements List<T> {
 	 */
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		currentItems.retainAll(c);
+		delayQueue.retainAll(c);
 		return list.retainAll(c);
 	}
 
@@ -144,7 +169,7 @@ public class TimedList<T extends Delayed> implements List<T> {
 	 */
 	@Override
 	public void clear() {
-		currentItems.clear();
+		delayQueue.clear();
 		list.clear();
 	}
 
@@ -161,7 +186,7 @@ public class TimedList<T extends Delayed> implements List<T> {
 	 */
 	@Override
 	public T set(int index, T element) {
-		currentItems.put(element);
+		delayQueue.put(element);
 		return list.set(index, element);
 	}
 
@@ -170,7 +195,7 @@ public class TimedList<T extends Delayed> implements List<T> {
 	 */
 	@Override
 	public void add(int index, T element) {
-		currentItems.put(element);
+		delayQueue.put(element);
 		list.add(index, element);
 	}
 
@@ -180,7 +205,7 @@ public class TimedList<T extends Delayed> implements List<T> {
 	@Override
 	public T remove(int index) {
 		T element = list.get(index);
-		currentItems.remove(element);
+		delayQueue.remove(element);
 		return list.remove(index);
 	}
 

@@ -57,8 +57,8 @@ public class Point implements Delayed {
 	@Override
 	public int compareTo(Delayed o) {
 
-		return 0;
-
+		Delayed that = o;
+		return (int) (getDelay(TimeUnit.MILLISECONDS) - that.getDelay(TimeUnit.MILLISECONDS));
 	}
 
 	/**
