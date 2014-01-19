@@ -25,6 +25,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.captaindebug.longpoll" />
+	<context:component-scan base-package="com.captaindebug.report" />
 	
 	
 	<view-controller path="simplematchupdate" view-name="/simplematchupdate" />
