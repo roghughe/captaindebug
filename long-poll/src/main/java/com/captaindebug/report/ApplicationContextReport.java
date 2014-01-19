@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ApplicationContextReport implements ApplicationContextAware, InitializingBean {
 
+	private static final String LINE = "====================================================================================================\n";
 	private static final Logger logger = LoggerFactory.getLogger("ContextReport");
 
 	private ApplicationContext applicationContext;
@@ -39,13 +40,13 @@ public class ApplicationContextReport implements ApplicationContextAware, Initia
 
 	public void report() {
 
-		StringBuilder sb = new StringBuilder("\n=======================================================\n");
+		StringBuilder sb = new StringBuilder("\n" + LINE);
 		sb.append("Application Context Report\n");
-		sb.append("=======================================================\n");
+		sb.append(LINE);
 
 		createHeader(sb);
 		createBody(sb);
-		sb.append("====================================================================================================\n");
+		sb.append(LINE);
 
 		logger.info(sb.toString());
 	}
@@ -89,7 +90,7 @@ public class ApplicationContextReport implements ApplicationContextAware, Initia
 
 	private void addColumnHeaders(StringBuilder sb) {
 		sb.append("\nBean Name\tSimple Name\tSingleton\tFull Class Name\n");
-		sb.append("====================================================================================================\n");
+		sb.append(LINE);
 	}
 
 	private void addColumnValues(StringBuilder sb) {
@@ -101,17 +102,21 @@ public class ApplicationContextReport implements ApplicationContextAware, Initia
 	}
 
 	private void addRow(String name, StringBuilder sb) {
-		sb.append(name);
-		sb.append("\t");
 		Object obj = applicationContext.getBean(name);
-		String simpleName = obj.getClass().getSimpleName();
-		sb.append(simpleName);
-		sb.append("\t");
-		boolean singleton = applicationContext.isSingleton(name);
-		sb.append(singleton ? "YES" : "NO");
-		sb.append("\t");
+
 		String fullClassName = obj.getClass().getName();
-		sb.append(fullClassName);
-		sb.append("\n");
+		if (!fullClassName.contains("org.springframework")) {
+
+			sb.append(name);
+			sb.append("\t");
+			String simpleName = obj.getClass().getSimpleName();
+			sb.append(simpleName);
+			sb.append("\t");
+			boolean singleton = applicationContext.isSingleton(name);
+			sb.append(singleton ? "YES" : "NO");
+			sb.append("\t");
+			sb.append(fullClassName);
+			sb.append("\n");
+		}
 	}
 }

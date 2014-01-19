@@ -1,6 +1,5 @@
 package com.captaindebug.report;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +14,6 @@ public class ApplicationContextReportTest {
 
 	@Autowired
 	private ApplicationContextReport instance;
-
-	@Before
-	public void setUp() throws Exception {
-	}
 
 	@Test
 	public void testReport() {
