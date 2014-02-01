@@ -13,7 +13,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 /**
- * Simple class to send the contents an application context to a log4j
+ * Simple class to send the contents an application context to a log4j --
  * 
  * @author Roger
  * 
