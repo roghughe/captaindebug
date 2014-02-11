@@ -168,4 +168,23 @@ public class ReportTest {
 		validateResults(path2, results, "hello2", "world2");
 	}
 
+	@Test
+	public void testAddResult_with_valid_data_multiple_errors() {
+
+		final String path1 = "/use/local/myfile1.log";
+
+		List<String> list = getList("hello1", "world1");
+		instance.addResult(path1, 10, list);
+
+		list = getList("hello2", "world2");
+		instance.addResult(path1, 10, list);
+
+		@SuppressWarnings("unchecked")
+		Map<String, List<Report.ErrorResult>> results = (Map<String, List<ErrorResult>>) ReflectionTestUtils
+				.getField(instance, "results");
+		assertEquals(1, results.size());
+
+		List<Report.ErrorResult> result = results.get(path1);
+		assertEquals(2, result.size());
+	}
 }
