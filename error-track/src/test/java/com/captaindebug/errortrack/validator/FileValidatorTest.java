@@ -1,6 +1,19 @@
 package com.captaindebug.errortrack.validator;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,9 +28,6 @@ public class FileValidatorTest {
 	private FileValidator instance;
 
 	@Mock
-	private int extraLineCount;
-
-	@Mock
 	private RegexValidator regexValidator;
 
 	@Mock
@@ -29,12 +39,21 @@ public class FileValidatorTest {
 	@Mock
 	private File file;
 
+	@Mock
+	private BufferedReader bufferedReader;
+
 	@Before
 	public void setUp() throws Exception {
 
 		MockitoAnnotations.initMocks(this);
 
-		instance = new FileValidator();
+		instance = new FileValidator() {
+
+			@Override
+			BufferedReader createBufferedReader(File file) throws FileNotFoundException {
+				return bufferedReader;
+			}
+		};
 
 		ReflectionTestUtils.setField(instance, "extraLineCount", Integer.valueOf(10));
 		ReflectionTestUtils.setField(instance, "regexValidator", regexValidator);
@@ -43,10 +62,33 @@ public class FileValidatorTest {
 	}
 
 	@Test
-	public void test() {
+	public void testValiate_returns_false_when_invalid_file_date() {
 
-		instance.validate(file);
+		when(fileAgeValidator.validate(file)).thenReturn(false);
+		boolean result = instance.validate(file);
+		assertFalse(result);
+		verify(report, never()).addFile(anyString());
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testValiate_returns_true_when_valid_file_date_with_no_error_found() throws IOException {
+
+		when(fileAgeValidator.validate(file)).thenReturn(true);
+		when(file.getPath()).thenReturn("The/File/Path/name.log");
+
+		final String aline = "This line is okay";
+		when(bufferedReader.readLine()).thenReturn(aline).thenReturn(null);
+
+		when(regexValidator.validate(aline)).thenReturn(false);
+
+		boolean result = instance.validate(file);
+		assertTrue(result);
+		verify(report).addFile(anyString());
+
+		verify(report, never()).addResult(anyString(), anyInt(), (List<String>) anyObject());
 
 	}
+	// final String errorLine = "Exception blah blah blah";
 
 }

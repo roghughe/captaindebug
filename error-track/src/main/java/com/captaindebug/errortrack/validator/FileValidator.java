@@ -5,6 +5,7 @@ package com.captaindebug.errortrack.validator;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import com.captaindebug.errortrack.Report;
 import com.captaindebug.errortrack.Validator;
+import com.google.common.annotations.VisibleForTesting;
 
 /**
  * 
@@ -60,12 +62,18 @@ public class FileValidator implements Validator {
 	private void checkFile(File file) {
 
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(file));
+			BufferedReader in = createBufferedReader(file);
 			readLines(in, file);
 			in.close();
 		} catch (Exception e) {
 			logger.error("Error whilst processing file: " + file.getPath() + " Message: " + e.getMessage(), e);
 		}
+	}
+
+	@VisibleForTesting
+	BufferedReader createBufferedReader(File file) throws FileNotFoundException {
+		BufferedReader in = new BufferedReader(new FileReader(file));
+		return in;
 	}
 
 	private void readLines(BufferedReader in, File file) throws IOException {
