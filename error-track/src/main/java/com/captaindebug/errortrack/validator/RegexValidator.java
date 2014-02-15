@@ -1,7 +1,7 @@
 /**
  * Copyright 2014 Marin Solutions
  */
-package com.captaindebug.errortrack;
+package com.captaindebug.errortrack.validator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,21 +9,24 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 
+import com.captaindebug.errortrack.Validator;
+
 /**
  * @author Roger
  * 
  */
-public class RegexValidator implements InitializingBean {
+public class RegexValidator implements InitializingBean, Validator {
 
 	@Value("scan-for")
 	private String scanFor;
 
 	private Pattern pattern;
 
-	public boolean validate(String line) {
+	@Override
+	public <T> boolean validate(T line) {
 
 		boolean retVal = false;
-		Matcher matcher = pattern.matcher(line);
+		Matcher matcher = pattern.matcher((String) line);
 		retVal = matcher.matches();
 		return retVal;
 	}

@@ -1,7 +1,7 @@
 /**
  * Copyright 2014 Marin Solutions
  */
-package com.captaindebug.errortrack;
+package com.captaindebug.errortrack.validator;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -9,6 +9,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
+
+import com.captaindebug.errortrack.validator.RegexValidator;
 
 /**
  * @author Roger
@@ -28,7 +30,7 @@ public class RegexValidatorTest {
 	}
 
 	/**
-	 * Test method for {@link com.captaindebug.errortrack.RegexValidator#validate(java.lang.String)}
+	 * Test method for {@link com.captaindebug.errortrack.validator.RegexValidator#validate(java.lang.String)}
 	 */
 	@Test
 	public void testValidate_exception_found() throws Exception {
@@ -42,7 +44,7 @@ public class RegexValidatorTest {
 	}
 
 	/**
-	 * Test method for {@link com.captaindebug.errortrack.RegexValidator#validate(java.lang.String)}
+	 * Test method for {@link com.captaindebug.errortrack.validator.RegexValidator#validate(java.lang.String)}
 	 */
 	@Test
 	public void testValidate_no_exception_found() throws Exception {
@@ -55,7 +57,7 @@ public class RegexValidatorTest {
 	}
 
 	/**
-	 * Test method for {@link com.captaindebug.errortrack.RegexValidator#validate(java.lang.String)}
+	 * Test method for {@link com.captaindebug.errortrack.validator.RegexValidator#validate(java.lang.String)}
 	 */
 	@Test(expected = NullPointerException.class)
 	public void testValidate_null_line() throws Exception {

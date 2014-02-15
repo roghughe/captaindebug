@@ -1,7 +1,7 @@
 /**
  * Copyright 2014 Marin Solutions
  */
-package com.captaindebug.errortrack;
+package com.captaindebug.errortrack.file;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.never;
@@ -15,6 +15,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.util.ReflectionTestUtils;
+
+import com.captaindebug.errortrack.Validator;
 
 /**
  * @author Roger
@@ -49,18 +51,19 @@ public class FileLocatorTest {
 		ReflectionTestUtils.setField(instance, "scanIn", "/the/log/file/dir/*.log");
 
 		callback = new MyCallback();
-		ReflectionTestUtils.setField(instance, "callback", callback);
+		ReflectionTestUtils.setField(instance, "validator", callback);
 	}
 
 	/** Dummy file found handler */
-	private class MyCallback implements FileFoundHandler {
+	private class MyCallback implements Validator {
 
 		/**
-		 * @see com.captaindebug.errortrack.FileFoundHandler#foundFile(java.io.File)
+		 * @see com.captaindebug.errortrack.file.FileFoundHandler#foundFile(java.io.File)
 		 */
 		@Override
-		public void foundFile(File file) {
+		public <T> boolean validate(T obj) {
 			count++;
+			return true;
 		}
 	}
 
