@@ -20,26 +20,4 @@
 		</property>
 	</bean>
 
-	<bean name="FileLocatorJob" class="org.springframework.scheduling.quartz.JobDetailBean">
-		<property name="jobClass"
-			value="com.captaindebug.errortrack.quartz.FileLocatorJob" />
-	</bean>
-
-	<bean id="FileLocatorTrigger"
-		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail" ref="FileLocatorJob" />
-		<!-- run every morning at 2 AM -->
-		<!-- property name="cronExpression" value="0 0 2 * * ?" / -->
-		<property name="cronExpression" value="0/2 * * * * ?" />
-	</bean>
-
-	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="triggers">
-			<list>
-				<ref bean="FileLocatorTrigger" />
-				<!-- Add other triggers for other jobs (if any) here 
-				<ref bean="" /> -->
-			</list>
-		</property>
-	</bean>
 </beans>

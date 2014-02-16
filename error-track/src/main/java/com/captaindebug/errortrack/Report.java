@@ -86,7 +86,7 @@ public class Report {
 	 */
 	public String generate() {
 
-		return null;
+		return "TODO add the report: " + results;
 	}
 
 	@VisibleForTesting

@@ -55,6 +55,8 @@ public class FileValidator implements Validator {
 			report.addFile(file.getPath());
 			checkFile(file);
 			retVal = true;
+
+			logger.info(report.generate());
 		}
 		return retVal;
 	}
