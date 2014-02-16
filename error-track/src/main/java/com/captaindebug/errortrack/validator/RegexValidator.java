@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import com.captaindebug.errortrack.Validator;
 
@@ -15,9 +16,10 @@ import com.captaindebug.errortrack.Validator;
  * @author Roger
  * 
  */
+@Service
 public class RegexValidator implements InitializingBean, Validator {
 
-	@Value("scan-for")
+	@Value("${scan.for}")
 	private String scanFor;
 
 	private Pattern pattern;

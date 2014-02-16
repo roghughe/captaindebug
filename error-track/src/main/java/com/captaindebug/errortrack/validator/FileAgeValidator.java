@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import com.captaindebug.errortrack.Validator;
 
@@ -15,9 +16,10 @@ import com.captaindebug.errortrack.Validator;
  *         Created 17:20:33 15 Feb 2014
  * 
  */
+@Service
 public class FileAgeValidator implements Validator {
 
-	@Value("maxDays")
+	@Value("${max.days}")
 	private int maxDays;
 
 	/**

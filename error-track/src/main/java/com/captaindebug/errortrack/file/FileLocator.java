@@ -5,9 +5,12 @@ package com.captaindebug.errortrack.file;
 
 import java.io.File;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import com.captaindebug.errortrack.Validator;
 import com.google.common.annotations.VisibleForTesting;
@@ -19,9 +22,12 @@ import com.google.common.annotations.VisibleForTesting;
  * @author Roger
  * 
  */
+@Service
 public class FileLocator {
 
-	@Value("scan-in")
+	private static final Logger logger = LoggerFactory.getLogger(FileLocator.class);
+
+	@Value("${scan.in}")
 	private String scanIn;
 
 	@Autowired
@@ -31,6 +37,7 @@ public class FileLocator {
 	/** Search for the files requested */
 	public void findFile() {
 
+		logger.info("Searching in... {}", scanIn);
 		File file = createFile(scanIn);
 		search(file);
 	}
@@ -40,13 +47,15 @@ public class FileLocator {
 		return new File(name);
 	}
 
-	private void search(File startFile) {
+	private void search(File file) {
 
-		if (startFile.isDirectory()) {
-			File[] files = startFile.listFiles();
+		if (file.isDirectory()) {
+			logger.debug("Searching directory: {}", file.getName());
+			File[] files = file.listFiles();
 			searchFiles(files);
 		} else {
-			validator.validate(startFile);
+			logger.debug("Validating file: {}", file.getName());
+			validator.validate(file);
 		}
 	}
 

@@ -31,8 +31,8 @@ public class FileValidator implements Validator {
 
 	private static final Logger logger = LoggerFactory.getLogger(FileValidator.class);
 
-	@Value("following-lines")
-	private int extraLineCount;
+	@Value("${following.lines}")
+	private Integer extraLineCount;
 
 	@Autowired
 	private RegexValidator regexValidator;
@@ -96,12 +96,12 @@ public class FileValidator implements Validator {
 		if (regexValidator.validate(line)) {
 			List<String> lines = new ArrayList<String>();
 			lines.add(line);
-			addExtraLines(in, lines);
+			addExtraDetailLines(in, lines);
 			report.addResult(filePath, lineNumber, lines);
 		}
 	}
 
-	private void addExtraLines(BufferedReader in, List<String> lines) throws IOException {
+	private void addExtraDetailLines(BufferedReader in, List<String> lines) throws IOException {
 
 		for (int i = 0; i < extraLineCount; i++) {
 			String line = in.readLine();

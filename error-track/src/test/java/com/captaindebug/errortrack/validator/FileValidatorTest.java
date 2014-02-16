@@ -89,6 +89,26 @@ public class FileValidatorTest {
 		verify(report, never()).addResult(anyString(), anyInt(), (List<String>) anyObject());
 
 	}
-	// final String errorLine = "Exception blah blah blah";
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testValiate_returns_true_when_valid_file_date_with_and_error_found() throws IOException {
+
+		when(fileAgeValidator.validate(file)).thenReturn(true);
+		when(file.getPath()).thenReturn("The/File/Path/name.log");
+
+		final String aline = "This line is okay";
+		final String errorLine = "Exception blah blah blah";
+		when(bufferedReader.readLine()).thenReturn(aline).thenReturn(errorLine).thenReturn(null);
+
+		when(regexValidator.validate(aline)).thenReturn(false);
+		when(regexValidator.validate(errorLine)).thenReturn(true);
+
+		boolean result = instance.validate(file);
+		assertTrue(result);
+		verify(report).addFile(anyString());
+
+		verify(report).addResult(anyString(), anyInt(), (List<String>) anyObject());
+	}
 
 }
