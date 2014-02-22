@@ -14,6 +14,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,12 @@ public class FileValidator implements Validator {
 	private Integer extraLineCount;
 
 	@Autowired
-	private RegexValidator regexValidator;
+	@Qualifier("scan-for")
+	private RegexValidator scanForValidator;
+
+	@Autowired(required = false)
+	@Qualifier("exclude")
+	private RegexValidator excludeValidator;
 
 	@Autowired
 	private FileAgeValidator fileAgeValidator;
@@ -95,12 +101,20 @@ public class FileValidator implements Validator {
 
 	private void processLine(String line, String filePath, int lineNumber, BufferedReader in) throws IOException {
 
-		if (regexValidator.validate(line)) {
+		if (validateExcludes(line) && scanForValidator.validate(line)) {
 			List<String> lines = new ArrayList<String>();
 			lines.add(line);
 			addExtraDetailLines(in, lines);
 			report.addResult(filePath, lineNumber, lines);
 		}
+	}
+
+	private boolean validateExcludes(String line) {
+		boolean retVal = true;
+		if (isNotNull(excludeValidator)) {
+			retVal = !excludeValidator.validate(line);
+		}
+		return retVal;
 	}
 
 	private void addExtraDetailLines(BufferedReader in, List<String> lines) throws IOException {

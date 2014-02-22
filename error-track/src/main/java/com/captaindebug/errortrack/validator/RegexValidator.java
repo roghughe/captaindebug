@@ -8,25 +8,25 @@ import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 import com.captaindebug.errortrack.Validator;
 
 /**
+ * A Regular expression validator.
+ * 
  * @author Roger
  * 
  */
-@Service
-public class RegexValidator implements InitializingBean, Validator {
+public class RegexValidator implements Validator {
 
 	private static final Logger logger = LoggerFactory.getLogger(RegexValidator.class);
 
-	@Value("${scan.for}")
-	private String scanFor;
+	private final Pattern pattern;
 
-	private Pattern pattern;
+	public RegexValidator(String regex) {
+		pattern = Pattern.compile(regex);
+		logger.info("loaded regex: {}", regex);
+	}
 
 	@Override
 	public <T> boolean validate(T line) {
@@ -40,15 +40,4 @@ public class RegexValidator implements InitializingBean, Validator {
 
 		return retVal;
 	}
-
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
-	@Override
-	public void afterPropertiesSet() throws Exception {
-
-		pattern = Pattern.compile(scanFor);
-		logger.info("loaded regex: {}", scanFor);
-	}
-
 }

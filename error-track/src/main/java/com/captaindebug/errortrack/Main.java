@@ -3,22 +3,23 @@
  */
 package com.captaindebug.errortrack;
 
-import org.springframework.beans.factory.access.BeanFactoryLocator;
-import org.springframework.context.access.ContextSingletonBeanFactoryLocator;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
+ * Create an application context that loads the Spring application context.
+ * 
+ * Note: DON'T close the context, as we want it to keep going after the main
+ * thread exits. Use the @SuppressWarnings annotation instead.
+ * 
  * @author Roger
  * 
  */
 public class Main {
 
+	@SuppressWarnings("resource")
 	public static void main(String[] arg) {
 
-		// Load the ContextSingletonBeanFactoryLocator
-		BeanFactoryLocator factoryLocator = ContextSingletonBeanFactoryLocator.getInstance("classpath:beanRefContext.xml");
-
-		// Get hold of the factory to use and start the quartz job.
-		factoryLocator.useBeanFactory("quartzContextFactory");
+		new ClassPathXmlApplicationContext("error-track-context.xml");
 	}
 
 }
