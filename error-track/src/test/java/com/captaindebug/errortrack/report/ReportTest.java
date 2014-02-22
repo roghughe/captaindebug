@@ -1,7 +1,7 @@
 /**
  * Copyright 2014 Marin Solutions
  */
-package com.captaindebug.errortrack;
+package com.captaindebug.errortrack.report;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -15,7 +15,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import com.captaindebug.errortrack.Report.ErrorResult;
+import com.captaindebug.errortrack.report.Report;
+import com.captaindebug.errortrack.report.Report.ErrorResult;
 
 /**
  * @author Roger
@@ -48,7 +49,7 @@ public class ReportTest {
 
 		instance.addFile(path);
 
-		Map<String, List<Report.ErrorResult>> results = instance.getResults();
+		Map<String, List<Report.ErrorResult>> results = instance.getRawResults();
 		assertEquals(1, results.size());
 
 		List<Report.ErrorResult> result = results.get(path);

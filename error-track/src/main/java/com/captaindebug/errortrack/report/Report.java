@@ -1,17 +1,16 @@
 /**
  * Copyright 2014 Marin Solutions
  */
-package com.captaindebug.errortrack;
+package com.captaindebug.errortrack.report;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
 import org.springframework.stereotype.Service;
-
-import com.google.common.annotations.VisibleForTesting;
 
 /**
  * Class that generates a report based on the findings of the error search
@@ -29,9 +28,8 @@ public class Report {
 		results.clear();
 	}
 
-	@VisibleForTesting
-	Map<String, List<ErrorResult>> getResults() {
-		return results;
+	public Map<String, List<ErrorResult>> getRawResults() {
+		return Collections.unmodifiableMap(results);
 	}
 
 	/**
@@ -89,8 +87,7 @@ public class Report {
 		return "TODO add the report: " + results;
 	}
 
-	@VisibleForTesting
-	class ErrorResult {
+	public class ErrorResult {
 
 		private final int lineNumber;
 		private final List<String> lines;

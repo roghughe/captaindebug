@@ -18,8 +18,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.captaindebug.errortrack.Report;
 import com.captaindebug.errortrack.Validator;
+import com.captaindebug.errortrack.report.Report;
 import com.google.common.annotations.VisibleForTesting;
 
 /**
@@ -90,7 +90,7 @@ public class FileValidator implements Validator {
 		do {
 			line = in.readLine();
 			if (isNotNull(line)) {
-				processLine(line, file.getPath(), lineNumber++, in);
+				processLine(line, file.getPath(), ++lineNumber, in);
 			}
 		} while (isNotNull(line));
 	}
@@ -99,17 +99,20 @@ public class FileValidator implements Validator {
 		return obj != null;
 	}
 
-	private void processLine(String line, String filePath, int lineNumber, BufferedReader in) throws IOException {
+	private int processLine(String line, String filePath, int lineNumber, BufferedReader in) throws IOException {
 
-		if (validateExcludes(line) && scanForValidator.validate(line)) {
+		if (canValidateLine(line) && scanForValidator.validate(line)) {
 			List<String> lines = new ArrayList<String>();
 			lines.add(line);
 			addExtraDetailLines(in, lines);
 			report.addResult(filePath, lineNumber, lines);
+			lineNumber += extraLineCount;
 		}
+
+		return lineNumber;
 	}
 
-	private boolean validateExcludes(String line) {
+	private boolean canValidateLine(String line) {
 		boolean retVal = true;
 		if (isNotNull(excludeValidator)) {
 			retVal = !excludeValidator.validate(line);

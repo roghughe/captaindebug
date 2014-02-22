@@ -1,0 +1,17 @@
+Aug 18, 2013 2:16:33 PM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring FrameworkServlet 'appServlet'
+Aug 18, 2013 2:16:34 PM org.apache.catalina.core.StandardWrapperValve invoke
+SEVERE: Servlet.service() for servlet [appServlet] in context with path [/long-poll] threw exception [Request processing failed; nested exception is java.lang.IllegalStateException: Async support must be enabled on a servlet and for all filters involved in async request processing. This is done in Java code using the Servlet API or by adding "<async-supported>true</async-supported>" to servlet and filter declarations in web.xml.] with root cause
+java.lang.IllegalStateException: Async support must be enabled on a servlet and for all filters involved in async request processing. This is done in Java code using the Servlet API or by adding "<async-supported>true</async-supported>" to servlet and filter declarations in web.xml.
+        at org.springframework.util.Assert.state(Assert.java:385)
+        at org.springframework.web.context.request.async.StandardServletAsyncWebRequest.startAsync(StandardServletAsyncWebRequest.java:98)
+        at org.springframework.web.context.request.async.WebAsyncManager.startAsyncProcessing(WebAsyncManager.java:424)
+        at org.springframework.web.context.request.async.WebAsyncManager.startDeferredResultProcessing(WebAsyncManager.java:403)
+        at org.springframework.web.servlet.mvc.method.annotation.DeferredResultMethodReturnValueHandler.handleReturnValue(DeferredResultMethodReturnValueHandler.java:49)
+        at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:69)
+        at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:122)
+        at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:745)
+        at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:686)
+        at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:80)
+        at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:925)
+        at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:856)

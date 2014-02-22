@@ -4,45 +4,18 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:component-scan base-package="com.captaindebug.errortrack" />
+	<import resource="locator-context.xml" />
 
+	<bean id="FileLocatorJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 
-	<bean id="scan-for" class="com.captaindebug.errortrack.validator.RegexValidator" >
-		<constructor-arg value="${scan.for}" />
-	</bean>
-	<bean id="exclude" class="com.captaindebug.errortrack.validator.RegexValidator" >
-		<constructor-arg value="${exclude}" />
-	</bean>
+		<property name="targetObject" ref="fileLocator" />
+		<property name="targetMethod" value="findFile" />
 
-	<!-- Configurer that replaces ${...} placeholders with values from a properties 
-		file -->
-	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-
-		<property name="locations">
-			<list>
-				<value>app.properties</value>
-				<!-- List other property files here -->
-				<!-- value>mail.properties</value -->
-			</list>
-		</property>
 	</bean>
 
-
-<bean id="FileLocatorJob" 
- 	class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
- 
-	<property name="targetObject" ref="fileLocator" />
-	<property name="targetMethod" value="findFile" />
- 
-</bean>
-	<!--  <bean name="DONOTUSE" class="org.springframework.scheduling.quartz.JobDetailBean">
-		<property name="jobClass"
-			value="com.captaindebug.errortrack.quartz.FileLocatorJob" />
-	</bean>
-  -->
-  
-	<bean id="FileLocatorTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	<bean id="FileLocatorTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="FileLocatorJob" />
 		<!-- run every morning at 2 AM -->
 		<!-- property name="cronExpression" value="0 0 2 * * ?" / -->
@@ -53,8 +26,7 @@
 		<property name="triggers">
 			<list>
 				<ref bean="FileLocatorTrigger" />
-				<!-- Add other triggers for other jobs (if any) here 
-				<ref bean="" /> -->
+				<!-- Add other triggers for other jobs (if any) here <ref bean="" /> -->
 			</list>
 		</property>
 	</bean>
