@@ -18,8 +18,9 @@
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="FileLocatorJob" />
 		<!-- run every morning at 2 AM -->
-		<!-- property name="cronExpression" value="0 0 2 * * ?" / -->
-		<property name="cronExpression" value="0/10 * * * * ?" />
+		<property name="cronExpression" value="0 0 2 * * ?" />
+		<!-- Use this to test the app (every minute) -->
+		<!-- property name="cronExpression" value="0 0/1 * * * ?" / -->
 	</bean>
 
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
