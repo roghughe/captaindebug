@@ -63,6 +63,8 @@ public class FileLocatorITest {
 	private void testFileAvailable(String testFile) {
 		File file = new File(testFile);
 		assertTrue(file.exists());
+
+		file.setLastModified(System.currentTimeMillis());
 	}
 
 	@Test
