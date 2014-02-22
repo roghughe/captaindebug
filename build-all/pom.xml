@@ -30,5 +30,6 @@
 		<module>../audit-aspectj</module>
 		<module>../hazelcast</module>
 		<module>../long-poll</module>
+		<module>../error-track</module>
 	</modules>
 </project>
