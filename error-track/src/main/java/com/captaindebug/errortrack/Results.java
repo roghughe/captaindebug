@@ -1,7 +1,7 @@
 /**
  * Copyright 2014 Marin Solutions
  */
-package com.captaindebug.errortrack.report;
+package com.captaindebug.errortrack;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,7 +22,9 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service
-public class Report {
+public class Results {
+
+	private static final Logger logger = LoggerFactory.getLogger(Results.class);
 
 	private final Map<String, List<ErrorResult>> results = new HashMap<String, List<ErrorResult>>();
 
@@ -43,6 +47,7 @@ public class Report {
 		Validate.notNull(filePath);
 		Validate.notBlank(filePath, "Invalid file/path");
 
+		logger.debug("Adding file {}", filePath);
 		List<ErrorResult> list = new ArrayList<ErrorResult>();
 		results.put(filePath, list);
 	}
@@ -71,6 +76,7 @@ public class Report {
 
 		ErrorResult errorResult = new ErrorResult(lineNumber, lines);
 		list.add(errorResult);
+		logger.debug("Adding Result: {}", errorResult);
 	}
 
 	private boolean isNull(Object obj) {
@@ -82,9 +88,12 @@ public class Report {
 	 * 
 	 * @return The report as a String
 	 */
-	public String generate() {
+	public <T> void generate(Formatter formatter, Publisher publisher) {
 
-		return "TODO add the report: " + results;
+		T report = formatter.format(this);
+		if (!publisher.publish(report)) {
+			logger.error("Failed to publish report");
+		}
 	}
 
 	public class ErrorResult {
@@ -103,6 +112,11 @@ public class Report {
 
 		public List<String> getLines() {
 			return lines;
+		}
+
+		@Override
+		public String toString() {
+			return "LineNumber: " + lineNumber + "\nLines:\n" + lines;
 		}
 	}
 }

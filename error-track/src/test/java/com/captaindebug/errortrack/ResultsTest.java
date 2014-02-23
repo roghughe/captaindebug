@@ -1,7 +1,7 @@
 /**
  * Copyright 2014 Marin Solutions
  */
-package com.captaindebug.errortrack.report;
+package com.captaindebug.errortrack;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -15,20 +15,20 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import com.captaindebug.errortrack.report.Report;
-import com.captaindebug.errortrack.report.Report.ErrorResult;
+import com.captaindebug.errortrack.Results;
+import com.captaindebug.errortrack.Results.ErrorResult;
 
 /**
  * @author Roger
  * 
  */
-public class ReportTest {
+public class ResultsTest {
 
-	private Report instance;
+	private Results instance;
 
 	@Before
 	public void setUp() {
-		instance = new Report();
+		instance = new Results();
 	}
 
 	@Test(expected = NullPointerException.class)
@@ -49,10 +49,10 @@ public class ReportTest {
 
 		instance.addFile(path);
 
-		Map<String, List<Report.ErrorResult>> results = instance.getRawResults();
+		Map<String, List<Results.ErrorResult>> results = instance.getRawResults();
 		assertEquals(1, results.size());
 
-		List<Report.ErrorResult> result = results.get(path);
+		List<Results.ErrorResult> result = results.get(path);
 		assertTrue(result.isEmpty());
 	}
 
@@ -65,11 +65,11 @@ public class ReportTest {
 		instance.addFile(path);
 
 		@SuppressWarnings("unchecked")
-		Map<String, List<Report.ErrorResult>> results = (Map<String, List<ErrorResult>>) ReflectionTestUtils
+		Map<String, List<Results.ErrorResult>> results = (Map<String, List<ErrorResult>>) ReflectionTestUtils
 				.getField(instance, "results");
 		assertEquals(1, results.size());
 
-		List<Report.ErrorResult> result = results.get(path);
+		List<Results.ErrorResult> result = results.get(path);
 		assertTrue(result.isEmpty());
 	}
 
@@ -115,7 +115,7 @@ public class ReportTest {
 		instance.addResult(path, 10, list);
 
 		@SuppressWarnings("unchecked")
-		Map<String, List<Report.ErrorResult>> results = (Map<String, List<ErrorResult>>) ReflectionTestUtils
+		Map<String, List<Results.ErrorResult>> results = (Map<String, List<ErrorResult>>) ReflectionTestUtils
 				.getField(instance, "results");
 		assertEquals(1, results.size());
 
@@ -131,13 +131,13 @@ public class ReportTest {
 		return list;
 	}
 
-	private void validateResults(String path, Map<String, List<Report.ErrorResult>> results,
+	private void validateResults(String path, Map<String, List<Results.ErrorResult>> results,
 			String... strings) {
 
-		List<Report.ErrorResult> result = results.get(path);
+		List<Results.ErrorResult> result = results.get(path);
 		assertEquals(1, result.size());
 
-		Report.ErrorResult errorResult = result.get(0);
+		Results.ErrorResult errorResult = result.get(0);
 		assertEquals(10, errorResult.getLineNumber());
 		List<String> lines = errorResult.getLines();
 
@@ -161,7 +161,7 @@ public class ReportTest {
 		instance.addResult(path2, 10, list);
 
 		@SuppressWarnings("unchecked")
-		Map<String, List<Report.ErrorResult>> results = (Map<String, List<ErrorResult>>) ReflectionTestUtils
+		Map<String, List<Results.ErrorResult>> results = (Map<String, List<ErrorResult>>) ReflectionTestUtils
 				.getField(instance, "results");
 		assertEquals(2, results.size());
 
@@ -181,11 +181,11 @@ public class ReportTest {
 		instance.addResult(path1, 10, list);
 
 		@SuppressWarnings("unchecked")
-		Map<String, List<Report.ErrorResult>> results = (Map<String, List<ErrorResult>>) ReflectionTestUtils
+		Map<String, List<Results.ErrorResult>> results = (Map<String, List<ErrorResult>>) ReflectionTestUtils
 				.getField(instance, "results");
 		assertEquals(1, results.size());
 
-		List<Report.ErrorResult> result = results.get(path1);
+		List<Results.ErrorResult> result = results.get(path1);
 		assertEquals(2, result.size());
 	}
 }

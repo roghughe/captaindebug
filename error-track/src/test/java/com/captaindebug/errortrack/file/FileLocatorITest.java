@@ -18,7 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import com.captaindebug.errortrack.report.Report;
+import com.captaindebug.errortrack.Results;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:locator-context.xml" })
@@ -32,7 +32,7 @@ public class FileLocatorITest {
 	private FileLocator instance;
 
 	@Autowired
-	private Report report;
+	private Results report;
 
 	@Before
 	public void setUp() throws Exception {
@@ -52,10 +52,10 @@ public class FileLocatorITest {
 
 		instance.findFile();
 
-		Map<String, List<Report.ErrorResult>> results = report.getRawResults();
+		Map<String, List<Results.ErrorResult>> results = report.getRawResults();
 
 		assertEquals(1, results.size());
-		List<Report.ErrorResult> errorList = results.get(testFile);
+		List<Results.ErrorResult> errorList = results.get(testFile);
 		assertNotNull(errorList);
 		assertEquals(0, errorList.size());
 	}
@@ -76,14 +76,14 @@ public class FileLocatorITest {
 
 		instance.findFile();
 
-		Map<String, List<Report.ErrorResult>> results = report.getRawResults();
+		Map<String, List<Results.ErrorResult>> results = report.getRawResults();
 
 		assertEquals(1, results.size());
-		List<Report.ErrorResult> errorList = results.get(testFile);
+		List<Results.ErrorResult> errorList = results.get(testFile);
 		assertNotNull(errorList);
 		assertEquals(1, errorList.size());
 
-		Report.ErrorResult errorResult = errorList.get(0);
+		Results.ErrorResult errorResult = errorList.get(0);
 		assertEquals(4, errorResult.getLineNumber());
 	}
 
@@ -96,10 +96,10 @@ public class FileLocatorITest {
 
 		instance.findFile();
 
-		Map<String, List<Report.ErrorResult>> results = report.getRawResults();
+		Map<String, List<Results.ErrorResult>> results = report.getRawResults();
 
 		assertEquals(1, results.size());
-		List<Report.ErrorResult> errorList = results.get(testFile);
+		List<Results.ErrorResult> errorList = results.get(testFile);
 		assertNotNull(errorList);
 		assertEquals(0, errorList.size());
 	}

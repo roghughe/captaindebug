@@ -21,7 +21,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import com.captaindebug.errortrack.report.Report;
+import com.captaindebug.errortrack.Results;
 
 public class FileValidatorTest {
 
@@ -37,7 +37,7 @@ public class FileValidatorTest {
 	private FileAgeValidator fileAgeValidator;
 
 	@Mock
-	private Report report;
+	private Results report;
 
 	@Mock
 	private File file;

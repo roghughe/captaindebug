@@ -18,8 +18,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.captaindebug.errortrack.Formatter;
+import com.captaindebug.errortrack.Publisher;
+import com.captaindebug.errortrack.Results;
 import com.captaindebug.errortrack.Validator;
-import com.captaindebug.errortrack.report.Report;
 import com.google.common.annotations.VisibleForTesting;
 
 /**
@@ -44,10 +46,18 @@ public class FileValidator implements Validator {
 	private RegexValidator excludeValidator;
 
 	@Autowired
+	@Qualifier("textFormatter")
+	private Formatter formatter;
+
+	@Autowired
+	@Qualifier("emailPublisher")
+	private Publisher publisher;
+
+	@Autowired
 	private FileAgeValidator fileAgeValidator;
 
 	@Autowired
-	private Report report;
+	private Results report;
 
 	/**
 	 * @see com.captaindebug.errortrack.file.FileFoundHandler#foundFile(java.io.File)
@@ -62,7 +72,7 @@ public class FileValidator implements Validator {
 			checkFile(file);
 			retVal = true;
 
-			logger.info(report.generate());
+			report.generate(formatter, publisher);
 		}
 		return retVal;
 	}
