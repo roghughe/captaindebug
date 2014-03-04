@@ -57,7 +57,7 @@ public class FileValidator implements Validator {
 	private FileAgeValidator fileAgeValidator;
 
 	@Autowired
-	private Results report;
+	private Results results;
 
 	/**
 	 * @see com.captaindebug.errortrack.file.FileFoundHandler#foundFile(java.io.File)
@@ -68,11 +68,11 @@ public class FileValidator implements Validator {
 		boolean retVal = false;
 		File file = (File) obj;
 		if (fileAgeValidator.validate(file)) {
-			report.addFile(file.getPath());
+			results.addFile(file.getPath());
 			checkFile(file);
 			retVal = true;
 
-			report.generate(formatter, publisher);
+			results.generate(formatter, publisher);
 		}
 		return retVal;
 	}
@@ -115,7 +115,7 @@ public class FileValidator implements Validator {
 			List<String> lines = new ArrayList<String>();
 			lines.add(line);
 			addExtraDetailLines(in, lines);
-			report.addResult(filePath, lineNumber, lines);
+			results.addResult(filePath, lineNumber, lines);
 			lineNumber += extraLineCount;
 		}
 
