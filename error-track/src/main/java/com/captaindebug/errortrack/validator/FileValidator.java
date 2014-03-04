@@ -18,8 +18,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.captaindebug.errortrack.Formatter;
-import com.captaindebug.errortrack.Publisher;
 import com.captaindebug.errortrack.Results;
 import com.captaindebug.errortrack.Validator;
 import com.google.common.annotations.VisibleForTesting;
@@ -46,14 +44,6 @@ public class FileValidator implements Validator {
 	private RegexValidator excludeValidator;
 
 	@Autowired
-	@Qualifier("textFormatter")
-	private Formatter formatter;
-
-	@Autowired
-	@Qualifier("emailPublisher")
-	private Publisher publisher;
-
-	@Autowired
 	private FileAgeValidator fileAgeValidator;
 
 	@Autowired
@@ -71,8 +61,6 @@ public class FileValidator implements Validator {
 			results.addFile(file.getPath());
 			checkFile(file);
 			retVal = true;
-
-			results.generate(formatter, publisher);
 		}
 		return retVal;
 	}
@@ -84,7 +72,9 @@ public class FileValidator implements Validator {
 			readLines(in, file);
 			in.close();
 		} catch (Exception e) {
-			logger.error("Error whilst processing file: " + file.getPath() + " Message: " + e.getMessage(), e);
+			logger.error(
+					"Error whilst processing file: " + file.getPath() + " Message: "
+							+ e.getMessage(), e);
 		}
 	}
 
@@ -109,7 +99,8 @@ public class FileValidator implements Validator {
 		return obj != null;
 	}
 
-	private int processLine(String line, String filePath, int lineNumber, BufferedReader in) throws IOException {
+	private int processLine(String line, String filePath, int lineNumber, BufferedReader in)
+			throws IOException {
 
 		if (canValidateLine(line) && scanForValidator.validate(line)) {
 			List<String> lines = new ArrayList<String>();

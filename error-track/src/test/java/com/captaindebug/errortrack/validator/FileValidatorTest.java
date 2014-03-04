@@ -37,13 +37,13 @@ public class FileValidatorTest {
 	private FileAgeValidator fileAgeValidator;
 
 	@Mock
-	private Results report;
-
-	@Mock
 	private File file;
 
 	@Mock
 	private BufferedReader bufferedReader;
+
+	@Mock
+	private Results results;
 
 	@Before
 	public void setUp() throws Exception {
@@ -61,7 +61,7 @@ public class FileValidatorTest {
 		ReflectionTestUtils.setField(instance, "extraLineCount", Integer.valueOf(10));
 		ReflectionTestUtils.setField(instance, "scanForValidator", scanForValidator);
 		ReflectionTestUtils.setField(instance, "fileAgeValidator", fileAgeValidator);
-		ReflectionTestUtils.setField(instance, "report", report);
+		ReflectionTestUtils.setField(instance, "results", results);
 	}
 
 	@Test
@@ -70,12 +70,13 @@ public class FileValidatorTest {
 		when(fileAgeValidator.validate(file)).thenReturn(false);
 		boolean result = instance.validate(file);
 		assertFalse(result);
-		verify(report, never()).addFile(anyString());
+		verify(results, never()).addFile(anyString());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testValiate_returns_true_when_valid_file_date_with_no_error_found() throws IOException {
+	public void testValiate_returns_true_when_valid_file_date_with_no_error_found()
+			throws IOException {
 
 		when(fileAgeValidator.validate(file)).thenReturn(true);
 		when(file.getPath()).thenReturn("The/File/Path/name.log");
@@ -87,36 +88,39 @@ public class FileValidatorTest {
 
 		boolean result = instance.validate(file);
 		assertTrue(result);
-		verify(report).addFile(anyString());
+		verify(results).addFile(anyString());
 
-		verify(report, never()).addResult(anyString(), anyInt(), (List<String>) anyObject());
+		verify(results, never()).addResult(anyString(), anyInt(), (List<String>) anyObject());
 
 	}
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testValiate_returns_true_when_valid_file_date_with_and_error_found() throws IOException {
+	public void testValiate_returns_true_when_valid_file_date_with_and_error_found()
+			throws IOException {
 
 		when(fileAgeValidator.validate(file)).thenReturn(true);
 		when(file.getPath()).thenReturn("The/File/Path/name.log");
 
 		final String aline = "This line is okay";
 		final String errorLine = "Exception blah blah blah";
-		when(bufferedReader.readLine()).thenReturn(aline).thenReturn(errorLine).thenReturn(null);
+		when(bufferedReader.readLine()).thenReturn(aline).thenReturn(errorLine)
+				.thenReturn(null);
 
 		when(scanForValidator.validate(aline)).thenReturn(false);
 		when(scanForValidator.validate(errorLine)).thenReturn(true);
 
 		boolean result = instance.validate(file);
 		assertTrue(result);
-		verify(report).addFile(anyString());
+		verify(results).addFile(anyString());
 
-		verify(report).addResult(anyString(), anyInt(), (List<String>) anyObject());
+		verify(results).addResult(anyString(), anyInt(), (List<String>) anyObject());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testValiate_returns_false_when_valid_file_date_with_and_error_found_and_exclude_match() throws IOException {
+	public void testValiate_returns_false_when_valid_file_date_with_and_error_found_and_exclude_match()
+			throws IOException {
 
 		ReflectionTestUtils.setField(instance, "excludeValidator", excludeValidator);
 
@@ -125,7 +129,8 @@ public class FileValidatorTest {
 
 		final String aline = "This line is okay";
 		final String errorLine = "Exception blah blah blah";
-		when(bufferedReader.readLine()).thenReturn(aline).thenReturn(errorLine).thenReturn(null);
+		when(bufferedReader.readLine()).thenReturn(aline).thenReturn(errorLine)
+				.thenReturn(null);
 
 		when(scanForValidator.validate(aline)).thenReturn(false);
 		when(scanForValidator.validate(errorLine)).thenReturn(true);
@@ -134,14 +139,15 @@ public class FileValidatorTest {
 
 		boolean result = instance.validate(file);
 		assertTrue(result);
-		verify(report).addFile(anyString());
+		verify(results).addFile(anyString());
 
-		verify(report, never()).addResult(anyString(), anyInt(), (List<String>) anyObject());
+		verify(results, never()).addResult(anyString(), anyInt(), (List<String>) anyObject());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testValiate_returns_true_when_valid_file_date_with_and_error_found_and_exclude__no_match() throws IOException {
+	public void testValiate_returns_true_when_valid_file_date_with_and_error_found_and_exclude__no_match()
+			throws IOException {
 
 		ReflectionTestUtils.setField(instance, "excludeValidator", excludeValidator);
 
@@ -150,7 +156,8 @@ public class FileValidatorTest {
 
 		final String aline = "This line is okay";
 		final String errorLine = "Exception blah blah blah";
-		when(bufferedReader.readLine()).thenReturn(aline).thenReturn(errorLine).thenReturn(null);
+		when(bufferedReader.readLine()).thenReturn(aline).thenReturn(errorLine)
+				.thenReturn(null);
 
 		when(scanForValidator.validate(aline)).thenReturn(false);
 		when(scanForValidator.validate(errorLine)).thenReturn(true);
@@ -159,9 +166,9 @@ public class FileValidatorTest {
 
 		boolean result = instance.validate(file);
 		assertTrue(result);
-		verify(report).addFile(anyString());
+		verify(results).addFile(anyString());
 
-		verify(report).addResult(anyString(), anyInt(), (List<String>) anyObject());
+		verify(results).addResult(anyString(), anyInt(), (List<String>) anyObject());
 	}
 
 }

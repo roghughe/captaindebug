@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import com.captaindebug.errortrack.Results;
 import com.captaindebug.errortrack.Validator;
 
 /**
@@ -30,6 +31,9 @@ public class FileLocatorTest {
 
 	@Mock
 	private File mockFile;
+
+	@Mock
+	private Results results;
 
 	private int count;
 
@@ -49,6 +53,7 @@ public class FileLocatorTest {
 		};
 
 		ReflectionTestUtils.setField(instance, "scanIn", "/the/log/file/dir/*.log");
+		ReflectionTestUtils.setField(instance, "results", results);
 
 		callback = new MyCallback();
 		ReflectionTestUtils.setField(instance, "validator", callback);
