@@ -31,9 +31,9 @@ public class FileAgeValidator implements Validator {
 	public <T> boolean validate(T obj) {
 
 		File file = (File) obj;
+		Calendar fileDate = getFileDate(file);
 
 		Calendar ageLimit = getFileAgeLimit();
-		Calendar fileDate = getFileDate(file);
 
 		boolean retVal = false;
 		if (fileDate.after(ageLimit)) {
