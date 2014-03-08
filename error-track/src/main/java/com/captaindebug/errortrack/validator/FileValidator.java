@@ -49,9 +49,6 @@ public class FileValidator implements Validator {
 	@Autowired
 	private Results results;
 
-	/**
-	 * @see com.captaindebug.errortrack.file.FileFoundHandler#foundFile(java.io.File)
-	 */
 	@Override
 	public <T> boolean validate(T obj) {
 
@@ -72,9 +69,7 @@ public class FileValidator implements Validator {
 			readLines(in, file);
 			in.close();
 		} catch (Exception e) {
-			logger.error(
-					"Error whilst processing file: " + file.getPath() + " Message: "
-							+ e.getMessage(), e);
+			logger.error("Error whilst processing file: " + file.getPath() + " Message: " + e.getMessage(), e);
 		}
 	}
 
@@ -99,8 +94,7 @@ public class FileValidator implements Validator {
 		return obj != null;
 	}
 
-	private int processLine(String line, String filePath, int lineNumber, BufferedReader in)
-			throws IOException {
+	private int processLine(String line, String filePath, int lineNumber, BufferedReader in) throws IOException {
 
 		if (canValidateLine(line) && scanForValidator.validate(line)) {
 			List<String> lines = new ArrayList<String>();
