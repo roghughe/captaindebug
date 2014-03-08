@@ -29,13 +29,13 @@ public class RegexValidator implements Validator {
 	}
 
 	@Override
-	public <T> boolean validate(T line) {
+	public <T> boolean validate(T string) {
 
 		boolean retVal = false;
-		Matcher matcher = pattern.matcher((String) line);
+		Matcher matcher = pattern.matcher((String) string);
 		retVal = matcher.matches();
 		if (retVal && logger.isDebugEnabled()) {
-			logger.debug("Found error line: {}", line);
+			logger.debug("Found error line: {}", string);
 		}
 
 		return retVal;

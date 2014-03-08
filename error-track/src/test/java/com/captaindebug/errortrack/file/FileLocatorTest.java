@@ -53,7 +53,6 @@ public class FileLocatorTest {
 		};
 
 		ReflectionTestUtils.setField(instance, "scanIn", "/the/log/file/dir/*.log");
-		ReflectionTestUtils.setField(instance, "results", results);
 
 		callback = new MyCallback();
 		ReflectionTestUtils.setField(instance, "validator", callback);
