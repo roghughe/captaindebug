@@ -75,8 +75,7 @@ public class FileValidatorTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testValiate_returns_true_when_valid_file_date_with_no_error_found()
-			throws IOException {
+	public void testValiate_returns_true_when_valid_file_date_with_no_error_found() throws IOException {
 
 		when(fileAgeValidator.validate(file)).thenReturn(true);
 		when(file.getPath()).thenReturn("The/File/Path/name.log");
@@ -96,16 +95,14 @@ public class FileValidatorTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testValiate_returns_true_when_valid_file_date_with_and_error_found()
-			throws IOException {
+	public void testValiate_returns_true_when_valid_file_date_with_and_error_found() throws IOException {
 
 		when(fileAgeValidator.validate(file)).thenReturn(true);
 		when(file.getPath()).thenReturn("The/File/Path/name.log");
 
 		final String aline = "This line is okay";
 		final String errorLine = "Exception blah blah blah";
-		when(bufferedReader.readLine()).thenReturn(aline).thenReturn(errorLine)
-				.thenReturn(null);
+		when(bufferedReader.readLine()).thenReturn(aline).thenReturn(errorLine).thenReturn(null);
 
 		when(scanForValidator.validate(aline)).thenReturn(false);
 		when(scanForValidator.validate(errorLine)).thenReturn(true);
@@ -119,8 +116,7 @@ public class FileValidatorTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testValiate_returns_false_when_valid_file_date_with_and_error_found_and_exclude_match()
-			throws IOException {
+	public void testValiate_returns_false_when_valid_file_date_with_and_error_found_and_exclude_match() throws IOException {
 
 		ReflectionTestUtils.setField(instance, "excludeValidator", excludeValidator);
 
@@ -129,8 +125,7 @@ public class FileValidatorTest {
 
 		final String aline = "This line is okay";
 		final String errorLine = "Exception blah blah blah";
-		when(bufferedReader.readLine()).thenReturn(aline).thenReturn(errorLine)
-				.thenReturn(null);
+		when(bufferedReader.readLine()).thenReturn(aline).thenReturn(errorLine).thenReturn(null);
 
 		when(scanForValidator.validate(aline)).thenReturn(false);
 		when(scanForValidator.validate(errorLine)).thenReturn(true);
@@ -146,8 +141,7 @@ public class FileValidatorTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testValiate_returns_true_when_valid_file_date_with_and_error_found_and_exclude__no_match()
-			throws IOException {
+	public void testValiate_returns_true_when_valid_file_date_with_and_error_found_and_exclude__no_match() throws IOException {
 
 		ReflectionTestUtils.setField(instance, "excludeValidator", excludeValidator);
 
@@ -156,8 +150,7 @@ public class FileValidatorTest {
 
 		final String aline = "This line is okay";
 		final String errorLine = "Exception blah blah blah";
-		when(bufferedReader.readLine()).thenReturn(aline).thenReturn(errorLine)
-				.thenReturn(null);
+		when(bufferedReader.readLine()).thenReturn(aline).thenReturn(errorLine).thenReturn(null);
 
 		when(scanForValidator.validate(aline)).thenReturn(false);
 		when(scanForValidator.validate(errorLine)).thenReturn(true);

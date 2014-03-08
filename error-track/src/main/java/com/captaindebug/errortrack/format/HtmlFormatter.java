@@ -10,7 +10,7 @@ public class HtmlFormatter implements Formatter {
 
 	@Override
 	public <T> T format(Results report) {
-		// TODO Auto-generated method stub
+		// TODO Add this some other day...
 		return null;
 	}
 
