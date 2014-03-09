@@ -31,4 +31,19 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- Spring mail configuration -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.ntlworld.com"/>
+	</bean>
+	
+	<!-- this is a template message that we can pre-load with default state -->
+	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+	  	<property name="from" value="tracking@captaindebug.com"/>
+	  	<property name="subject" value="Error Tracking Report"/>
+	</bean>
+
+	
+	
+	
 </beans>

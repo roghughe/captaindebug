@@ -30,14 +30,13 @@ public class TextFormatter implements Formatter {
 			appendErrors(sb, entry.getValue());
 		}
 
-		sb.append(RULE);
 		return (T) sb.toString();
 	}
 
 	private String dateFormat() {
 
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		return df.format(Calendar.getInstance());
+		return df.format(Calendar.getInstance().getTime());
 	}
 
 	private void appendFileName(StringBuilder sb, String fileName) {
@@ -70,7 +69,7 @@ public class TextFormatter implements Formatter {
 
 		for (String line : lines) {
 			sb.append(line);
-			sb.append("\n");
+			// sb.append("\n");
 		}
 	}
 }
