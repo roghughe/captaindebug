@@ -1,7 +1,7 @@
 /**
  * Copyright 2014 Marin Solutions
  */
-package com.captaindebug.errortrack;
+package com.captaindebug.errortrack.report;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -15,8 +15,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import com.captaindebug.errortrack.Results;
-import com.captaindebug.errortrack.Results.ErrorResult;
+import com.captaindebug.errortrack.report.Results;
+import com.captaindebug.errortrack.report.Results.ErrorResult;
 
 /**
  * @author Roger

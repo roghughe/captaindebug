@@ -18,7 +18,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import com.captaindebug.errortrack.Results;
+import com.captaindebug.errortrack.report.Results;
+import com.captaindebug.errortrack.report.Results.ErrorResult;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:locator-context.xml" })
@@ -34,12 +35,18 @@ public class FileLocatorITest {
 	@Autowired
 	private Results report;
 
+	Map<String, List<Results.ErrorResult>> results;
+
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
 
 		logFileDir = System.getProperty("user.dir") + "/src/test/resources/";
 		logger.info("Using directory: " + logFileDir);
 		report.clear();
+
+		results = (Map<String, List<ErrorResult>>) ReflectionTestUtils.getField(report,
+				"results");
 	}
 
 	@Test
@@ -51,8 +58,6 @@ public class FileLocatorITest {
 		ReflectionTestUtils.setField(instance, "scanIn", testFile);
 
 		instance.findFile();
-
-		Map<String, List<Results.ErrorResult>> results = report.getRawResults();
 
 		assertEquals(1, results.size());
 		List<Results.ErrorResult> errorList = results.get(testFile);
@@ -76,8 +81,6 @@ public class FileLocatorITest {
 
 		instance.findFile();
 
-		Map<String, List<Results.ErrorResult>> results = report.getRawResults();
-
 		assertEquals(1, results.size());
 		List<Results.ErrorResult> errorList = results.get(testFile);
 		assertNotNull(errorList);
@@ -95,8 +98,6 @@ public class FileLocatorITest {
 		ReflectionTestUtils.setField(instance, "scanIn", testFile);
 
 		instance.findFile();
-
-		Map<String, List<Results.ErrorResult>> results = report.getRawResults();
 
 		assertEquals(1, results.size());
 		List<Results.ErrorResult> errorList = results.get(testFile);

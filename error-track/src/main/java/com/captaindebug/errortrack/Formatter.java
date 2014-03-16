@@ -1,5 +1,7 @@
 package com.captaindebug.errortrack;
 
+import com.captaindebug.errortrack.report.Results;
+
 
 /**
  * Classes implementing this interface can format reports into whatever type of

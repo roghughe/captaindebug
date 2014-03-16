@@ -1,9 +1,8 @@
-package com.captaindebug.errortrack.format;
+package com.captaindebug.errortrack.report;
 
 import org.springframework.stereotype.Service;
 
 import com.captaindebug.errortrack.Formatter;
-import com.captaindebug.errortrack.Results;
 
 @Service
 public class HtmlFormatter implements Formatter {

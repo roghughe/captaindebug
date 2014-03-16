@@ -1,7 +1,7 @@
 /**
  * Copyright 2014 Marin Solutions
  */
-package com.captaindebug.errortrack;
+package com.captaindebug.errortrack.report;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,6 +13,9 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import com.captaindebug.errortrack.Formatter;
+import com.captaindebug.errortrack.Publisher;
 
 /**
  * Class that generates a report based on the findings of the error search
@@ -79,7 +82,7 @@ public class Results {
 		results.clear();
 	}
 
-	public Map<String, List<ErrorResult>> getRawResults() {
+	Map<String, List<ErrorResult>> getRawResults() {
 		return Collections.unmodifiableMap(results);
 	}
 

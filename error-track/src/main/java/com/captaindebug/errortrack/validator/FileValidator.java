@@ -18,8 +18,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.captaindebug.errortrack.Results;
 import com.captaindebug.errortrack.Validator;
+import com.captaindebug.errortrack.report.Results;
 import com.google.common.annotations.VisibleForTesting;
 
 /**

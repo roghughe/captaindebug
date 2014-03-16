@@ -1,4 +1,4 @@
-package com.captaindebug.errortrack.format;
+package com.captaindebug.errortrack.report;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,8 +9,7 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 
 import com.captaindebug.errortrack.Formatter;
-import com.captaindebug.errortrack.Results;
-import com.captaindebug.errortrack.Results.ErrorResult;
+import com.captaindebug.errortrack.report.Results.ErrorResult;
 
 @Service
 public class TextFormatter implements Formatter {

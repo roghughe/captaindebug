@@ -1,4 +1,4 @@
-package com.captaindebug.errortrack.publish;
+package com.captaindebug.errortrack.report;
 
 import org.springframework.stereotype.Service;
 

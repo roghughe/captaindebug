@@ -21,7 +21,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import com.captaindebug.errortrack.Results;
+import com.captaindebug.errortrack.report.Results;
 
 public class FileValidatorTest {
 

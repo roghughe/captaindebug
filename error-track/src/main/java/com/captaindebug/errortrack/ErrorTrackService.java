@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.captaindebug.errortrack.file.FileLocator;
+import com.captaindebug.errortrack.report.Results;
 
 @Service
 public class ErrorTrackService {
