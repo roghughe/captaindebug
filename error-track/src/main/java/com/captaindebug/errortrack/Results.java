@@ -28,14 +28,6 @@ public class Results {
 
 	private final Map<String, List<ErrorResult>> results = new HashMap<String, List<ErrorResult>>();
 
-	public void clear() {
-		results.clear();
-	}
-
-	public Map<String, List<ErrorResult>> getRawResults() {
-		return Collections.unmodifiableMap(results);
-	}
-
 	/**
 	 * Add the next file found in the folder.
 	 * 
@@ -81,6 +73,14 @@ public class Results {
 
 	private boolean isNull(Object obj) {
 		return obj == null;
+	}
+
+	public void clear() {
+		results.clear();
+	}
+
+	public Map<String, List<ErrorResult>> getRawResults() {
+		return Collections.unmodifiableMap(results);
 	}
 
 	/**
