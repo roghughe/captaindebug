@@ -124,9 +124,13 @@
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
 			<version>1.8.6</version>
-			<!-- You can't use Quartz two with String 3
-			 -->
+			<!-- You can't use Quartz two with String 3 -->
 		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>		
 	</dependencies>
 	<build>
 		<plugins>

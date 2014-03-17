@@ -22,7 +22,7 @@ import com.captaindebug.errortrack.report.Results;
 import com.captaindebug.errortrack.report.Results.ErrorResult;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({ "classpath:locator-context.xml" })
+@ContextConfiguration({ "classpath:error-track-context.xml" })
 public class FileLocatorITest {
 
 	Logger logger = LoggerFactory.getLogger(FileLocatorITest.class);
@@ -45,8 +45,7 @@ public class FileLocatorITest {
 		logger.info("Using directory: " + logFileDir);
 		report.clear();
 
-		results = (Map<String, List<ErrorResult>>) ReflectionTestUtils.getField(report,
-				"results");
+		results = (Map<String, List<ErrorResult>>) ReflectionTestUtils.getField(report, "results");
 	}
 
 	@Test

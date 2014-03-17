@@ -4,7 +4,40 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<import resource="locator-context.xml" />
+	<context:component-scan base-package="com.captaindebug.errortrack" />
+
+	<bean id="scan-for" class="com.captaindebug.errortrack.validator.RegexValidator" >
+		<constructor-arg value="${scan.for}" />
+	</bean>
+	<bean id="exclude" class="com.captaindebug.errortrack.validator.RegexValidator" >
+		<constructor-arg value="${exclude}" />
+	</bean>
+
+	<!-- Configurer that replaces ${...} placeholders with values from a properties 
+		file -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+
+		<property name="locations">
+			<list>
+				<value>app.properties</value>
+				<!-- List other property files here -->
+				<!-- value>mail.properties</value -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- Spring mail configuration -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${mail.smtp.host}"/>
+	</bean>
+	
+	<!-- this is a template message that we can pre-load with default state -->
+	<bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="to" value="${mail.to}"></property>
+	  	<property name="from" value="${mail.from}"/>
+	  	<property name="subject" value="${mail.subject}"/>
+	</bean>
 
 	<bean id="FileLocatorJob"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -18,9 +51,7 @@
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="FileLocatorJob" />
 		<!-- run every morning at 2 AM -->
-		<property name="cronExpression" value="0 0 2 * * ?" />
-		<!-- Use this to test the app (every minute) -->
-		<!-- property name="cronExpression" value="0 0/1 * * * ?" / -->
+		<property name="cronExpression" value="${cron.expression}" />
 	</bean>
 
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
@@ -31,19 +62,4 @@
 			</list>
 		</property>
 	</bean>
-	
-	<!-- Spring mail configuration -->
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.ntlworld.com"/>
-	</bean>
-	
-	<!-- this is a template message that we can pre-load with default state -->
-	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
-	  	<property name="from" value="tracking@captaindebug.com"/>
-	  	<property name="subject" value="Error Tracking Report"/>
-	</bean>
-
-	
-	
-	
 </beans>
