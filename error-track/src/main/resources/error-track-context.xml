@@ -42,8 +42,8 @@
 	<bean id="FileLocatorJob"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 
-		<property name="targetObject" ref="fileLocator" />
-		<property name="targetMethod" value="findFile" />
+		<property name="targetObject" ref="errorTrackService" />
+		<property name="targetMethod" value="trackErrors" />
 
 	</bean>
 

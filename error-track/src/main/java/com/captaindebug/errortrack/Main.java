@@ -8,8 +8,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * Create an application context that loads the Spring application context.
  * 
- * Note: DON'T close the context, as we want it to keep going after the main
- * thread exits. Use the @SuppressWarnings annotation instead.
+ * Note: DON'T close the context, as we want it to keep going after the main thread exits. Use
+ * the @SuppressWarnings annotation instead.
  * 
  * @author Roger
  * 
@@ -20,6 +20,7 @@ public class Main {
 	public static void main(String[] arg) {
 
 		new ClassPathXmlApplicationContext("error-track-context.xml");
+
 	}
 
 }
