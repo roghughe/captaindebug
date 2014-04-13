@@ -29,6 +29,7 @@ public class EmailPublisher implements Publisher {
 			String message = (String) report;
 			mailMessage.setText(message);
 			mailSender.send(mailMessage);
+			logger.debug("Email sent...");
 			retVal = true;
 		} catch (Exception e) {
 			logger.error("Can't send email... " + e.getMessage(), e);
