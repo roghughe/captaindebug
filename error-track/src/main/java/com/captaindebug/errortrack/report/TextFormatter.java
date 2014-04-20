@@ -68,7 +68,7 @@ public class TextFormatter implements Formatter {
 
 		for (String line : lines) {
 			sb.append(line);
-			// sb.append("\n");
+			sb.append("\n");
 		}
 	}
 }
