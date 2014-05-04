@@ -124,7 +124,7 @@
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
 			<version>1.8.6</version>
-			<!-- You can't use Quartz two with String 3 -->
+			<!-- You can't use Quartz two with Spring 3 -->
 		</dependency>
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -172,7 +172,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<mainClass>com.captaindebug.errortrack.Main</mainClass>
-							<classpathPrefix>dependency-jars/</classpathPrefix>
+							<classpathPrefix>lib/</classpathPrefix>
 						</manifest>
 					</archive>
 				</configuration>
@@ -190,7 +190,7 @@
 						</goals>
 						<configuration>
 							<outputDirectory>
-								${project.build.directory}/dependency-jars/
+								${project.build.directory}/lib/
 							</outputDirectory>
 						</configuration>
 					</execution>
