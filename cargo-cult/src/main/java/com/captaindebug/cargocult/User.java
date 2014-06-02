@@ -12,12 +12,35 @@ import java.util.Date;
  */
 public class User {
 
-	private long id;
+	private final long id;
 
-	private String name;
+	private final String name;
 
-	private String email;
+	private final String email;
 
-	private Date createDate;
+	private final Date createDate;
 
+	public User(long id, String name, String email, Date createDate) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.createDate = createDate;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
 }

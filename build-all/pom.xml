@@ -31,5 +31,6 @@
 		<module>../hazelcast</module>
 		<module>../long-poll</module>
 		<module>../error-track</module>
+		<module>../cargo-cult</module>
 	</modules>
 </project>
