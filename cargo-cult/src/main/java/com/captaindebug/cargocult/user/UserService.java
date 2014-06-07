@@ -1,9 +1,11 @@
 package com.captaindebug.cargocult.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.captaindebug.cargocult.User;
 
+@Service
 public class UserService {
 
 	@Autowired

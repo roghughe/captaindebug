@@ -29,5 +29,11 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
+	
+	<resource-ref>
+		<description>Connection Pool</description>
+		<res-ref-name>jdbc/LiveDataSource</res-ref-name>
+		<res-type>javax.sql.Datasource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
 </web-app>

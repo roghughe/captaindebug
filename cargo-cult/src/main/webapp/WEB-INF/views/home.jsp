@@ -5,10 +5,12 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
+<h1>Find a User</h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<P> The time on the server is ${serverTime}. </P>
+<P>
+<a href="find1?user=Tom">Find user Tom using 'N' Tier</a><br/>
+<a href="find2?user=Tom">Find user Tom using class model</a>
+</P>
 </body>
 </html>

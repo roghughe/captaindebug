@@ -15,10 +15,10 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping("/find1")
-	public String findUser(@RequestParam String name, Model model) {
+	public String findUser(@RequestParam("user") String name, Model model) {
 
 		User user = userService.findUser(name);
 		model.addAttribute("user", user);
-		return "displayUser";
+		return "user";
 	}
 }
