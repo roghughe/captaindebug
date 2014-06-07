@@ -10,6 +10,7 @@
 <P> The time on the server is ${serverTime}. </P>
 <P>
 <a href="find1?user=Tom">Find user Tom using 'N' Tier</a><br/>
+<a href="find1?user=">Find empty using 'N' Tier</a><br/><br/>
 <a href="find2?user=Tom">Find user Tom using class model</a>
 </P>
 </body>

@@ -1,4 +1,4 @@
-package com.captaindebug.cargocult.user;
+package com.captaindebug.cargocult.ntier;
 
 import java.io.Serializable;
 import java.sql.ResultSet;

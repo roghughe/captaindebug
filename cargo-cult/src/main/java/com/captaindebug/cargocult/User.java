@@ -12,6 +12,8 @@ import java.util.Date;
  */
 public class User {
 
+	public static User NULL_USER = new User(-1, "null_name", "", new Date());
+
 	private final long id;
 
 	private final String name;

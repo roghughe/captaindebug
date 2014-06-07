@@ -1,4 +1,4 @@
-package com.captaindebug.cargocult.user;
+package com.captaindebug.cargocult.ntier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

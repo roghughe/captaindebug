@@ -1,6 +1,7 @@
-package com.captaindebug.cargocult.user;
+package com.captaindebug.cargocult.ntier;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -16,8 +17,13 @@ public class UserDao {
 
 	public User findUser(String name) {
 
-		FindUserMapper rowMapper = new FindUserMapper();
-
-		return jdbcTemplate.queryForObject(FIND_USER_BY_NAME, rowMapper, name);
+		User user;
+		try {
+			FindUserMapper rowMapper = new FindUserMapper();
+			user = jdbcTemplate.queryForObject(FIND_USER_BY_NAME, rowMapper, name);
+		} catch (EmptyResultDataAccessException e) {
+			user = User.NULL_USER;
+		}
+		return user;
 	}
 }
