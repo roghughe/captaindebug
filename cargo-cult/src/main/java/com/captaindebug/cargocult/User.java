@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class User {
 
-	public static User NULL_USER = new User(-1, "null_name", "", new Date());
+	public static User NULL_USER = new User(-1, "Not Available", "", new Date());
 
 	private final long id;
 
@@ -23,7 +23,6 @@ public class User {
 	private final Date createDate;
 
 	public User(long id, String name, String email, Date createDate) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
