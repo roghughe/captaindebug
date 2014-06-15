@@ -1,17 +1,9 @@
 package com.captaindebug.cargocult.ntier;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.captaindebug.cargocult.User;
 
-@Service
-public class UserService {
+public interface UserService {
 
-	@Autowired
-	private UserDao userDao;
+	public abstract User findUser(String name);
 
-	public User findUser(String name) {
-		return userDao.findUser(name);
-	}
 }

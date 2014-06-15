@@ -27,7 +27,7 @@ public class UserServiceTest {
 
 		MockitoAnnotations.initMocks(this);
 
-		instance = new UserService();
+		instance = new UserServiceImpl();
 
 		ReflectionTestUtils.setField(instance, "userDao", userDao);
 	}

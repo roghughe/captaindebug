@@ -24,7 +24,7 @@ public class UserAccessor {
 	private JdbcTemplate jdbcTemplate;
 
 	@RequestMapping("/find2")
-	public String findUser(@RequestParam("user") String name, Model model) {
+	public String findUser2(@RequestParam("user") String name, Model model) {
 
 		User user;
 		try {

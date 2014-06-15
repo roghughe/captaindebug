@@ -33,7 +33,7 @@ public class UserDaoTest {
 
 		MockitoAnnotations.initMocks(this);
 
-		instance = new UserDao();
+		instance = new UserDaoImpl();
 		ReflectionTestUtils.setField(instance, "jdbcTemplate", jdbcTemplate);
 	}
 
