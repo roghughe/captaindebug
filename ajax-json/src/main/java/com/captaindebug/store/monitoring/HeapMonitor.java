@@ -24,8 +24,6 @@ public class HeapMonitor extends SingleThreadRunner {
 	// @Value("TimeUnit")
 	private TimeUnit timeUnit;
 
-	private TimedList<Point> list;
-
 	private final Runtime runtime = Runtime.getRuntime();
 
 	/**
@@ -36,12 +34,6 @@ public class HeapMonitor extends SingleThreadRunner {
 	}
 
 	private ExecutorService executor;
-
-	/** Called by Spring to start the object up */
-	public void start() {
-
-		list = new TimedList<Point>();
-	}
 
 	/** Called by Spring on shutdown */
 	public void destroy() {
@@ -66,14 +58,14 @@ public class HeapMonitor extends SingleThreadRunner {
 			}
 
 			private Point createPoint() {
-				Point point = new Point(runtime.freeMemory(), runtime.totalMemory(),
-						runtime.maxMemory());
+				Point point = new Point(runtime.freeMemory(), runtime.totalMemory(), runtime.maxMemory());
 				return point;
 			}
 
 			private void addPointToList(Point point) {
 
-				// TODO create a sparse list adding only those entries that need to be added
+				// TODO create a sparse list adding only those entries that need
+				// to be added
 
 			}
 

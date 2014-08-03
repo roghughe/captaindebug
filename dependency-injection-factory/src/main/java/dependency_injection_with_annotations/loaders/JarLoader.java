@@ -109,7 +109,7 @@ public class JarLoader {
 
 		boolean retVal = false;
 		if (!jarEntry.isDirectory()) {
-			String name = jarEntry.getName();
+			// String name = jarEntry.getName();
 			// TODO Fix this
 			// Matcher matcher = pattern.matcher(name);
 			retVal = true;
