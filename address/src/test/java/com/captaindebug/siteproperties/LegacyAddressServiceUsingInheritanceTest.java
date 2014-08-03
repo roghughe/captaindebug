@@ -68,6 +68,7 @@ public class LegacyAddressServiceUsingInheritanceTest {
 
 	public class StubSitePropertiesUsingInheritance extends SitePropertiesManager {
 
+		private static final long serialVersionUID = 1L;
 		private final Map<String, String> propMap = new HashMap<String, String>();
 
 		public void setProperty(String key, String value) {

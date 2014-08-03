@@ -94,6 +94,7 @@ public class ExceptionsDemoController {
 
 		logger.info("This will throw a NullPointerException");
 
+		@SuppressWarnings("null")
 		String str = null; // Ensure that this is null.
 		str.length();
 
