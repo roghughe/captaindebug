@@ -7,13 +7,13 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.validation.support.BindingAwareModelMap;
-import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.database.annotations.Transactional;
 import org.unitils.database.util.TransactionMode;
 import org.unitils.dbunit.annotation.DataSet;
-import org.unitils.spring.annotation.SpringApplicationContext;
-import org.unitils.spring.annotation.SpringBeanByType;
 
 /**
  * Simple Demo of a Mock test for the Address Service
@@ -21,12 +21,12 @@ import org.unitils.spring.annotation.SpringBeanByType;
  * @author Roger
  * 
  */
-@RunWith(UnitilsJUnit4TestClassRunner.class)
-@SpringApplicationContext("servlet-context.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration({ "classpath:/servlet-context.xml" })
 @Transactional(TransactionMode.DISABLED)
 public class EndToEndAddressServiceTest {
 
-	@SpringBeanByType
+	@Autowired
 	private AddressController instance;
 
 	/**
@@ -55,8 +55,7 @@ public class EndToEndAddressServiceTest {
 	public void testFindAddress() {
 
 		final int id = 1;
-		Address expected = new Address(id, "15 My Street", "My Town",
-				"POSTCODE", "My Country");
+		Address expected = new Address(id, "15 My Street", "My Town", "POSTCODE", "My Country");
 
 		BindingAwareModelMap model = new BindingAwareModelMap();
 

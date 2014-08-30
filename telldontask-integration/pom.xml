@@ -8,7 +8,7 @@
 	<packaging>jar</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
-		<java-version>1.7</java-version>
+		<java-version>1.6</java-version>
 		<jbehave.version>3.8</jbehave.version>
 		<ignore.failures>true</ignore.failures>
 		<meta.filter></meta.filter>
